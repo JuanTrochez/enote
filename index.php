@@ -1,5 +1,5 @@
 <?php
-	//include_once 'global/bdd.php';
+	include_once 'function/bdd.php';
 	
 	//$security = new Security();
 
