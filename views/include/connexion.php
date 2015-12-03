@@ -1,8 +1,12 @@
-<?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+<div>Bienvenue sur notre....</div>
+
+<form>
+    <input class="coco" name="login" type="text">
+    <br />
+    <input class="pwd" name="pwd" type="text">
+    <br />
+    <input class="submit" name="submit" type="submit" value="Connect">
+</form>
+
 
