@@ -10,7 +10,6 @@
     <div class="checkbox">
         <label><input type="checkbox"> Rester connecté </label>
     </div>
-    <br />
     <input class="btn btn-primary" name="submit" type="submit" value="Connect">
 </form>
 
