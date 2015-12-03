@@ -1,5 +1,7 @@
 <?php
 	include_once 'function/bdd.php';
+        
+        $basePath = "http://" . $_SERVER["SERVER_NAME"] . "/enote/";
 	
 	//$security = new Security();
 
