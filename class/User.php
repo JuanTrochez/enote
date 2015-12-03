@@ -1,5 +1,7 @@
 <?php
 
+include_once '/function/cookie.php';
+
 class User {
     //put your code here
     private $login;
@@ -30,14 +32,25 @@ class User {
         return $this->password;
     }
     
-    public function connect($bdd)
+    public function connect($bdd, $remember)
     {
        $isConnected = false;
        $connected = $bdd->prepare('SELECT * FROM user WHERE login = :login AND password = :password LIMIT 1');      
        $connected->execute(array(':login' => $this->login, ':password' => $this->password));
        
+       //verifie que la requete renvoie une ligne
        if ($connected->rowCount() == 1) {
-           $isConnected = true;
+            $u = $connected->fetchAll();
+           
+           //s'il a coché la case 'se souvenir'
+            if($remember){
+                $_SESSION['user'] = $u[0];
+                cookie($this->pseudo, $this->password);
+            }else{
+                $_SESSION['user'] = $u[0];
+            }            
+            
+            $isConnected = true;
        }       
        return $isConnected;
     }
