@@ -42,4 +42,9 @@ class User {
        }
        return $isConnected;
     }
+
+    function __destruct() 
+    {
+        
+    }
 }
