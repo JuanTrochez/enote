@@ -2,7 +2,6 @@
 
 include_once "/class/User.php";
 
-var_dump($_SESSION);
 if (isset($_SESSION['user']) && !empty($_SESSION['user']))
 {
     echo "hello accueil";

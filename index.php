@@ -1,5 +1,6 @@
 <?php
 	include_once 'function/bdd.php';
+        include_once "/class/Security.php";
         
         $basePath = "http://" . $_SERVER["SERVER_NAME"] . "/enote/";
         $secu = new Security();
@@ -33,5 +34,6 @@
 		// Inclusion du pied de page
 		include_once 'views/global/footer.php';
 	}
+        var_dump($_COOKIE);
 
 ?>
