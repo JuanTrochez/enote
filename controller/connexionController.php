@@ -20,7 +20,7 @@ if(isset($_POST['login']) && isset($_POST['pwd'])){
         }
         
         if ($user->connect($bdd, $remember)) {
-            header('Location:' . $_SERVER['SERVER_NAME'] . "/enote/");
+            header('Location: index.php');
         } else {
             echo "<div class='erreur'>Erreur dans le pseudo/mot de passe</div>";
         }
