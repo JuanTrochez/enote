@@ -1,0 +1,20 @@
+
+//Général
+body
+{
+    background: aliceblue;   
+}
+
+.section
+{
+    max-width: 1300px;
+    margin: 2% auto;
+}
+
+
+//page connexion
+.form
+{
+    width: 25%;
+    margin: 0 auto;
+}
