@@ -2,6 +2,7 @@
 	include_once 'function/bdd.php';
         
         $basePath = "http://" . $_SERVER["SERVER_NAME"] . "/enote/";
+        $secu = new Security();
 
         // si une page est demandée avec '?p=pageDemandee' (dans l'url)
 	if(isset($_GET['page']) && !empty($_GET['page']) && preg_match("/^[a-zA-Z0-9-]+$/i",$_GET['page'])){
