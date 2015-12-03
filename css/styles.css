@@ -15,4 +15,10 @@ body
 {
     width: 25%;
     margin: 0 auto;
+    text-align: center;
+}
+
+.champ-form
+{
+    text-align: center;
 }
