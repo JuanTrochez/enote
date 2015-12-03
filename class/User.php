@@ -32,10 +32,13 @@ class User {
     
     public function connect($bdd)
     {
-        
-       $connected = $bdd->prepare('SELECT * FROM user WHERE login = :login AND password = :password');      
-       $isConnected = $connected->execute(array(':login' => $this->login, ':password' => $this->password));
+       $isConnected = false;
+       $connected = $bdd->prepare('SELECT * FROM user WHERE login = :login AND password = :password LIMIT 1');      
+       $connected->execute(array(':login' => $this->login, ':password' => $this->password));
        
+       if ($connected->rowCount() == 1) {
+           $isConnected = true;
+       }       
        return $isConnected;
     }
 
