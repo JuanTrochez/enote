@@ -7,7 +7,7 @@
 	if(isset($_GET['page']) && !empty($_GET['page']) && preg_match("/^[a-zA-Z0-9-]+$/i",$_GET['page'])){
 		$p = htmlspecialchars(htmlentities($_GET['page']));
 		// Vérifie si le fichier existe avant inclusion
-		if(file_exists('views/include/' . $p . '.php')){
+		if(file_exists('controller/' . $p . 'Controller.php')){
 			include_once 'views/global/header.php'; // Inclusion de l'entete de la page
 
 			include_once 'controller/' . $p . 'Controller.php'; // Inclusion du contenu de la page
