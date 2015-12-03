@@ -10,11 +10,12 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="<?php echo $basePath ?>vendor/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="<?php echo $basePath ?>css/app.css">
     </head>
     <body>
         <header>
             
         </header>
         
-        <section>
+        <section class ="section">
         
