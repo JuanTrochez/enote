@@ -2,10 +2,9 @@
 
 include_once "/class/User.php";
 
-if ($_SESSION['user'])
+if (isset($_SESSION['user']) && !empty($_SESSION['user']))
 {
     echo "hello accueil";
-    var_dump($_SESSION['user']);
     include_once "/views/include/accueil.php";
 }
 elseif (isset($_COOKIE['login']) && !empty($_COOKIE['login']) &&
@@ -21,6 +20,6 @@ elseif (isset($_COOKIE['login']) && !empty($_COOKIE['login']) &&
 else 
 {
     echo "hello connexion";
-    include_once "/views/include/connexion.php";
+    header("Location: ?page=connexion");
 }
 
