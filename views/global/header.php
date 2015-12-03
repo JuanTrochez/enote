@@ -42,6 +42,9 @@ and open the template in the editor.
                             <li><a href="#">Separated link</a></li>
                             <li><a href="#">One more separated link</a></li>
                           </ul>
+                          <ul class="nav navbar-nav navbar-right">
+                            <li class="active"><a href="?page=deconnexion">Déconnexion<span class="sr-only">(current)</span></a></li>
+                          </ul>
                         </li>
                       </ul>
                     </div><!--/.nav-collapse -->
