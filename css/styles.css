@@ -1,5 +1,5 @@
 
-//Général
+/*Général*/
 body
 {
     background: aliceblue;   
@@ -12,7 +12,7 @@ body
 }
 
 
-//page connexion
+/*page connexion*/
 .form
 {
     width: 25%;
