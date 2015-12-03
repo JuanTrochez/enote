@@ -1,9 +1,21 @@
 <?php
 	include_once 'function/bdd.php';
         include_once "/class/Security.php";
+        include_once '/class/User.php';
         
         $basePath = "http://" . $_SERVER["SERVER_NAME"] . "/enote/";
         $secu = new Security();
+        
+        // si il y a un cookie, on connect l'user.
+        if (isset($_COOKIE['login']) && !empty($_COOKIE['login']) &&
+        isset($_COOKIE['password']) && !empty($_COOKIE['password']))
+        {
+            $user = new User();
+            $user->setLogin($_COOKIE['login']);
+            $user->setPassword($_COOKIE['password']);
+            $user->connect($bdd,true);
+            include_once "/views/include/accueil.php";
+        }
 
         // si une page est demandée avec '?p=pageDemandee' (dans l'url)
 	if(isset($_GET['page']) && !empty($_GET['page']) && preg_match("/^[a-zA-Z0-9-]+$/i",$_GET['page'])){
@@ -34,6 +46,5 @@
 		// Inclusion du pied de page
 		include_once 'views/global/footer.php';
 	}
-        var_dump($_COOKIE);
 
 ?>

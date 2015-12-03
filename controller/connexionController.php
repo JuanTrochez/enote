@@ -15,7 +15,7 @@ if(isset($_POST['login']) && isset($_POST['pwd'])){
         $user->setPassword($password);
         
         //s'il a coché la case 'remember' on set la variable a true
-        if(isset($_POST['souvenir']) && !empty($_POST['souvenir'])){
+        if(isset($_POST['remember']) && !empty($_POST['remember'])){
             $remember = true;
         }
         

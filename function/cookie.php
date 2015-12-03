@@ -1,7 +1,7 @@
 <?php
 
-function cookie($pseudo, $password, $undo){
-    if(!$undo){
+function cookie($pseudo, $password, $do){
+    if($do){
             setcookie('login', ''.$pseudo.'', time() + 365*24*3600, null, null, false, true); 
             setcookie('password', ''.$password.'', time() + 365*24*3600, null, null, false, true);
     }else{

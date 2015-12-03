@@ -8,7 +8,7 @@
     <input class="form-control champ-form" name="pwd" type="password" placeholder="Mot de passe">
     <br />
     <div class="checkbox">
-        <label><input type="checkbox"> Rester connecté </label>
+        <label><input name="remember" type="checkbox"> Rester connecté </label>
     </div>
     <input class="btn btn-primary" name="submit" type="submit" value="Connect">
 </form>

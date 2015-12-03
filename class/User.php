@@ -45,7 +45,7 @@ class User {
            //s'il a coché la case 'se souvenir'
             if($remember){
                 $_SESSION['user'] = $u[0];
-                cookie($this->pseudo, $this->password);
+                cookie($this->login, $this->password,true);
             }else{
                 $_SESSION['user'] = $u[0];
             }            
