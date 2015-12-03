@@ -44,6 +44,9 @@ and open the template in the editor.
                           </ul>
                         </li>
                       </ul>
+                      <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="?page=deconnexion">Déconnexion<span class="sr-only">(current)</span></a></li>
+                      </ul>
                     </div><!--/.nav-collapse -->
                   </div>
                 </nav>               
