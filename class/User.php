@@ -34,12 +34,8 @@ class User {
     {
         
        $connected = $bdd->prepare('SELECT * FROM user WHERE login = :login AND password = :password');      
-       $isConnected = $connected->execute(array(':login' => $this->login));
+       $isConnected = $connected->execute(array(':login' => $this->login, ':password' => $this->password));
        
-       if($isConnected == true)
-       {
-           $isConnected = $connected->execute(array(':password' => $this->password));
-       }
        return $isConnected;
     }
 
