@@ -6,8 +6,10 @@ class User {
     //put your code here
     private $login;
     private $password;
+    private $name;
+    private $role;
     
-    function _construct()
+    function __construct()
     {
         
     }
@@ -15,6 +17,11 @@ class User {
     public function setLogin($loginEnvoye)
     {
         $this->login = $loginEnvoye;
+    }   
+    
+    public function getLogin()
+    {
+        return $this->login;
     }
     
     public function setPassword($passwordEnvoye)
@@ -22,14 +29,29 @@ class User {
         $this->password = $passwordEnvoye;
     }
     
-    public function getLogin()
-    {
-        return $this->login;
-    }
-    
     public function getPassword()
     {
         return $this->password;
+    }
+    
+    public function setName($value)
+    {
+        $this->name = $value;
+    }
+    
+    public function getName()
+    {
+        return $this->name;
+    }
+    
+    public function setRole($value)
+    {
+        $this->role = $value;
+    }
+    
+    public function getRole()
+    {
+        return $this->role;
     }
     
     public function connect($bdd, $remember)
