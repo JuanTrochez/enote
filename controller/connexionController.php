@@ -20,7 +20,7 @@ if(isset($_POST['login']) && isset($_POST['pwd'])){
         }
         
         if ($user->connect($bdd, $remember)) {
-            header('Location: ?page=accueil.php');
+            header('Location: http://localhost/enote/');
         } else {
             echo "<div class='erreur'>Erreur dans le pseudo/mot de passe</div>";
         }

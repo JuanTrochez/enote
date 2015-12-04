@@ -14,7 +14,6 @@
             $user->setLogin($_COOKIE['login']);
             $user->setPassword($_COOKIE['password']);
             $user->connect($bdd,true);
-            include_once "/views/include/accueil.php";
         }
 
         // si une page est demandée avec '?p=pageDemandee' (dans l'url)
