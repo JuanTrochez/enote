@@ -1,13 +1,19 @@
 
 /*Général*/
+@font-face {
+    font-family: Alice;
+    src: url(fonts/Alice-Regular.ttf);
+}
 body
 {
     background: aliceblue;
     color: #00001a;
-    font-weight: bold;
-    font-size: 16px;
-    font-family: "Montserrat";
-    
+    font-size: 20px;
+    font-family: Alice;
+}
+header
+{
+        font-weight: bold;
 }
 
 .section
@@ -28,4 +34,14 @@ body
 .champ-form
 {
     text-align: center;
+}
+
+.btn-primary
+{
+    font-size: 20px;
+}
+
+.rememberme
+{
+    font-size: 16px;
 }
