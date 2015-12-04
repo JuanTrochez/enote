@@ -2,7 +2,11 @@
 /*Général*/
 body
 {
-    background: aliceblue;   
+    background: aliceblue;
+    color: #00001a;
+    font-weight: bold;
+    font-size: 16px;
+    
 }
 
 .section
