@@ -2,12 +2,11 @@
 
 if (isset($_SESSION['user']) && !empty($_SESSION['user']))
 {
-    echo "hello accueil";
     include_once "/views/include/accueil.php";
 }
 
 else 
 {
-    header("Location: ?page=connexion");
+    header("Location: http://localhost/enote/?page=connexion");
 }
 

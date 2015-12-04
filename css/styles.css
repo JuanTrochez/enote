@@ -35,6 +35,7 @@ header
 .champ-form
 {
     text-align: center;
+    margin: 0px 0px 20px 0px;
 }
 
 .btn-primary
@@ -52,16 +53,11 @@ header
 
 .deco
 {
-    bottom: 15px;
-    position: absolute;
+    margin-top: 30px;
 }
 
 #wrapper {
     padding-left: 0;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
 }
 
 #wrapper.toggled {
@@ -70,17 +66,13 @@ header
 
 #sidebar-wrapper {
     z-index: 1000;
-    position: fixed;
+    position: absolute;
     left: 200px;
     width: 0;
     height: 100%;
     margin-left: -200px;
     overflow-y: auto;
     background: #2A3F54;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
 }
 
 #wrapper.toggled #sidebar-wrapper {
