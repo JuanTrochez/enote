@@ -166,3 +166,55 @@ header
         margin-right: 0;
     }
 }
+
+
+/* ACCUEIL (liste des notes) */
+#accueil .list-statut {
+    margin: 30px 0;
+    padding: 0;
+    font-size: 0;
+    background-color: rgba(68, 102, 136, 0.70);
+    color: rgba(255, 255, 255, 0.70);
+}
+
+#accueil .list-statut li {
+    display: inline-block;
+    cursor: pointer;
+    width: 20%;
+    font-size: 20px;
+    text-align: center;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.50);
+}
+#accueil .list-statut li.active {
+    background-color: #446688;
+    border-bottom: 2px solid white;
+    color: white;
+}
+
+#accueil .list-note {
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+#accueil .list-note li {
+    list-style-type: none;
+    min-height: 100px;
+    margin: 15px 0;
+    padding: 20px;
+    background-color: #446688;
+    font-size: 0;
+}
+#accueil .list-note li div {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 20px;
+}
+#accueil .list-note .infos-note {
+    width: 40%;
+}
+#accueil .list-note .actions-note {
+    width: 40%;
+}
+#accueil .list-note .total {
+    width: 20%;
+}

@@ -4,7 +4,8 @@ include_once '/function/cookie.php';
 
 if (isset($_COOKIE['login']) && !empty($_COOKIE['login']) &&
         isset($_COOKIE['password']) && !empty($_COOKIE['password'])) {
-    cookie($_SESSION['user']['login'], $_SESSION['user']['password'], false);
+    $user = unserialize($_SESSION['user']);
+    cookie($user->getLogin(), $user->getPassword(), false);
 }
 
 $_SESSION = array();

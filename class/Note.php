@@ -1,23 +1,36 @@
 <?php
 
+include_once "Frais.php";
+
 class Note {
+    private $id;
     private $name;
     private $total;
     private $date;
     private $user;
     private $statut;
-    
-    
+
+
     function __construct()
     {
-        
+
     }
-    
+
+    public function setId($value)
+    {
+        $this->id = $value;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
     public function setName($value)
     {
         $this->name = $value;
-    }   
-    
+    }
+
     public function getName()
     {
         return $this->name;
@@ -26,8 +39,8 @@ class Note {
     public function setTotal($value)
     {
         $this->total = $value;
-    }   
-    
+    }
+
     public function getTotal()
     {
         return $this->total;
@@ -36,8 +49,8 @@ class Note {
     public function setDate($value)
     {
         $this->date = $value;
-    }   
-    
+    }
+
     public function getDate()
     {
         return $this->date;
@@ -46,8 +59,8 @@ class Note {
     public function setUser($value)
     {
         $this->user = $value;
-    }   
-    
+    }
+
     public function getUser()
     {
         return $this->user;
@@ -56,11 +69,36 @@ class Note {
     public function setStatut($value)
     {
         $this->statut = $value;
-    }   
-    
+    }
+
     public function getStatut()
     {
         return $this->statut;
+    }
+
+    //retourne toutes les notes en base de données
+    public function getAllNotes($bdd) {
+        $listNotes = $bdd->query("SELECT * FROM note_frais");
+
+        $list = $listNotes->fetchAll();
+
+        return $list;
+    }
+    
+    public function getNotesByUser($bdd, $uid) {
+        $listNotes = $bdd->prepare("SELECT * FROM note_frais WHERE user_id = :uId");
+        $listNotes->execute(array(
+            ":uId"  =>  $uid
+        ));
+
+        $list = $listNotes->fetchAll();
+
+        return $list;
+    }
+
+    //recupère les frais correspondant a la note
+    public function getListFrais($bdd) {
+        getFraisByNote($bdd, $this->id);
     }
 
 }

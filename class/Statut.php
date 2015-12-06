@@ -1,6 +1,6 @@
 <?php
 
-class CategorieFrais {
+class Statut {
     private $id;
     private $name;
 
@@ -28,5 +28,14 @@ class CategorieFrais {
     {
         return $this->name;
     }
-
+    
+    public function getStatutById($bdd) {
+        $statut = $bdd->prepare("SELECT * FROM statut_note WHERE id = :sId");
+        
+        $statut->execute(array(
+            ":sId"      =>  $this->id
+        ));
+        
+        return $satut->fetch();
+    }
 }
