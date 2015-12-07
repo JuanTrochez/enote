@@ -6,7 +6,7 @@
  */
 ?>
 
-<form action="fraisController.php" method="POST" enctype="multipart/form-data">
+<form action="" method="POST" enctype="multipart/form-data">
     <p>
         Formulaire d'envoi de fichier :<br />
         <input type="file" name="monfichier" /><br />
