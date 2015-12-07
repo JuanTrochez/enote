@@ -35,7 +35,7 @@ class Statut {
         $statut->execute(array(
             ":sId"      =>  $this->id
         ));
-        
-        return $satut->fetch();
+                
+        return $statut->fetch();
     }
 }

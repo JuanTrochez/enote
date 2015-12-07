@@ -80,9 +80,7 @@ class Note {
     public function getAllNotes($bdd) {
         $listNotes = $bdd->query("SELECT * FROM note_frais");
 
-        $list = $listNotes->fetchAll();
-
-        return $list;
+        return $listNotes->fetchAll();
     }
     
     public function getNotesByUser($bdd, $uid) {
@@ -91,9 +89,8 @@ class Note {
             ":uId"  =>  $uid
         ));
 
-        $list = $listNotes->fetchAll();
+        return $listNotes->fetchAll();
 
-        return $list;
     }
 
     //recupère les frais correspondant a la note

@@ -1,5 +1,6 @@
 <?php
 include_once "/class/Note.php";
+include_once "/class/Statut.php";
 include_once "/class/User.php";
 
 if (isset($_SESSION['user']) && !empty($_SESSION['user']))

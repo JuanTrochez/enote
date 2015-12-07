@@ -20,7 +20,14 @@
 					<div class="infos-note">
 						<span><?php echo $note['name']; ?></span><br/>
 						<span><?php echo $note['date']; ?></span><br/>
-						<span>statut note</span><br/>
+                                                <span>
+                                                    <?php 
+                                                        $statut = new Statut(); 
+                                                        $statut->setId($note['id']);
+                                                        $stat = $statut->getStatutById($bdd);
+                                                        echo $stat['name'];
+                                                    ?>
+                                                </span><br/>
 					</div>
 					<div class="actions-note">
 						<span>supprimer</span>

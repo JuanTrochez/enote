@@ -101,11 +101,8 @@ class Frais {
             ":noteid"   =>  $noteId
         ));
 
-        $listFrais = $allFrais->fetch();
+        return $allFrais->fetch();
 
-        var_dump($listFrais);
-
-        return $listFrais;
     }
 
 }
