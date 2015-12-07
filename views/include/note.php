@@ -1,6 +1,6 @@
 
-<div>Ajout d'une nouvelle note de frais</div>
-
+<h2>Ajout d'une nouvelle note de frais</h2>
+<br>
 <form class="form" action="" method="POST">
     
     <input class="form-control champ-form" name="name_note" type="text" placeholder="Libellé">

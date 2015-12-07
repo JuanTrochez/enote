@@ -15,10 +15,10 @@ if (isset($_POST['valider']))
         $newnote->setTotal(0);
         $newnote->setDate($date);
         $newnote->setUser($user->getId());
-        $newnote->setStatut(5);
+        $newnote->setStatut(1);
         
         $newnote->insertNewNote($bdd);
-        echo '<div class="bg-success">La note à bien été ajoutée <br/><br/></div>';
+        echo '<div class="bg-success">La note à bien été ajoutée</div><br/><br/>';
         include_once "/views/include/note.php";
     }
 }
