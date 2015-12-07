@@ -25,10 +25,10 @@ and open the template in the editor.
                     <a href="<?php echo $basePath; ?>">Home</a>
                 </li>
                 <li>
-                    <a href="#">Shortcuts</a>
+                    <a href="<?php echo $basePath; ?>/?page=note">Nouvelle note</a>
                 </li>
                 <li>
-                    <a href="#">Overview</a>
+                    <a href="<?php echo $basePath; ?>/?page=frais">Ajouter un frais</a>
                 </li>
                 <li>
                     <a href="#">Events</a>
