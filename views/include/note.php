@@ -10,5 +10,5 @@
             <label class="envoi_note"><input name="envoyer_note" type="checkbox">Envoyer la note</label>
    <php} >
 -->   
-    <input class="btn btn-primary" name="submit" type="submit" value="Valider">
+    <input class="btn btn-primary" name="valider" type="submit" value="Valider">
 </form>

@@ -90,7 +90,21 @@ class Note {
         ));
 
         return $listNotes->fetchAll();
-
+    }
+    
+    //Rentrer une nouvelle note.
+    public function insertNewNote($bdd){
+        $addnote = $bdd->prepare("INSERT INTO note_frais(name, total, date, user_id, statut_id) "
+                . "values (:name, :total, :date, :user, :statut)");
+        $addnote->execute(array(
+           ":name" => $this->name,
+           ":total" => $this->total,
+           ":date" => $this->date,
+           ":user" => $this->user,
+           ":statut" => $this->statut
+        ));
+        
+        
     }
 
     //recupère les frais correspondant a la note
