@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 04 Décembre 2015 à 14:19
+-- Généré le :  Dim 06 Décembre 2015 à 16:26
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -100,7 +100,18 @@ CREATE TABLE IF NOT EXISTS `note_frais` (
   PRIMARY KEY (`id`),
   KEY `categorie_id` (`statut_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- Contenu de la table `note_frais`
+--
+
+INSERT INTO `note_frais` (`id`, `name`, `total`, `date`, `user_id`, `statut_id`) VALUES
+(1, 'Note 1', 10, '2015-12-06', 1, 1),
+(2, 'Note 2', 520, '2015-12-06', 3, 2),
+(3, 'Note 3', 102, '2015-12-06', 4, 3),
+(4, 'Note 4', 50.3, '2015-06-20', 1, 5),
+(5, 'Note 5', 90.6, '2015-08-03', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -170,14 +181,14 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `login`, `password`, `role_id`, `name`, `devise_id`) VALUES
-(1, 'pdg', 'pwdpdg', 1, 'Grand chef', 0),
-(2, 'leader', 'pwdleader', 2, 'Chef', 0),
-(3, 'pdg', 'pwdpdg', 1, 'Grand chef', 0),
-(4, 'leader', 'pwdleader', 2, 'Chef', 0),
-(5, 'toto', 'pwdtoto', 3, 'Toto', 0),
-(6, 'titi', 'pwdtiti', 3, 'Titi', 0),
-(7, 'tata', 'pwdtata', 3, 'Tata', 0),
-(8, 'tutu', 'pwdtutu', 3, 'Tutu', 0);
+(1, 'pdg', 'pwdpdg', 1, 'Grand chef', 1),
+(2, 'leader', 'pwdleader', 2, 'Chef', 1),
+(3, 'pdg', 'pwdpdg', 1, 'Grand chef', 1),
+(4, 'leader', 'pwdleader', 2, 'Chef', 1),
+(5, 'toto', 'pwdtoto', 3, 'Toto', 1),
+(6, 'titi', 'pwdtiti', 3, 'Titi', 1),
+(7, 'tata', 'pwdtata', 3, 'Tata', 1),
+(8, 'tutu', 'pwdtutu', 3, 'Tutu', 1);
 
 --
 -- Contraintes pour les tables exportées
