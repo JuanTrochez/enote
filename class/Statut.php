@@ -29,6 +29,12 @@ class Statut {
         return $this->name;
     }
     
+    public function getAll($bdd) {
+        $statut = $bdd->query("SELECT * FROM statut_note");
+                
+        return $statut->fetchAll();
+    }
+
     public function getStatutById($bdd) {
         $statut = $bdd->prepare("SELECT * FROM statut_note WHERE id = :sId");
         
