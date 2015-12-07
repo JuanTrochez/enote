@@ -4,16 +4,15 @@
 
 	<div class="list-container">
 		<ul class="list-statut">
-			<li class="active">Non signées</li>
-			<li>En cours</li>
-			<li>Refusées</li>
-			<li>Acceptées</li>
-			<li>Payées</li>
+                    <?php foreach ($listStatut as $statut) { ?>
+                        <li class="statut-<?php echo $statut['id']; if ($statut['id'] == 1) {echo " active";} ?>"><?php echo $statut['name']; ?></li>
+                    <?php } ?>
 		</ul>
 
 		<ul class="list-note">
 			<?php
 				//boucle sur la liste des notes
+                                $noteStatut = new Statut();
 				foreach ($notes as $note) {
 			?>
 				<li class="statut-<?php echo $note['statut_id']; ?>">
@@ -21,10 +20,9 @@
 						<span><?php echo $note['name']; ?></span><br/>
 						<span><?php echo $note['date']; ?></span><br/>
                                                 <span>
-                                                    <?php 
-                                                        $statut = new Statut(); 
-                                                        $statut->setId($note['id']);
-                                                        $stat = $statut->getStatutById($bdd);
+                                                    <?php
+                                                        $noteStatut->setId($note['statut_id']);
+                                                        $stat = $noteStatut->getStatutById($bdd);
                                                         echo $stat['name'];
                                                     ?>
                                                 </span><br/>
@@ -40,7 +38,7 @@
 					</div>
 				</li>
 			<?php
-				}
+				}//fin boucle liste notes
 			?>
 		</ul>
 	</div>

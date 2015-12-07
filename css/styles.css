@@ -185,6 +185,11 @@ header
     text-align: center;
     border-bottom: 2px solid rgba(0, 0, 0, 0.50);
 }
+#accueil .list-statut li:hover {
+    background-color: #446688;
+    border-bottom: 2px solid white;
+    color: white;
+}
 #accueil .list-statut li.active {
     background-color: #446688;
     border-bottom: 2px solid white;
