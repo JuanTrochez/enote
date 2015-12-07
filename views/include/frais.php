@@ -10,6 +10,16 @@
     <p>
         Formulaire d'envoi de fichier :<br />
         <input type="file" name="monfichier" /><br />
+        <input type="text" name="date" placeholder="jj/mm/aaaa"/>
+        <input type="text" name="description" placeholder="Description"/>
+        <br>
+        <input type="text" name="montant" placeholder="TTC"/>
+        
+        <select name="devise_id">
+            <option value="1">€</option>
+            <option value="2">$</option>
+        </select>
+        <br>
         <input type="submit" value="Envoyer le fichier" />
     </p>
 </form>
