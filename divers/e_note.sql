@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Dim 06 Décembre 2015 à 16:26
+-- Généré le :  Lun 07 Décembre 2015 à 16:51
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -151,11 +151,11 @@ CREATE TABLE IF NOT EXISTS `statut_note` (
 --
 
 INSERT INTO `statut_note` (`id`, `name`) VALUES
-(1, 'En cours'),
-(2, 'Payee'),
-(3, 'Refusee'),
-(4, 'Acceptee'),
-(5, 'Signee');
+(1, 'Non publiÃ©e'),
+(2, 'En cours'),
+(3, 'RefusÃ©e'),
+(4, 'AcceptÃ©e'),
+(5, 'PayÃ©e');
 
 -- --------------------------------------------------------
 

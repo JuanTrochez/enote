@@ -34,8 +34,52 @@
 					<div class="total">
 						<?php echo $note['total']; ?> €<br/>
 						+ nb frais<br/>
-						Afficher les frais
 					</div>
+					<div class="btn-show-frais">+ Afficher les frais</div>
+                    <ul class="list-frais">
+                        <li>
+                        	<div class="infos-frais">
+								<span class="img-frais">image frais</span>
+								<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor dolor eu magna condimentum, ut rutrum nisi ultrices. Praesent non nisl mollis risus dignissim pulvinar. Donec sollicitudin id lorem non ultricies. Curabitur venenatis, nibh id volutpat.</span><br/>
+							</div>
+							<div class="actions-frais">
+								<span>supprimer</span>
+								<span>editer</span>
+							</div>
+							<div class="total">
+								total frais + devise frais<br/>
+								 <span>date frais</span>
+							</div>
+                        </li>
+                        <li>
+                        	<div class="infos-frais">
+								<span class="img-frais">image frais</span>
+								<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor dolor eu magna condimentum, ut rutrum nisi ultrices. Praesent non nisl mollis risus dignissim pulvinar. Donec sollicitudin id lorem non ultricies. Curabitur venenatis, nibh id volutpat.</span><br/>
+							</div>
+							<div class="actions-frais">
+								<span>supprimer</span>
+								<span>editer</span>
+							</div>
+							<div class="total">
+								total frais + devise frais<br/>
+								 <span>date frais</span>
+							</div>
+                        </li>
+                        <li>
+                        	<div class="infos-frais">
+								<span class="img-frais">image frais</span>
+								<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor dolor eu magna condimentum, ut rutrum nisi ultrices. Praesent non nisl mollis risus dignissim pulvinar. Donec sollicitudin id lorem non ultricies. Curabitur venenatis, nibh id volutpat.</span><br/>
+							</div>
+							<div class="actions-frais">
+								<span>supprimer</span>
+								<span>editer</span>
+							</div>
+							<div class="total">
+								total frais + devise frais<br/>
+								 <span>date frais</span>
+							</div>
+                        </li>
+                    </ul>
 				</li>
 			<?php
 				}//fin boucle liste notes
