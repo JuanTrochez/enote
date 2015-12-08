@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 08 Décembre 2015 à 14:30
+-- Généré le :  Mar 08 Décembre 2015 à 14:56
 -- Version du serveur :  5.6.26
 -- Version de PHP :  5.6.12
 
@@ -52,7 +52,7 @@ INSERT INTO `categorie_frais` (`id`, `name`) VALUES
 
 CREATE TABLE IF NOT EXISTS `devise` (
   `id` int(11) NOT NULL,
-  `name` varchar(4) NOT NULL
+  `name` varchar(30) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `devise` (
 --
 
 INSERT INTO `devise` (`id`, `name`) VALUES
-(1, '&eur'),
+(1, '&euro;'),
 (2, '$');
 
 -- --------------------------------------------------------
@@ -71,7 +71,7 @@ INSERT INTO `devise` (`id`, `name`) VALUES
 
 CREATE TABLE IF NOT EXISTS `frais` (
   `id` int(11) NOT NULL,
-  `image` varchar(100) NOT NULL,
+  `image` varchar(255) NOT NULL,
   `date` date NOT NULL,
   `description` varchar(255) NOT NULL,
   `montant` float NOT NULL,
@@ -114,7 +114,7 @@ INSERT INTO `note_frais` (`id`, `name`, `total`, `date`, `user_id`, `statut_id`)
 
 CREATE TABLE IF NOT EXISTS `role` (
   `id` int(11) NOT NULL,
-  `name` varchar(30) NOT NULL
+  `name` varchar(60) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
@@ -134,7 +134,7 @@ INSERT INTO `role` (`id`, `name`) VALUES
 
 CREATE TABLE IF NOT EXISTS `statut_note` (
   `id` int(11) NOT NULL,
-  `name` varchar(35) NOT NULL
+  `name` varchar(75) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
@@ -156,10 +156,10 @@ INSERT INTO `statut_note` (`id`, `name`) VALUES
 
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL,
-  `login` varchar(30) NOT NULL,
+  `login` varchar(75) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role_id` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL,
+  `name` varchar(99) NOT NULL,
   `devise_id` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
