@@ -18,7 +18,7 @@ if (isset($_POST['valider']))
         $newnote->setStatut(1);
         
         $newnote->insertNewNote($bdd);
-        echo '<div class="bg-success">La note à bien été ajoutée</div><br/><br/>';
+        echo '<div class="bg-success">La note à bien été ajoutée oooo</div><br/><br/>';
         include_once "/views/include/note.php";
     }
 }
