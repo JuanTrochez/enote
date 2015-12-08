@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 08 Décembre 2015 à 15:33
+-- Généré le :  Mar 08 Décembre 2015 à 16:13
 -- Version du serveur :  5.6.26
 -- Version de PHP :  5.6.12
 
@@ -78,7 +78,23 @@ CREATE TABLE IF NOT EXISTS `frais` (
   `devise_id` int(11) NOT NULL,
   `note_id` int(11) NOT NULL,
   `categorie_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `frais`
+--
+
+INSERT INTO `frais` (`id`, `image`, `date`, `description`, `montant`, `devise_id`, `note_id`, `categorie_id`) VALUES
+(1, 'pdg08-12-2015-16-06-48.jpg', '2015-06-10', 'IZI TRADING', 666, 1, 1, 1),
+(2, 'pdg08-12-2015-16-07-31.jpg', '2015-10-13', 'EUROS', 150, 1, 3, 3),
+(3, 'pdg08-12-2015-16-08-17.jpg', '2015-08-01', 'COC + BITCH', 300, 1, 6, 6),
+(4, 'pdg08-12-2015-16-09-18.jpg', '2015-03-02', '', 234, 1, 1, 4),
+(5, 'pdg08-12-2015-16-09-46.jpg', '2015-06-22', 'biff', 2340, 1, 5, 4),
+(6, 'pdg08-12-2015-16-10-21.jpg', '2015-08-19', 'LVMH', 92000000, 1, 5, 4),
+(7, 'pdg08-12-2015-16-10-46.jpg', '2015-03-22', 'bibi', 900, 1, 5, 3),
+(8, 'pdg08-12-2015-16-11-14.jpg', '2015-05-23', 'DoMac', 5000, 1, 5, 2),
+(9, 'pdg08-12-2015-16-12-17.jpg', '2015-12-06', 'DOLLADOLLA', 200, 1, 1, 7),
+(10, 'pdg08-12-2015-16-12-45.jpg', '2015-02-27', 'IZI MONNAIE', 10000, 1, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -250,7 +266,7 @@ ALTER TABLE `devise`
 -- AUTO_INCREMENT pour la table `frais`
 --
 ALTER TABLE `frais`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT pour la table `note_frais`
 --

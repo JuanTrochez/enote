@@ -6,8 +6,9 @@
  * and open the template in the editor.
  */
 // Testons si le fichier a bien été envoyé et s'il n'y a pas d'erreur
-if (verifValue())
+if (isset($_POST['valider']))
 {
+    verifValue();
     $req = $bdd->prepare("INSERT INTO frais(image, date, description, montant, devise_id, note_id, categorie_id) VALUES(:image, :date, :description, :montant, :devise_id, :note_id, :categorie_id)");
     
     $req->bindParam('image', $nameImage); 
@@ -40,11 +41,9 @@ if (verifValue())
         if (in_array($extension_upload, $extensions_autorisees))
         {
             // Methode qui deplce le fichier et change son nom
-            $test = move_uploaded_file($_FILES['image']['tmp_name'], 'uploads/'. $nom);
+            $test = move_uploaded_file($_FILES['image']['tmp_name'], 'image/uploads/'. $nom);
             if($test == TRUE)
-            {
-                echo "L'envoi a bien été effectué !";
-                        
+            {           
                 $nameImage = $nom;
                 $date = filter_input(INPUT_POST, 'date');
                 $description = filter_input(INPUT_POST, 'description');
@@ -53,8 +52,12 @@ if (verifValue())
                 $note_id = filter_input(INPUT_POST, 'note_id');
                 $categorie_id = filter_input(INPUT_POST, 'categorie_id');
                 $req->execute();
+                
+                echo '<div class="bg-success">Le frais à bien été ajouté </div><br/><br/>';
+                include_once "/views/include/frais.php";
             }else{
                 echo "Une erreur est survenue !";
+                include_once "/views/include/frais.php";
             }          
         }
         
@@ -78,6 +81,7 @@ function verifValue()
     //Verifie qu'un fichier est bien présent
     if (!isset($_FILES['image']) || !$_FILES['image']['error'] == 0)
     {
+        echo 'Erreur avec le justificatif (image)';
         $resultatRetour = false;
     }
     //Verifie le format de la date et si le champ à été remplit

@@ -11,7 +11,7 @@
     <p>
         Formulaire d'envoi de fichier :<br />
         <input type="file" name="image" /><br />
-        <input type="date" name="date" placeholder="aaaa/mm/jj"/>
+        <input type="date" max="<?php echo date('Y-m-d');?>" name="date" placeholder="aaaa/mm/jj"/>
         <input type="text" name="description" placeholder="Description"/>
         <br>
         <input type="text" name="montant" placeholder="TTC"/>
@@ -58,6 +58,6 @@
         </select>
         
         <br>
-        <input type="submit" value="Envoyer le fichier" />
+        <input type="submit" value="Valider" name = "valider"/>
     </p>
 </form>
