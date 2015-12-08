@@ -19,13 +19,13 @@
 					<div class="infos-note">
 						<span><?php echo $note['name']; ?></span><br/>
 						<span><?php echo $note['date']; ?></span><br/>
-                                                <span>
-                                                    <?php
-                                                        $noteStatut->setId($note['statut_id']);
-                                                        $stat = $noteStatut->getStatutById($bdd);
-                                                        echo $stat['name'];
-                                                    ?>
-                                                </span><br/>
+                        <span>
+                            <?php
+                                $noteStatut->setId($note['statut_id']);
+                                $stat = $noteStatut->getStatutById($bdd);
+                                echo $stat['name'];
+                            ?>
+                        </span><br/>
 					</div>
 					<div class="actions-note">
 						<span>supprimer</span>
@@ -39,7 +39,7 @@
                     <ul class="list-frais">
                         <li>
                         	<div class="infos-frais">
-								<span class="img-frais">image frais</span>
+								<img class="img-frais" src="#"/>
 								<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor dolor eu magna condimentum, ut rutrum nisi ultrices. Praesent non nisl mollis risus dignissim pulvinar. Donec sollicitudin id lorem non ultricies. Curabitur venenatis, nibh id volutpat.</span><br/>
 							</div>
 							<div class="actions-frais">
@@ -53,7 +53,7 @@
                         </li>
                         <li>
                         	<div class="infos-frais">
-								<span class="img-frais">image frais</span>
+								<img class="img-frais" src="#"/>
 								<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor dolor eu magna condimentum, ut rutrum nisi ultrices. Praesent non nisl mollis risus dignissim pulvinar. Donec sollicitudin id lorem non ultricies. Curabitur venenatis, nibh id volutpat.</span><br/>
 							</div>
 							<div class="actions-frais">
@@ -67,7 +67,7 @@
                         </li>
                         <li>
                         	<div class="infos-frais">
-								<span class="img-frais">image frais</span>
+								<img class="img-frais" src="#"/>
 								<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor dolor eu magna condimentum, ut rutrum nisi ultrices. Praesent non nisl mollis risus dignissim pulvinar. Donec sollicitudin id lorem non ultricies. Curabitur venenatis, nibh id volutpat.</span><br/>
 							</div>
 							<div class="actions-frais">

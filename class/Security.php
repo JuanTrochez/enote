@@ -12,12 +12,11 @@ class Security {
         if (isset($_SESSION['user'])) {
             return true;
 
-        } else {
-            return false;
         }
+        return false;
     }
 
-    public function isAdmin() {
+    public function isAdmin($bdd) {
         if (logged()) {
             $user = unserialize($_SESSION['user']);
             $result = $bdd->prepare("SELECT * FROM user "
@@ -28,16 +27,11 @@ class Security {
                     ":id"		=>	$user->getId()
                     ));
 
-            if($result->rowCount() == 1){
-                    return true;
+            return ($result->rowCount() == 1);
 
-            }else{
-                    return false;
-            }
-
-        } else {
-            return false;
         }
+        return false;
+        
     }
 
 }
