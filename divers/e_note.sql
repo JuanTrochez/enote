@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 08 Décembre 2015 à 14:56
+-- Généré le :  Mar 08 Décembre 2015 à 15:33
 -- Version du serveur :  5.6.26
 -- Version de PHP :  5.6.12
 
@@ -41,8 +41,8 @@ INSERT INTO `categorie_frais` (`id`, `name`) VALUES
 (3, 'Train'),
 (4, 'Avance'),
 (5, 'Carburant'),
-(6, 'Hôtel'),
-(7, 'Péage');
+(6, 'H&ocirc;tel'),
+(7, 'P&eacute;age');
 
 -- --------------------------------------------------------
 
@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `note_frais` (
   `date` date NOT NULL,
   `user_id` int(11) NOT NULL,
   `statut_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `note_frais`
@@ -104,7 +104,8 @@ INSERT INTO `note_frais` (`id`, `name`, `total`, `date`, `user_id`, `statut_id`)
 (2, 'Note 2', 520, '2015-12-06', 3, 2),
 (3, 'Note 3', 102, '2015-12-06', 4, 3),
 (4, 'Note 4', 50.3, '2015-06-20', 1, 5),
-(5, 'Note 5', 90.6, '2015-08-03', 1, 2);
+(5, 'Note 5', 90.6, '2015-08-03', 1, 2),
+(6, 'Note 6', 0, '2015-12-08', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -254,7 +255,7 @@ ALTER TABLE `frais`
 -- AUTO_INCREMENT pour la table `note_frais`
 --
 ALTER TABLE `note_frais`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT pour la table `role`
 --
