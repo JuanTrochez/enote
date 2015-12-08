@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `devise` (
 --
 
 INSERT INTO `devise` (`id`, `name`) VALUES
-(1, '€'),
+(1, '&euro;'),
 (2, '$');
 
 -- --------------------------------------------------------
@@ -151,11 +151,11 @@ CREATE TABLE IF NOT EXISTS `statut_note` (
 --
 
 INSERT INTO `statut_note` (`id`, `name`) VALUES
-(1, 'Non publiÃ©e'),
+(1, 'Non publi&eacute;e'),
 (2, 'En cours'),
-(3, 'RefusÃ©e'),
-(4, 'AcceptÃ©e'),
-(5, 'PayÃ©e');
+(3, 'Refus&eacute;e'),
+(4, 'Accept&eacute;e'),
+(5, 'Pay&eacute;e');
 
 -- --------------------------------------------------------
 
