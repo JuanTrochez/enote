@@ -32,7 +32,7 @@
         </div>
         <select class = "formulaire deroulantFrais form-control champ-form deroulantId" name="note_id">
             <?php
-            $reponseNote = $bdd->query('SELECT * FROM note_frais');
+            $reponseNote = $bdd->query('SELECT * FROM note_frais WHERE statut_id = 1');
             while($donnee = $reponseNote->fetch())
             {
                 ?>
