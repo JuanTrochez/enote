@@ -13,6 +13,9 @@
 			<?php
 				//boucle sur la liste des notes
 				foreach ($notes as $note) {
+					//initialisation des variables pour les frais de la note		
+            		$fraisNote->setId($note['id']);
+            		$allFrais = $fraisNote->getListFrais($bdd);
 			?>
 				<li class="statut-<?php echo $note['statut_id']; ?>">
 					<div class="infos-note">
@@ -32,15 +35,11 @@
 						<a href="<?php echo $basePath. '?page=note&amp;id=' . $note['id']; ?>">editer</a>
 					</div>
 					<div class="total">
-						<?php echo Note::getMontantTotal($bdd, $note['id']) . ' ' . Devise::getDeviseById($bdd, $user->getDevise());; ?><br/>
-						+ nb frais<br/>
+						<?php echo Note::getMontantTotal($bdd, $note['id']) . ' ' . Devise::getDeviseById($bdd, $user->getDevise());; ?>
 					</div>
-					<div class="btn-show-frais">+ Afficher les frais</div>
+					<div class="btn-show-frais">+ Afficher les frais (<?php echo count($allFrais); ?>)</div>
                     <ul class="list-frais">
                     	<?php
-                    		$fraisNote->setId($note['id']);
-                    		$allFrais = $fraisNote->getListFrais($bdd);
-
                     		//boucle des frais de la note
                     		foreach ($allFrais as $frais) {                    			
                     	?>
