@@ -261,16 +261,27 @@ header
     height: 68px;
     width: 100%;
 }
-.deroulantId{
-    width: 32%;
+
+.formulairePrixTTC{
+    display: inline;
+    width : 40%;
 }
 
-.formulaireReduit{
-    margin-left: 25%;
-    width: 50%;
+.formulairePrix{
+    display: inline;
+    width : 30%;
 }
 .deroulantFrais{
     display: inline-block;
+    width: 47%;
+}
+
+.formulaireReduit{
+    width: 50%;
+    margin-left: 25%;
+}
+#blocPrix{
+    display : inline;
 }
 #image,date{
     width: 50%;
