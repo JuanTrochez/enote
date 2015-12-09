@@ -8,62 +8,67 @@
 // Testons si le fichier a bien été envoyé et s'il n'y a pas d'erreur
 if (isset($_POST['valider']))
 {
-    verifValue();
-    $req = $bdd->prepare("INSERT INTO frais(image, date, description, montant, devise_id, note_id, categorie_id) VALUES(:image, :date, :description, :montant, :devise_id, :note_id, :categorie_id)");
-    
-    $req->bindParam('image', $nameImage); 
-    $req->bindParam('date', $date);
-    $req->bindParam('description', $description);
-    $req->bindParam('montant', $montant);
-    $req->bindParam('devise_id', $devise_id);
-    $req->bindParam('note_id', $note_id);
-    $req->bindParam('categorie_id', $categorie_id);
-    
-
-    
- // Testons si le fichier n'est pas trop gros ici 1Mo maximum
-    if ($_FILES['image']['size'] <= 1000000)
+    if(verifValue())
     {
-        //On prend la date pour l'ajouter dans le nom de l'image upload 
-        $dateImage = date("d-m-Y");
-        $heureImage = date("H-i-s");
-        //On récupère le nom de l'user pour l'ajouter au nom de l'image upload
-        $user = unserialize($_SESSION['user']);
-        $userName = $user->getLogin();
-        
-        // Testons si l'extension est autorisée
-        $infosfichier = pathinfo($_FILES['image']['name']);
-        $extension_upload = $infosfichier['extension'];
-        $extensions_autorisees = array('jpg', 'jpeg', 'png');
-        
-        //Construction du nom de fichier
-        $nom = $userName . $dateImage .'-'. $heureImage . '.' . $extension_upload;
-        if (in_array($extension_upload, $extensions_autorisees))
+        $req = $bdd->prepare("INSERT INTO frais(image, date, description, montant, devise_id, note_id, categorie_id) VALUES(:image, :date, :description, :montant, :devise_id, :note_id, :categorie_id)");
+
+        $req->bindParam('image', $nameImage); 
+        $req->bindParam('date', $date);
+        $req->bindParam('description', $description);
+        $req->bindParam('montant', $montant);
+        $req->bindParam('devise_id', $devise_id);
+        $req->bindParam('note_id', $note_id);
+        $req->bindParam('categorie_id', $categorie_id);
+
+
+
+     // Testons si le fichier n'est pas trop gros ici 1Mo maximum
+        if ($_FILES['image']['size'] <= 1000000)
         {
-            // Methode qui deplce le fichier et change son nom
-            $test = move_uploaded_file($_FILES['image']['tmp_name'], 'image/uploads/'. $nom);
-            if($test == TRUE)
-            {           
-                $nameImage = $nom;
-                $date = filter_input(INPUT_POST, 'date');
-                $description = filter_input(INPUT_POST, 'description');
-                $montant = filter_input(INPUT_POST, 'montant');
-                $devise_id = filter_input(INPUT_POST, 'devise_id');
-                $note_id = filter_input(INPUT_POST, 'note_id');
-                $categorie_id = filter_input(INPUT_POST, 'categorie_id');
-                $req->execute();
-                
-                echo '<div class="bg-success">Le frais à bien été ajouté </div><br/><br/>';
-                include_once "/views/include/frais.php";
-            }else{
-                echo "Une erreur est survenue !";
-                include_once "/views/include/frais.php";
-            }          
+            //On prend la date pour l'ajouter dans le nom de l'image upload 
+            $dateImage = date("d-m-Y");
+            $heureImage = date("H-i-s");
+            //On récupère le nom de l'user pour l'ajouter au nom de l'image upload
+            $user = unserialize($_SESSION['user']);
+            $userName = $user->getLogin();
+
+            // Testons si l'extension est autorisée
+            $infosfichier = pathinfo($_FILES['image']['name']);
+            $extension_upload = $infosfichier['extension'];
+            $extensions_autorisees = array('jpg', 'jpeg', 'png');
+
+            //Construction du nom de fichier
+            $nom = $userName . $dateImage .'-'. $heureImage . '.' . $extension_upload;
+            if (in_array($extension_upload, $extensions_autorisees))
+            {
+                // Methode qui deplce le fichier et change son nom
+                $test = move_uploaded_file($_FILES['image']['tmp_name'], 'image/uploads/'. $nom);
+                if($test == TRUE)
+                {           
+                    $nameImage = $nom;
+                    $date = filter_input(INPUT_POST, 'date');
+                    $description = filter_input(INPUT_POST, 'description');
+                    $montant = filter_input(INPUT_POST, 'montant');
+                    $devise_id = filter_input(INPUT_POST, 'devise_id');
+                    $note_id = filter_input(INPUT_POST, 'note_id');
+                    $categorie_id = filter_input(INPUT_POST, 'categorie_id');
+                    $req->execute();
+
+                    echo '<div class="bg-success">Le frais à bien été ajouté </div><br/><br/>';
+                    include_once "/views/include/frais.php";
+                }else{
+                    echo "Une erreur est survenue !";
+                    include_once "/views/include/frais.php";
+                }          
+            }
+            $req->closeCursor();
         }
-        
-        
-        $req->closeCursor();
     }
+    else
+    {
+        include_once "/views/include/frais.php";
+    }
+    
 }else{
     if (isset($_SESSION['user']) && !empty($_SESSION['user']))
     {

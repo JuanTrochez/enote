@@ -7,16 +7,16 @@
  */
 ?>
 
-<form action="" method="POST" enctype="multipart/form-data">
+<h2>Ajout d'un nouveau frais</h2><br />
+
+<form  class = "form" action="" method="POST" enctype="multipart/form-data">
     <p>
-        Formulaire d'envoi de fichier :<br />
-        <input type="file" name="image" /><br />
-        <input type="date" max="<?php echo date('Y-m-d');?>" name="date" placeholder="aaaa/mm/jj"/>
-        <input type="text" name="description" placeholder="Description"/>
-        <br>
-        <input type="text" name="montant" placeholder="TTC"/>
+        <input class = "formulaire form-control champ-form" type="file" name="image" />
+        <input class = "formulaire form-control champ-form formulaireReduit" type="date" max="<?php echo date('Y-m-d');?>" name="date" placeholder="aaaa/mm/jj"/>
+        <input class = "descriptionFormulaire formulaire form-control champ-form " type="text" name="description" placeholder="Description"/>
+        <input class = "formulaire form-control champ-form formulaireReduit" type="text" name="montant" placeholder="TTC"/>
         
-        <select name="devise_id">
+        <select class = "deroulantFrais form-control champ-form deroulantId" name="devise_id">
             <?php
             $reponseDevise = $bdd->query('SELECT * FROM devise');
             while($donnee = $reponseDevise->fetch())
@@ -28,9 +28,8 @@
             $reponseDevise->closeCursor();
             ?>
         </select>
-        <br>
         
-        <select name="note_id">
+        <select class = "deroulantFrais form-control champ-form deroulantId" name="note_id">
             <?php
             $reponseNote = $bdd->query('SELECT * FROM note_frais');
             while($donnee = $reponseNote->fetch())
@@ -42,9 +41,8 @@
             $reponseNote->closeCursor();
             ?>
         </select>
-        <br>
         
-        <select name="categorie_id">
+        <select class = "deroulantFrais form-control champ-form deroulantId" name="categorie_id">
             <?php
             $reponseCategorie = $bdd->query('SELECT * FROM categorie_frais');
             while($donnee = $reponseCategorie->fetch())
@@ -58,6 +56,6 @@
         </select>
         
         <br>
-        <input type="submit" value="Valider" name = "valider"/>
+        <input class="btn btn-primary" type="submit" value="Valider" name = "valider"/>
     </p>
 </form>
