@@ -46,7 +46,7 @@
                     		<li>
 	                        	<div class="infos-frais">
 									<img class="img-frais" src="<?php echo $basePath . 'image/uploads/' .$frais ['image'] ?>"/>
-									<span><?php echo $frais ['description'] ?></span><br/>
+									<span><?php echo $frais['description'] ?></span><br/>
 								</div>
 								<div class="actions-frais">
 									<span>supprimer</span>
