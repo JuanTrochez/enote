@@ -1,6 +1,9 @@
         </section>
-        <footer>
-
+        <footer class="foot">
+<!--            <div>
+                <div class="faq"><a href="#">FAQ</a></div>
+                <div class="faq"><a href="#">Contactez nous</a></div>
+            </div>-->
         </footer>
         
         
