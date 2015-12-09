@@ -28,7 +28,7 @@
 					</div>
 					<div class="actions-note">
 						<span>supprimer</span>
-						<span>editer</span>
+						<a href="<?php echo $basePath. '?page=note&amp;id=' . $note['id']; ?>">editer</a>
 					</div>
 					<div class="total">
 						<?php echo $note['total']; ?> €<br/>
