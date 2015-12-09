@@ -18,6 +18,9 @@
 
     // si une page est demandée avec '?p=pageDemandee' (dans l'url)
     if(isset($_GET['page']) && !empty($_GET['page']) && preg_match("/^[a-zA-Z0-9-]+$/i",$_GET['page'])){
+        if (!$secu->logged() && $_GET['page'] != 'connexion'){ 
+            header("Location: ?page=connexion");  
+        }
             $p = htmlspecialchars(htmlentities($_GET['page']));
             // Vérifie si le fichier existe avant inclusion
             if(file_exists('controller/' . $p . 'Controller.php')){

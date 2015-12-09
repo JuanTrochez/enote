@@ -1,25 +1,12 @@
 <?php
 
+include_once "/class/Frais.php";
+
 // Testons si le fichier a bien été envoyé et s'il n'y a pas d'erreur
 if (isset($_POST['valider']))
 {
     if(verifValue($bdd))
     {
-        
-        $req = $bdd->prepare("INSERT INTO frais(image, date, description, montant, devise_id, note_id, categorie_id) VALUES(:image, :date, :description, :montant, :devise_id, :note_id, :categorie_id)");
-
-        $req->bindParam('image', $nameImage); 
-        $req->bindParam('date', $date);
-        $req->bindParam('description', $description);
-        $req->bindParam('montant', $montant);
-        $req->bindParam('devise_id', $devise_id);
-        $req->bindParam('note_id', $note_id);
-        $req->bindParam('categorie_id', $categorie_id);
-        
-
-
-
-
      // Testons si le fichier n'est pas trop gros ici 1Mo maximum
         if ($_FILES['image']['size'] <= 1000000)
         {
@@ -43,40 +30,38 @@ if (isset($_POST['valider']))
                 $test = move_uploaded_file($_FILES['image']['tmp_name'], 'image/uploads/'. $nom);
                 if($test == TRUE)
                 {           
-                    $nameImage = $nom;
-                    $date = filter_input(INPUT_POST, 'date');
-                    $description = nl2br(filter_input(INPUT_POST, 'description'));
-                    $montant = filter_input(INPUT_POST, 'montant');
-                    $devise_id = filter_input(INPUT_POST, 'devise_id');
-                    $note_id = filter_input(INPUT_POST, 'note_id');
-                    $categorie_id = filter_input(INPUT_POST, 'categorie_id');
-                    $req->execute();
+                    $frais = new Frais();
+                    $frais->setCategorie(filter_input(INPUT_POST, 'categorie_id'));
+                    $frais->setDate(filter_input(INPUT_POST, 'date'));
+                    $frais->setDescription(nl2br(filter_input(INPUT_POST, 'description')));
+                    $frais->setDevise(filter_input(INPUT_POST, 'devise_id'));
+                    $frais->setImage($nom);
+                    $frais->setMontant(filter_input(INPUT_POST, 'montant'));
+                    $frais->setNote(filter_input(INPUT_POST, 'note_id'));
+                    
+                    if(isset($_GET['id']) && !empty($_GET['id'])){
+                        $frais->setId($_GET['id']);
+                        $frais->upDateFrais($bdd);
+                    }else{
+                        $frais->insertFrais($bdd);
+                    }                   
+                    
 
                     echo '<div class="bg-success">Le frais à bien été ajouté </div><br/><br/>';
-                    include_once "/views/include/frais.php";
                 }else{
                     echo "Une erreur est survenue !";
-                    include_once "/views/include/frais.php";
                 }          
             }
-            $req->closeCursor();
         }
     }
-    else
-    {
-        include_once "/views/include/frais.php";
-    }
-    
-}else{
-    if (isset($_SESSION['user']) && !empty($_SESSION['user']))
-    {
-        include_once "/views/include/frais.php";
-    }
-    else 
-    {
-        header("Location: ?page=connexion");
-    }
 }
+if(isset($_GET['id']) && !empty($_GET['id'])){
+    $fraisEdit = Frais::getFraisById($bdd,$_GET['id']);
+    include_once "/views/include/fraisEdit.php";
+}else{
+    include_once "/views/include/frais.php";
+}
+
 
 function verifValue($bdd)
 {
@@ -100,7 +85,7 @@ function verifValue($bdd)
         $resultatRetour = false;
     }
     //Verifie que nous avons un montant correct (pas de lettres)
-    else if (!is_numeric(filter_input(INPUT_POST, 'montant')))
+    else if (!is_numeric(filter_input(INPUT_POST, 'montant')) || filter_input(INPUT_POST, 'montant')>50000 || filter_input(INPUT_POST, 'montant')<0)
     {
         echo 'Montant incorrect, merci de mettre des . pour les centimes ex : 22.90';
         $resultatRetour = false;
