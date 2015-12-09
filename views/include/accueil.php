@@ -12,7 +12,6 @@
 		<ul class="list-note">
 			<?php
 				//boucle sur la liste des notes
-                                $noteStatut = new Statut();
 				foreach ($notes as $note) {
 			?>
 				<li class="statut-<?php echo $note['statut_id']; ?>">
@@ -37,48 +36,31 @@
 					</div>
 					<div class="btn-show-frais">+ Afficher les frais</div>
                     <ul class="list-frais">
-                        <li>
-                        	<div class="infos-frais">
-								<img class="img-frais" src="#"/>
-								<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor dolor eu magna condimentum, ut rutrum nisi ultrices. Praesent non nisl mollis risus dignissim pulvinar. Donec sollicitudin id lorem non ultricies. Curabitur venenatis, nibh id volutpat.</span><br/>
-							</div>
-							<div class="actions-frais">
-								<span>supprimer</span>
-								<span>editer</span>
-							</div>
-							<div class="total">
-								total frais + devise frais<br/>
-								 <span>date frais</span>
-							</div>
-                        </li>
-                        <li>
-                        	<div class="infos-frais">
-								<img class="img-frais" src="#"/>
-								<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor dolor eu magna condimentum, ut rutrum nisi ultrices. Praesent non nisl mollis risus dignissim pulvinar. Donec sollicitudin id lorem non ultricies. Curabitur venenatis, nibh id volutpat.</span><br/>
-							</div>
-							<div class="actions-frais">
-								<span>supprimer</span>
-								<span>editer</span>
-							</div>
-							<div class="total">
-								total frais + devise frais<br/>
-								 <span>date frais</span>
-							</div>
-                        </li>
-                        <li>
-                        	<div class="infos-frais">
-								<img class="img-frais" src="#"/>
-								<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor dolor eu magna condimentum, ut rutrum nisi ultrices. Praesent non nisl mollis risus dignissim pulvinar. Donec sollicitudin id lorem non ultricies. Curabitur venenatis, nibh id volutpat.</span><br/>
-							</div>
-							<div class="actions-frais">
-								<span>supprimer</span>
-								<span>editer</span>
-							</div>
-							<div class="total">
-								total frais + devise frais<br/>
-								 <span>date frais</span>
-							</div>
-                        </li>
+                    	<?php
+                    		$fraisNote->setId($note['id']);
+                    		$allFrais = $fraisNote->getListFrais($bdd);
+
+                    		//boucle des frais de la note
+                    		foreach ($allFrais as $frais) {                    			
+                    	?>
+                    		<li>
+	                        	<div class="infos-frais">
+									<img class="img-frais" src="<?php echo $basePath . 'image/uploads/' .$frais ['image'] ?>"/>
+									<span><?php echo $frais ['description'] ?></span><br/>
+								</div>
+								<div class="actions-frais">
+									<span>supprimer</span>
+									<span>editer</span>
+								</div>
+								<div class="total">
+									<?php echo $frais['montant'] . ' ' . $frais['devise_id'] ?><br/>
+									<span><?php echo $frais ['date'] ?></span>
+								</div>
+	                        </li>
+
+                    	<?php
+                    		} //fin boucle des frais
+                    	?>
                     </ul>
 				</li>
 			<?php

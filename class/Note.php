@@ -109,7 +109,7 @@ class Note {
 
     //recupère les frais correspondant a la note
     public function getListFrais($bdd) {
-        return getFraisByNote($bdd, $this->id);
+        return Frais::getFraisByNote($bdd, $this->id);
     }
 
 }

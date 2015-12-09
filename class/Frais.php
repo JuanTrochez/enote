@@ -93,15 +93,15 @@ class Frais {
     public function getCategorie()
     {
         return $this->categorie;
-    }
-
+    }    
+    
     public function getFraisByNote($bdd, $noteId) {
         $allFrais = $bdd->prepare("SELECT * FROM frais WHERE note_id = :noteid");
         $allFrais->execute(array(
             ":noteid"   =>  $noteId
         ));
 
-        return $allFrais->fetch();
+        return $allFrais->fetchAll();
 
     }
 
