@@ -13,23 +13,24 @@
     <p>
         <input class = "formulaire form-control champ-form" type="file" name="image" />
         <input class = "formulaire form-control champ-form formulaireReduit" type="date" max="<?php echo date('Y-m-d');?>" name="date" placeholder="aaaa/mm/jj"/>
-        <input class = "descriptionFormulaire formulaire form-control champ-form " type="text" name="description" placeholder="Description"/>
-        <input class = "formulaire form-control champ-form formulaireReduit" type="text" name="montant" placeholder="TTC"/>
-        
-        <select class = "deroulantFrais form-control champ-form deroulantId" name="devise_id">
-            <?php
-            $reponseDevise = $bdd->query('SELECT * FROM devise');
-            while($donnee = $reponseDevise->fetch())
-            {
+        <textarea class = "formulaire form-control champ-form descriptionFormulaire" name="description" placeholder="Description"></textarea>
+        <div id ="blocPrix">
+            <input class = "formulaire  formulairePrixTTC form-control champ-form" type="text" name="montant" placeholder="TTC"/>
+
+            <select class = "formulaire formulairePrix form-control champ-form" name="devise_id">
+                <?php
+                $reponseDevise = $bdd->query('SELECT * FROM devise');
+                while($donnee = $reponseDevise->fetch())
+                {
+                    ?>
+                    <option value="<?php echo $donnee['id'];?>"><?php echo $donnee['name'];?></option>
+                    <?php  
+                }
+                $reponseDevise->closeCursor();
                 ?>
-                <option value="<?php echo $donnee['id'];?>"><?php echo $donnee['name'];?></option>
-                <?php  
-            }
-            $reponseDevise->closeCursor();
-            ?>
-        </select>
-        
-        <select class = "deroulantFrais form-control champ-form deroulantId" name="note_id">
+            </select>
+        </div>
+        <select class = "formulaire deroulantFrais form-control champ-form deroulantId" name="note_id">
             <?php
             $reponseNote = $bdd->query('SELECT * FROM note_frais');
             while($donnee = $reponseNote->fetch())
@@ -42,7 +43,7 @@
             ?>
         </select>
         
-        <select class = "deroulantFrais form-control champ-form deroulantId" name="categorie_id">
+        <select class = "formulaire deroulantFrais form-control champ-form deroulantId" name="categorie_id">
             <?php
             $reponseCategorie = $bdd->query('SELECT * FROM categorie_frais');
             while($donnee = $reponseCategorie->fetch())

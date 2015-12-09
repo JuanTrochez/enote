@@ -47,7 +47,7 @@ if (isset($_POST['valider']))
                 {           
                     $nameImage = $nom;
                     $date = filter_input(INPUT_POST, 'date');
-                    $description = filter_input(INPUT_POST, 'description');
+                    $description = nl2br(filter_input(INPUT_POST, 'description'));
                     $montant = filter_input(INPUT_POST, 'montant');
                     $devise_id = filter_input(INPUT_POST, 'devise_id');
                     $note_id = filter_input(INPUT_POST, 'note_id');
@@ -90,7 +90,7 @@ function verifValue()
         $resultatRetour = false;
     }
     //Verifie le format de la date et si le champ à été remplit
-    else if(!strtotime(filter_input(INPUT_POST, 'date')))
+    else if(!strtotime(nl2br(filter_input(INPUT_POST, 'date'))))
     {
         echo 'Erreur lors de la saisie de la Date  ';
         $resultatRetour = false;
