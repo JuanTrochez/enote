@@ -1,10 +1,5 @@
 <?php
-var_dump($bdd);
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 // Testons si le fichier a bien été envoyé et s'il n'y a pas d'erreur
 if (isset($_POST['valider']))
 {
