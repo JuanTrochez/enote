@@ -20,7 +20,7 @@
 				<li class="statut-<?php echo $note['statut_id']; ?>">
 					<div class="infos-note">
 						<span><?php echo $note['name']; ?></span><br/>
-						<span><?php echo $note['date']; ?></span><br/>
+						<span><?php echo date("d-m-Y", strtotime($note['date'])); ?></span><br/>
                         <span>
                             <?php
                             	// recupere et affiche le nom du statut
@@ -54,7 +54,7 @@
 								</div>
 								<div class="total">
 									<?php echo $frais['montant'] . ' ' . Devise::getDeviseById($bdd, $frais['devise_id']); ?><br/>
-									<span><?php echo $frais ['date'] ?></span>
+									<span><?php echo date("d-m-Y", strtotime($frais['date'])); ?></span>
 								</div>
 	                        </li>
 
