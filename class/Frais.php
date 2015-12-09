@@ -37,7 +37,7 @@ class Frais {
 
     public function setDate($value)
     {
-        $this->Date = $value;
+        $this->date = $value;
     }
 
     public function getDate()
@@ -103,6 +103,48 @@ class Frais {
 
         return $allFrais->fetchAll();
 
+    }
+    
+    public function insertFrais($bdd)
+    {
+        $req = $bdd->prepare("INSERT INTO frais(image, date, description, montant, devise_id, note_id, categorie_id) VALUES(:image, :date, :description, :montant, :devise_id, :note_id, :categorie_id)");
+        $req->execute(array(
+            ':image' => $this->image,
+            ':date' => $this->date,
+            ':description' => $this->description,
+            ':montant' => $this->montant,
+            ':devise_id' => $this->devise,
+            ':note_id' => $this->note,
+            ':categorie_id' => $this->categorie
+        ));
+        $req->closeCursor();
+    }
+    
+    public function upDateFrais($bdd)
+    {
+        $req = $bdd->prepare("UPDATE frais SET image = :image, date = :date,description = :description,"
+                . "montant = :montant,devise_id =  :devise_id,note_id = :note_id,categorie_id = :categorie_id"
+                . "WHERE id = :id");
+        $req->execute(array(
+            ':image' => $this->image,
+            ':date' => $this->date,
+            ':description' => $this->description,
+            ':montant' => $this->montant,
+            ':devise_id' => $this->devise,
+            ':note_id' => $this->note,
+            ':categorie_id' => $this->categorie,
+            ':id' => $this->id
+        ));
+        $req->closeCursor();
+    }
+    
+    public function getFraisById($bdd, $id)
+    {
+        $req= $bdd->prepare('SELECT * FROM frais WHERE id = :id LIMIT 1');
+        $req->execute(array(
+            ':id' => $id
+        ));
+        return $req->fetchAll();
     }
 
 }

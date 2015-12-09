@@ -13,13 +13,17 @@
 			<?php
 				//boucle sur la liste des notes
 				foreach ($notes as $note) {
+					//initialisation des variables pour les frais de la note		
+            		$fraisNote->setId($note['id']);
+            		$allFrais = $fraisNote->getListFrais($bdd);
 			?>
 				<li class="statut-<?php echo $note['statut_id']; ?>">
 					<div class="infos-note">
 						<span><?php echo $note['name']; ?></span><br/>
-						<span><?php echo $note['date']; ?></span><br/>
+						<span><?php echo date("d-m-Y", strtotime($note['date'])); ?></span><br/>
                         <span>
                             <?php
+                            	// recupere et affiche le nom du statut
                                 $noteStatut->setId($note['statut_id']);
                                 $stat = $noteStatut->getStatutById($bdd);
                                 echo $stat['name'];
@@ -31,15 +35,11 @@
 						<a href="<?php echo $basePath. '?page=note&amp;id=' . $note['id']; ?>">editer</a>
 					</div>
 					<div class="total">
-						<?php echo $note['total']; ?> €<br/>
-						+ nb frais<br/>
+						<?php echo Note::getMontantTotal($bdd, $note['id']) . ' ' . Devise::getDeviseById($bdd, $user->getDevise());; ?>
 					</div>
-					<div class="btn-show-frais">+ Afficher les frais</div>
+					<div class="btn-show-frais">+ Afficher les frais (<?php echo count($allFrais); ?>)</div>
                     <ul class="list-frais">
                     	<?php
-                    		$fraisNote->setId($note['id']);
-                    		$allFrais = $fraisNote->getListFrais($bdd);
-
                     		//boucle des frais de la note
                     		foreach ($allFrais as $frais) {                    			
                     	?>
@@ -50,11 +50,11 @@
 								</div>
 								<div class="actions-frais">
 									<span>supprimer</span>
-									<span>editer</span>
+									<a href="<?php echo $basePath . '?page=frais&amp;id=' . $frais['id']; ?>">editer</a>
 								</div>
 								<div class="total">
-									<?php echo $frais['montant'] . ' ' . $frais['devise_id'] ?><br/>
-									<span><?php echo $frais ['date'] ?></span>
+									<?php echo $frais['montant'] . ' ' . Devise::getDeviseById($bdd, $frais['devise_id']); ?><br/>
+									<span><?php echo date("d-m-Y", strtotime($frais['date'])); ?></span>
 								</div>
 	                        </li>
 

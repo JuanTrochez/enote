@@ -120,14 +120,19 @@ header
 }
 #accueil .list-note .actions-frais, #accueil .list-frais .total {
     width: 20%;
+    text-align: center;
 }
 
 #accueil .list-note .infos-frais .img-frais {
-    display: block;
+    display: table-cell;
     float: left;
     height: 130px;
     width: 130px;
     margin-right: 10px;
+}
+
+#accueil .list-note .infos-frais span {
+    display: table-cell;
 }
 
 
