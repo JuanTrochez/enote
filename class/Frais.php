@@ -122,9 +122,10 @@ class Frais {
     
     public function upDateFrais($bdd)
     {
-        $req = $bdd->prepare("UPDATE frais SET image = :image, date = :date,description = :description,"
-                . "montant = :montant,devise_id =  :devise_id,note_id = :note_id,categorie_id = :categorie_id"
+        $req = $bdd->prepare("UPDATE frais SET image = :image, date = :date, description = :description, "
+                . "montant = :montant, devise_id = :devise_id, note_id = :note_id, categorie_id = :categorie_id "
                 . "WHERE id = :id");
+        
         $req->execute(array(
             ':image' => $this->image,
             ':date' => $this->date,
