@@ -28,4 +28,14 @@ class Devise {
     {
         return $this->name;
     }
+    
+    public function getDeviseById($bdd, $id) {
+        $devise = $bdd->prepare("SELECT name FROM devise WHERE id = :did");
+        
+        $devise->execute(array(
+            ':did'  =>  $id
+        ));
+        $aDevise = $devise->fetch();
+        return $aDevise[0];
+    }
 }

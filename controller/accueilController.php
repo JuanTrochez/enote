@@ -1,4 +1,5 @@
 <?php
+include_once "/class/Devise.php";
 include_once "/class/Note.php";
 include_once "/class/Statut.php";
 include_once "/class/User.php";

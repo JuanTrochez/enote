@@ -20,6 +20,7 @@
 						<span><?php echo $note['date']; ?></span><br/>
                         <span>
                             <?php
+                            	// recupere et affiche le nom du statut
                                 $noteStatut->setId($note['statut_id']);
                                 $stat = $noteStatut->getStatutById($bdd);
                                 echo $stat['name'];
@@ -31,7 +32,7 @@
 						<a href="<?php echo $basePath. '?page=note&amp;id=' . $note['id']; ?>">editer</a>
 					</div>
 					<div class="total">
-						<?php echo $note['total']; ?> €<br/>
+						<?php echo Note::getMontantTotal($bdd, $note['id']) . ' ' . Devise::getDeviseById($bdd, $user->getDevise());; ?><br/>
 						+ nb frais<br/>
 					</div>
 					<div class="btn-show-frais">+ Afficher les frais</div>
@@ -50,10 +51,10 @@
 								</div>
 								<div class="actions-frais">
 									<span>supprimer</span>
-									<span>editer</span>
+									<a href="<?php echo $basePath . '?page=frais&amp;id=' . $frais['id']; ?>">editer</a>
 								</div>
 								<div class="total">
-									<?php echo $frais['montant'] . ' ' . $frais['devise_id'] ?><br/>
+									<?php echo $frais['montant'] . ' ' . Devise::getDeviseById($bdd, $frais['devise_id']); ?><br/>
 									<span><?php echo $frais ['date'] ?></span>
 								</div>
 	                        </li>

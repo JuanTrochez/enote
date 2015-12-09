@@ -111,5 +111,15 @@ class Note {
     public function getListFrais($bdd) {
         return Frais::getFraisByNote($bdd, $this->id);
     }
+    
+    public function getMontantTotal($bdd, $nid) {
+        $montant = $bdd->prepare("SELECT ROUND(SUM(montant), 2) as 'total' FROM frais WHERE note_id = :nid");
+        
+        $montant->execute(array(
+            ':nid'  =>  $nid
+        ));
+        $aMontant = $montant->fetch();
+        return $aMontant[0];
+    }
 
 }
