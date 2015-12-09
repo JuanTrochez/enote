@@ -1,5 +1,5 @@
 <?php
-
+var_dump($bdd);
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,8 +8,9 @@
 // Testons si le fichier a bien été envoyé et s'il n'y a pas d'erreur
 if (isset($_POST['valider']))
 {
-    if(verifValue())
+    if(verifValue($bdd))
     {
+        
         $req = $bdd->prepare("INSERT INTO frais(image, date, description, montant, devise_id, note_id, categorie_id) VALUES(:image, :date, :description, :montant, :devise_id, :note_id, :categorie_id)");
 
         $req->bindParam('image', $nameImage); 
@@ -19,6 +20,8 @@ if (isset($_POST['valider']))
         $req->bindParam('devise_id', $devise_id);
         $req->bindParam('note_id', $note_id);
         $req->bindParam('categorie_id', $categorie_id);
+        
+
 
 
 
@@ -80,7 +83,7 @@ if (isset($_POST['valider']))
     }
 }
 
-function verifValue()
+function verifValue($bdd)
 {
     $resultatRetour = true;
     //Verifie qu'un fichier est bien présent
@@ -106,6 +109,16 @@ function verifValue()
     {
         echo 'Montant incorrect, merci de mettre des . pour les centimes ex : 22.90';
         $resultatRetour = false;
+    }
+    else if (is_numeric(filter_input(INPUT_POST, 'note_id'))){
+        $check = $bdd->prepare('SELECT * FROM note_frais WHERE statut_id = 1 AND id=:id limit 1');
+        $check->execute(array(
+        ":id"=>filter_input(INPUT_POST, 'note_id')
+        ));
+        if ($check->rowCount()!=1) {
+            echo 'Stop F12 !';
+            $resultatRetour = false;
+        }
     }
     return $resultatRetour;
 }
