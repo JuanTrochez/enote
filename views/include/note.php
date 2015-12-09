@@ -1,6 +1,6 @@
 
 
-  <?php if (isset($_GET["id"])) { var_dump(Note::getNameNote($bdd, $_GET['id']))?>
+  <?php if (isset($_GET["id"])) { ?>
             
             <h2>Modification d'une note de frais</h2>
             <br/>
