@@ -27,5 +27,19 @@
     	}
     	sibling.slideDown();
     });
+    
+    $('.admin-user table tr td .btn-danger').click(function() {
+        
+        
+        var classes = $(this).attr('class');       
+        var firstIndex = classes.indexOf('-') + 1;
+        var lastIndex = classes.indexOf(' ');
+        var userId = classes.substring(firstIndex, lastIndex);
+        
+        if (confirm('confirmer')) {
+            var fullPath = window.location.href + '&delete=' + userId;
+            $.ajax(fullPath);
+        };
+    });
 
 })(jQuery);

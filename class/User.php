@@ -77,6 +77,11 @@ class User {
         return $this->devise;
     }
     
+    public function getAllUser($bdd) {
+        $req = $bdd->query("SELECT * FROM user");
+        
+        return $req->fetchAll();
+    }
 
     //retourne les notes de l'utilisateur en base de données
     public function getNotes($bdd) {
@@ -112,6 +117,14 @@ class User {
             $isConnected = true;
        }
        return $isConnected;
+    }
+    
+    public function deleteUserById($bdd, $id) {
+        $req = $bdd->prepare("DELETE FROM user WHERE id = :id");
+        $req->execute(array(
+            ":id"   =>  $id
+        ));
+        
     }
 
     function __destruct()

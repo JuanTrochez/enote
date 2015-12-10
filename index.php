@@ -26,32 +26,33 @@
         if (!$secu->logged() && $_GET['page'] != 'connexion'){ 
             header("Location: " . $basePath . "?page=connexion");  
         }
-            $p = htmlspecialchars(htmlentities($_GET['page']));
-            // Vérifie si le fichier existe avant inclusion
-            if(file_exists('controller/' . $p . 'Controller.php')){
-                    include_once 'views/global/header.php'; // Inclusion de l'entete de la page
+        
+        $p = htmlspecialchars(htmlentities($_GET['page']));
+        // Vérifie si le fichier existe avant inclusion
+        if(file_exists('controller/' . $p . 'Controller.php')){
+                include_once 'views/global/header.php'; // Inclusion de l'entete de la page
 
-                    include_once 'controller/' . $p . 'Controller.php'; // Inclusion du contenu de la page
+                include_once 'controller/' . $p . 'Controller.php'; // Inclusion du contenu de la page
 
-                    // Inclusion du pied de page
-                    include_once 'views/global/footer.php';
+                // Inclusion du pied de page
+                include_once 'views/global/footer.php';
 
-            }else{// sinon renvoi une erreur 404 si le fichier n'existe pas
-                    include_once 'views/global/header.php'; // Inclusion de l'entete de la page
+        }else{// sinon renvoi une erreur 404 si le fichier n'existe pas
+                include_once 'views/global/header.php'; // Inclusion de l'entete de la page
 
-                    include_once 'views/include/404.php'; // Inclusion du contenu de la page
+                include_once 'views/include/404.php'; // Inclusion du contenu de la page
 
-                    // Inclusion du pied de page
-                    include_once 'views/global/footer.php';
-            }
+                // Inclusion du pied de page
+                include_once 'views/global/footer.php';
+        }
 
     }else{
-            include_once 'views/global/header.php'; // Inclusion de l'entete de la page
+        include_once 'views/global/header.php'; // Inclusion de l'entete de la page
 
-            include_once 'controller/accueilController.php';
+        include_once 'controller/accueilController.php';
 
-            // Inclusion du pied de page
-            include_once 'views/global/footer.php';
+        // Inclusion du pied de page
+        include_once 'views/global/footer.php';
     }
 
 ?>
