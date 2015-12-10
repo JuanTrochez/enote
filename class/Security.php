@@ -17,7 +17,7 @@ class Security {
     }
 
     public function isAdmin($bdd) {
-        if (logged()) {
+        if ($this->logged()) {
             $user = unserialize($_SESSION['user']);
             $result = $bdd->prepare("SELECT * FROM user "
                     . "WHERE id = :id AND role_id = 1 "
