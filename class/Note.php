@@ -5,7 +5,6 @@ include_once "Frais.php";
 class Note {
     private $id;
     private $name;
-    private $total;
     private $date;
     private $user;
     private $statut;
@@ -34,16 +33,6 @@ class Note {
     public function getName()
     {
         return $this->name;
-    }
-
-    public function setTotal($value)
-    {
-        $this->total = $value;
-    }
-
-    public function getTotal()
-    {
-        return $this->total;
     }
 
     public function setDate($value)
@@ -94,17 +83,14 @@ class Note {
     
     //Rentrer une nouvelle note.
     public function insertNewNote($bdd){
-        $addnote = $bdd->prepare("INSERT INTO note_frais(name, total, date, user_id, statut_id) "
-                . "values (:name, :total, :date, :user, :statut)");
+        $addnote = $bdd->prepare("INSERT INTO note_frais(name, date, user_id, statut_id) "
+                . "values (:name, :date, :user, :statut)");
         $addnote->execute(array(
            ":name" => $this->name,
-           ":total" => $this->total,
            ":date" => $this->date,
            ":user" => $this->user,
            ":statut" => $this->statut
         ));
-        
-        
     }
 
     //recupère les frais correspondant a la note
@@ -139,6 +125,13 @@ class Note {
         $getname->execute(array(
             ":name" => $namenote,
             ":statut" => $satutnote,
+            ":nid" => $nid
+        ));
+    }
+    
+    public function deleteNote($bdd,$nid) {
+        $delnote = $bdd->prepare("DELETE * FROM `note_frais` WHERE `id`= :nid");
+        $delnote = execute(array(
             ":nid" => $nid
         ));
     }
