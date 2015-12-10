@@ -106,7 +106,7 @@ class User {
 
            //s'il a coché la case 'se souvenir'
             if($remember){
-                cookie($this->login, $this->password, true);
+                cookie($this->login, $this->password, $remember);
             }
 
             $isConnected = true;
