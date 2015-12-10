@@ -14,12 +14,17 @@
         $user->setLogin($_COOKIE['login']);
         $user->setPassword($_COOKIE['password']);
         $user->connect($bdd,true);
+        echo "cookie set session";
+    }
+    
+    if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+        $sessionUser = unserialize($_SESSION['user']);
     }
 
     // si une page est demandée avec '?p=pageDemandee' (dans l'url)
     if(isset($_GET['page']) && !empty($_GET['page']) && preg_match("/^[a-zA-Z0-9-]+$/i",$_GET['page'])){
         if (!$secu->logged() && $_GET['page'] != 'connexion'){ 
-            header("Location: ?page=connexion");  
+            header("Location: " . $basePath . "?page=connexion");  
         }
             $p = htmlspecialchars(htmlentities($_GET['page']));
             // Vérifie si le fichier existe avant inclusion

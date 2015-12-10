@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
             }
 
             if ($user->connect($bdd, $remember)) {
-                header('Location: http://localhost/enote/');
+                header('Location: ' . $basePath);
             } else {
                 echo "<div class='erreur'>Erreur dans le pseudo/mot de passe</div>";
             }

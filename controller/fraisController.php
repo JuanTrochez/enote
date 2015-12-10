@@ -14,8 +14,7 @@ if (isset($_POST['valider']))
             $dateImage = date("d-m-Y");
             $heureImage = date("H-i-s");
             //On récupère le nom de l'user pour l'ajouter au nom de l'image upload
-            $user = unserialize($_SESSION['user']);
-            $userName = $user->getLogin();
+            $userName = $sessionUser->getLogin();
 
             // Testons si l'extension est autorisée
             $infosfichier = pathinfo($_FILES['image']['name']);
