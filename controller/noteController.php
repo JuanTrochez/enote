@@ -54,6 +54,6 @@ else
 
     else
     {
-        header("Location: http://localhost/enote/?page=connexion");
+        header("Location: " . $basePath . "/?page=connexion");
     }
 }

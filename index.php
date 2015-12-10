@@ -4,6 +4,7 @@
     include_once '/class/User.php';
 
     $basePath = "http://" . $_SERVER["SERVER_NAME"] . "/enote/";
+    var_dump($basePath);
     $secu = new Security();
 
     // si il y a un cookie, on connect l'user.
@@ -20,7 +21,7 @@
     // si une page est demandée avec '?p=pageDemandee' (dans l'url)
     if(isset($_GET['page']) && !empty($_GET['page']) && preg_match("/^[a-zA-Z0-9-]+$/i",$_GET['page'])){
         if (!$secu->logged() && $_GET['page'] != 'connexion'){ 
-            header("Location: ?page=connexion");  
+            header("Location: " . $basePath . "?page=connexion");  
         }
             $p = htmlspecialchars(htmlentities($_GET['page']));
             // Vérifie si le fichier existe avant inclusion

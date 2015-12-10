@@ -13,5 +13,5 @@ $_SESSION = array();
 unset($_SESSION);
 session_destroy();
 
-header("Location: http://localhost/enote/?p=connexion");
+header("Location: " . $basePath . "/?page=connexion");
 

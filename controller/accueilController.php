@@ -18,6 +18,6 @@ if (isset($_SESSION['user']) && !empty($_SESSION['user']))
 
 else
 {
-    header("Location: http://localhost/enote/?page=connexion");
+    header("Location: " . $basePath . "?page=connexion");
 }
 
