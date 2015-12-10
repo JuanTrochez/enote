@@ -3,7 +3,10 @@
 class Devise {
     private $id;
     private $name;
-
+    private $signe;
+    private $taux;
+    
+    
     function __construct()
     {
 
@@ -29,13 +32,41 @@ class Devise {
         return $this->name;
     }
     
+    public function getSigne()
+    {
+        return $this->signe;
+    }
+    
+    public function setSigne($signe)
+    {
+        $this->signe = $signe;
+    }
+    
+    public function getTaux()
+    {
+        return $this->taux;
+    }
+    
+    public function setTaux($taux)
+    {
+        $this->taux = $taux;
+    }
+    
     public function getDeviseById($bdd, $id) {
-        $devise = $bdd->prepare("SELECT name FROM devise WHERE id = :did");
         
+        $Devise = new Devise();
+        $devise = $bdd->prepare("SELECT * FROM devise WHERE id = :did");
         $devise->execute(array(
             ':did'  =>  $id
         ));
-        $aDevise = $devise->fetch();
-        return $aDevise[0];
+        
+        $array = $devise->fetch();
+        
+        $Devise->setId($array['id']);
+        $Devise->setName($array['name']);
+        $Devise->setSigne($array['signe']);
+        $Devise->setTaux($array['taux']);
+        
+        return $Devise;
     }
 }

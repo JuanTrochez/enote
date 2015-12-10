@@ -14,7 +14,7 @@ if(isset($_POST['modifier']))
     
 if(isset($_SESSION['user']) && !empty($_SESSION['user']))
 {
-    include_once 'profil.php';
+    include_once 'views/include/profil.php';
 }else{
     header("Location: http://localhost/enote/?page=connexion");
 }
