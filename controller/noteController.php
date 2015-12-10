@@ -4,14 +4,14 @@ include_once "/class/User.php";
 
 if (isset($_POST['valider']))
 {
-    if (isset($_POST['name_note']) && !empty($_POST['name_note']))
+    $note_name = $_POST['name_note'];
+    if (isset($note_name) && !empty($note_name))
     {
         $date = date("Y-m-d");
-        $namenote = htmlentities($_POST['name_note']);
+        $namenote = htmlentities($note_name);
         
         $newnote = new Note();
         $newnote->setName($namenote);
-        $newnote->setTotal(0);
         $newnote->setDate($date);
         $newnote->setUser($sessionUser->getId());
         $newnote->setStatut(1);
@@ -22,9 +22,10 @@ if (isset($_POST['valider']))
 }
 else if (isset($_POST['modifier'])){
     
-    if (isset($_POST['name_note']) && !empty($_POST['name_note']))
+    $note_name = $_POST['name_note'];
+    if (isset($note_name) && !empty($note_name))
     {
-        $namenote = htmlentities($_POST['name_note']);
+        $namenote = htmlentities($note_name);
         
         //s'il a coché la case 'Cloturer'
         if(isset($_POST['cloturer']) && !empty($_POST['cloturer'])){
