@@ -28,10 +28,10 @@ and open the template in the editor.
                     <a href="<?php echo $basePath; ?>?page=user">Mon profil</a>
                 </li>
                 <li>
-                    <a href="<?php echo $basePath; ?>/?page=note">Nouvelle note</a>
+                    <a href="<?php echo $basePath; ?>?page=note">Nouvelle note</a>
                 </li>
                 <li>
-                    <a href="<?php echo $basePath; ?>/?page=frais">Ajouter un frais</a>
+                    <a href="<?php echo $basePath; ?>?page=frais">Ajouter un frais</a>
                 </li>
                 <li>
                     <a href="<?php echo $basePath; ?>?page=admin">Admin</a>
@@ -46,7 +46,7 @@ and open the template in the editor.
                             ?>
                            
                 <li class="deco">
-                    <a href="?page=deconnexion">Déconnexion<span class="sr-only">(current)</span></a>
+                    <a href="<?php echo $basePath; ?>?page=deconnexion">Déconnexion<span class="sr-only">(current)</span></a>
                 </li>
                         <?php
                         }

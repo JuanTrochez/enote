@@ -14,6 +14,7 @@
         $user->setLogin($_COOKIE['login']);
         $user->setPassword($_COOKIE['password']);
         $user->connect($bdd,true);
+        echo "cookie set session";
     }
 
     // si une page est demandée avec '?p=pageDemandee' (dans l'url)
