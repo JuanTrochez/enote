@@ -8,18 +8,16 @@ if (isset($_POST['valider']))
     {
         $date = date("Y-m-d");
         $namenote = htmlentities($_POST['name_note']);
-        $user = unserialize($_SESSION['user']);
         
         $newnote = new Note();
         $newnote->setName($namenote);
         $newnote->setTotal(0);
         $newnote->setDate($date);
-        $newnote->setUser($user->getId());
+        $newnote->setUser($sessionUser->getId());
         $newnote->setStatut(1);
         
         $newnote->insertNewNote($bdd);
         echo '<div class="bg-success">La note à bien été ajoutée</div><br/><br/>';
-        include_once "/views/include/note.php";
     }
 }
 else if (isset($_POST['modifier'])){
@@ -27,7 +25,6 @@ else if (isset($_POST['modifier'])){
     if (isset($_POST['name_note']) && !empty($_POST['name_note']))
     {
         $namenote = htmlentities($_POST['name_note']);
-//        $user = unserialize($_SESSION['user']);
         
         //s'il a coché la case 'Cloturer'
         if(isset($_POST['cloturer']) && !empty($_POST['cloturer'])){
@@ -40,20 +37,7 @@ else if (isset($_POST['modifier'])){
         
         Note::updateNote($bdd, $nid, $namenote, $statutnote);
         echo '<div class="bg-success">La note à bien été modifié</div><br/><br/>';
-        include_once "/views/include/note.php";
     }
 }
-else
-{
-    if (isset($_SESSION['user']) && !empty($_SESSION['user']))
-    {
-            
 
-        include_once "/views/include/note.php";
-    }
-
-    else
-    {
-        header("Location: " . $basePath . "/?page=connexion");
-    }
-}
+include_once "/views/include/note.php";

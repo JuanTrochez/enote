@@ -35,7 +35,7 @@
 						<a href="<?php echo $basePath. '?page=note&amp;id=' . $note['id']; ?>">editer</a>
 					</div>
 					<div class="total">
-						<?php echo Note::getMontantTotal($bdd, $note['id']) . ' ' . Devise::getDeviseById($bdd, $user->getDevise());; ?>
+						<?php echo Note::getMontantTotal($bdd, $note['id']) . ' ' . Devise::getDeviseById($bdd, $sessionUser->getDevise());; ?>
 					</div>
 					<div class="btn-show-frais">+ Afficher les frais (<?php echo count($allFrais); ?>)</div>
                     <ul class="list-frais">
