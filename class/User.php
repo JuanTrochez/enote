@@ -141,11 +141,11 @@ class User {
     public function getUserById($bdd,$id)
     {
         $CloneUser = new User();
-        $getUserInfo = $bdd->prepare("SELECT * FROM user WHERE id = :id");
+        $getUserInfo = $bdd->prepare("SELECT * FROM user WHERE id = :id LIMIT 1");
         $getUserInfo->execute(array(':id' => $id));   
         
         $array = $getUserInfo->fetch();
-        
+
         $CloneUser->setDevise($array['devise_id']);
         $CloneUser->setEmail($array['mail']);
         $CloneUser->setId($array['id']);

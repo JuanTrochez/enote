@@ -1,10 +1,10 @@
 <?php include_once 'class/Devise.php';?>
 
 <?php
-if(isset($_GET['id']) && Security::isAdmin())
+if(isset($_GET['id']) && Security::isAdmin($bdd))
 {
-    $CloneUser = new User();
-    $CloneUser->getUserById($bdd, $_GET['id']);
+    $CloneUser= User::getUserById($bdd, $_GET['id']);
+    //var_dump($CloneUser);
 ?>
     <h2> Bienvenue dans votre espace d'administrateur <?php echo $sessionUser->getName(); ?> </h2>
     <br/>
@@ -26,18 +26,20 @@ if(isset($_GET['id']) && Security::isAdmin())
     </div>
 
     <form  class = "form" action="" method="POST" enctype="multipart/form-data">
-        Changer le nom de l'utilisateur :  <input class = "form-control champ-form" type="text" name="changerNomUser"/><br/>
-        Changer le login de l'utilisateur :  <input class = "form-control champ-form" type="text" name="changerNomUser"/><br/>
-        Nouveau mot de passe :  <input class = "form-control champ-form" type="password" name="nouveauMdp"/> <br/>
-        Confirmer le nouveau mot de passe :  <input class = "form-control champ-form" type="password" name="confirmationMdp"/><br/>
+        Changer le nom de l'utilisateur :  <input class = "form-control champ-form" type="text" name="changerNomUser" value='<?php echo $CloneUser->getName()?>'/><br/>
+        Changer le login de l'utilisateur :  <input class = "form-control champ-form" type="text" name="changerLoginUser" value='<?php echo $CloneUser->getLogin()?>'/><br/>
+        Changer l'email de l'utilisateur :  <input class = "form-control champ-form" type="text" name="changerMailUser"value='<?php echo $CloneUser->getEmail()?>'/><br/>
+        Changer le role de l'utilisateur :  <input class = "form-control champ-form" type="text" name="changerRoleUser" value='<?php echo $CloneUser->getRole()?>'/><br/>
+        Nouveau mot de passe :  <input class = "form-control champ-form" type="password" name="nouveauMdpAdmin"/> <br/>
+        Confirmer le nouveau mot de passe :  <input class = "form-control champ-form" type="password" name="confirmationMdpAdmin"/><br/>
         Nouvelle devise :
-        <select class = "formulaire formulairePrix form-control champ-form" name="devise_id">
+        <select class = "formulaire formulairePrix form-control champ-form" name="devise_idAdmin">
             <?php
-                $reponseDevise = Devise::getDeviseFromBdd($bdd);
+                $reponseDevise = Devise::getAllDevise($bdd);
                 while($donnee = $reponseDevise->fetch())
                     {
                         ?>
-                        <option value="<?php echo $donnee['id'];?>" <?php if($sessionUser->getDevise() == $donnee['id']){echo "selected='selected'"; } ?>><?php echo $donnee['name'];?></option>
+            <option value="<?php echo $donnee['id'];?>" <?php if($CloneUser->getDevise() == $donnee['id']){echo "selected='selected'"; } ?>><?php echo $donnee['name'];?></option>
                         <?php  
                     }
             ?>
@@ -76,7 +78,7 @@ if(isset($_GET['id']) && Security::isAdmin())
         Nouvelle devise :
         <select class = "formulaire formulairePrix form-control champ-form" name="devise_id">
                     <?php
-                    $reponseDevise = Devise::getDeviseFromBdd($bdd);
+                    $reponseDevise = Devise::getAllDevise($bdd);
                     while($donnee = $reponseDevise->fetch())
                     {
                         ?>
@@ -86,7 +88,7 @@ if(isset($_GET['id']) && Security::isAdmin())
                     ?>
         </select>
         <br/>
-        <input class = "btn btn-primary" type="submit" name="changementDevise" value="Modifier"/><br/>
+        <input class = "btn btn-primary" type="submit" name="changementParamUser" value="Modifier"/><br/>
     </form>
 <?php
 }

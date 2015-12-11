@@ -4,7 +4,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-if(isset($_POST['changementDevise']) && verifModification($sessionUser))
+if(isset($_POST['changementParamUser']) && verifModification($sessionUser))
 {
     
     $sessionUser->setPassword($_POST['nouveauMdp']);
@@ -17,6 +17,8 @@ if(isset($_POST['changementDevise']) && verifModification($sessionUser))
 if(isset($_SESSION['user']) && !empty($_SESSION['user']))
 {
     include_once 'views/include/profil.php';
+}else if(isset($_POST['changementParamUser']) && verifModificationFromAdmin()){
+    
 }else{
     header("Location: http://localhost/enote/?page=connexion");
 }
@@ -49,5 +51,37 @@ function verifModification($user)
         echo 'Erreur avec la confirmation du mot de passe';
         $modifCorrect = false;
     }
+    return $modifCorrect;
+}
+
+
+function verifModificationFromAdmin()
+{
+    $modifCorrect = true;
+    //Verifie que tous le champs ne sont pas vide
+    if(!isset($_POST['changerNomUser']) || !isset($_POST['changerLoginUser']) || !isset($_POST['changerMailUser']) || !isset($_POST['changerRoleUser']) || !isset($_POST['nouveauMdp']) || !isset($_POST['confirmationMdp']))
+    {
+        echo 'Erreur veuillez remplir tous les champs';
+        $modifCorrect = false;
+    }
+    //Verifie que l'adresse mail est valide
+    else if(!filter_var($_POST['changerMailUser'], FILTER_VALIDATE_EMAIL))
+    {
+        echo'Erreur, adresse mail non valide';
+        $modifCorrect = false;
+    }
+    //Verifie que le nouveau mot de passe est supérieur ou égale à 6 caractères
+    else if(strlen($_POST['nouveauMdpAdmin'])<6)
+    {
+        echo 'Veuillez choisir un mot de passe de 6 caratères minimum';
+        $modifCorrect = false;
+    }
+    //Verifie que la confirmation du mot de passe est correct
+    else if(strcmp($_POST['nouveauMdpAdmin'], $_POST['confirmationMdpAdmin']) != 0)
+    {
+        echo 'Erreur avec la confirmation du mot de passe';
+        $modifCorrect = false;
+    }
+    
     return $modifCorrect;
 }
