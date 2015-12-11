@@ -11,9 +11,9 @@ if (!$secu->isAdmin($bdd)) {
     header("Location: " . $basePath);
 }
 
-if (isset($_GET['action']) && !empty($_GET['action'])) {
+if (isset($_GET['section']) && !empty($_GET['section'])) {
     
-    switch ($_GET['action']) {
+    switch ($_GET['section']) {
         //gestion des utilisateurs
         case "user":
             $listUser = User::getAllUser($bdd);     
