@@ -44,7 +44,6 @@
                 data: {deleteUser: userId},
                 dataType: 'json'
             }).done(function(data) {
-                console.log(data);
                 if (data.updated == true) {
                     $('.tr-user-' + userId).remove();
                 }
