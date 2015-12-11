@@ -121,7 +121,7 @@ class User {
     
     public function deleteUserById($bdd, $id) {
         $req = $bdd->prepare("DELETE FROM user WHERE id = :id");
-        $req->execute(array(
+        return $req->execute(array(
             ":id"   =>  $id
         ));
         
