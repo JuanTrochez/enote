@@ -1,9 +1,8 @@
 <?php
 
 if (isset($_POST['deleteUser']) && !empty($_POST['deleteUser'])) {
-    //User::deleteUserById($bdd, $_POST['delete']);
-    //$data = true;
+    $result = User::deleteUserById($bdd, $_POST['delete']);
     header('Content-Type: application/json');
-    $data = ["updated"=>true];
+    $data = ["result" => $result];
     echo json_encode($data);
 }
