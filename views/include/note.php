@@ -5,8 +5,7 @@
             <h2>Modification d'une note de frais</h2>
             <br/>
             <form class="form" action="" method="POST" name="aaa">
-    
-                <input class="form-control champ-form" name="name_note" type="text" value="<?php echo Note::getNameNote($bdd, $_GET['id']); ?>">
+            <input class="form-control champ-form" name="name_note" type="text" value="<?php echo Note::getNameNote($bdd, $_GET['id']); ?>">
             <label class="envoi_note"><input name="cloturer" type="checkbox">Cloturer et envoyer la note</label>
             <input class="btn btn-primary" name="modifier" type="submit" value="Modifier">
             <a href="<?php echo $basePath; ?>" class="btn btn-primary">Annuler</a>

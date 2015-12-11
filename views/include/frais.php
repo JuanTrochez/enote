@@ -1,10 +1,5 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 ?>
 
 <h2>Ajout d'un nouveau frais</h2><br />
@@ -30,17 +25,17 @@
                 ?>
             </select>
         </div>
+        <?php  
+    ?>
         <select class = "formulaire deroulantFrais form-control champ-form deroulantId" name="note_id">
             <?php
-            $reponseNote = $bdd->query('SELECT * FROM note_frais WHERE statut_id = 1');
-            while($donnee = $reponseNote->fetch())
-            {
+            $uid = $sessionUser->getId();
+            foreach ( (Note::getNotesByUser($bdd, $uid)) as $donnee ) {
+            if ( 1 != $donnee['statut_id'] ) { continue; }
                 ?>
-                <option value="<?php echo $donnee['id'];?>" <?php if(isset($_POST['note_id']) && !empty($_POST['note_id']) && $_POST['note_id'] == $donnee['id']){echo "selected='selected'"; } ?>><?php echo $donnee['name'];?></option>
-                <?php  
-            }
-            $reponseNote->closeCursor();
-            ?>
+                <option value="<?php echo $donnee['id'];?>" <?php if(isset($_POST['note_id']) && !empty($_POST['note_id']) && $_POST['note_id'] == $donnee['id']){echo "selected."
+                    . "='selected'"; } ?>><?php echo $donnee['name'];?></option>
+                <?php  }  ?>
         </select>
         
         <select class = "formulaire deroulantFrais form-control champ-form deroulantId" name="categorie_id">
