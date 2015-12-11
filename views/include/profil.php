@@ -17,7 +17,7 @@
 
 <div>
     <h2> Modification des informations personnelle</h2><br/>
-    <h4> <strong>Modification mot de passe </strong></h4><br/>
+    <h4> <strong>Modifications des informations </strong></h4><br/>
 </div>
 
 <form  class = "form" action="" method="POST" enctype="multipart/form-data">
