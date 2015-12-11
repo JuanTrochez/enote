@@ -11,6 +11,7 @@ class User {
     private $name;
     private $role;
     private $devise;
+    private $mail;
 
     function __construct()
     {
@@ -77,6 +78,15 @@ class User {
         return $this->devise;
     }
     
+    public function setEmail($email)
+    {
+        $this->mail = $email;
+    }
+    
+    public function getEmail()
+    {
+        return $this->mail;
+    }
     public function getAllUser($bdd) {
         $req = $bdd->query("SELECT * FROM user");
         
@@ -104,6 +114,7 @@ class User {
             $user->setId($u[0]['id']);
             $user->setLogin($u[0]['login']);
             $user->setPassword($u[0]['password']);
+            $user->setEmail($u[0]['mail']);
             $user->setName($u[0]['name']);
             $user->setRole($u[0]['role_id']);
             $user->setDevise($u[0]['devise_id']);
@@ -121,12 +132,46 @@ class User {
     
     public function deleteUserById($bdd, $id) {
         $req = $bdd->prepare("DELETE FROM user WHERE id = :id");
-        $req->execute(array(
+        return $req->execute(array(
             ":id"   =>  $id
         ));
         
     }
-
+    
+    public function getUserById($bdd,$id)
+    {
+        $CloneUser = new User();
+        $getUserInfo = $bdd->prepare("SELECT * FROM user WHERE id = :id");
+        $getUserInfo->execute(array(':id' => $id));   
+        
+        $array = $getUserInfo->fetch();
+        
+        $CloneUser->setDevise($array['devise_id']);
+        $CloneUser->setEmail($array['mail']);
+        $CloneUser->setId($array['id']);
+        $CloneUser->setLogin($array['login']);
+        $CloneUser->setName($array['name']);
+        $CloneUser->setPassword($array['password']);
+        $CloneUser->setRole($array['role_id']);
+        
+        return $CloneUser;
+    }
+    public function editUser($bdd, $Admin)
+    {
+        if($Admin)
+        {
+            
+        }else{  
+            $req = $bdd->prepare("UPDATE user SET password = :password, devise_id = :devise_id WHERE id = :id");
+            $req->execute(array(
+            ':password' => $this->password,
+            ':devise_id' => $this->devise,
+            ':id' => $this->id
+            ));
+        }
+        
+    }
+    
     function __destruct()
     {
 

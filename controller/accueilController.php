@@ -12,4 +12,3 @@ $noteStatut = new Statut();
 
 include_once "/views/include/accueil.php";
 
-

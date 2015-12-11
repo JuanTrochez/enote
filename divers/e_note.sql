@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 10 Décembre 2015 à 10:21
+-- Généré le :  Ven 11 Décembre 2015 à 12:40
 -- Version du serveur :  10.1.9-MariaDB
 -- Version de PHP :  5.6.15
 
@@ -90,7 +90,6 @@ CREATE TABLE `frais` (
 
 INSERT INTO `frais` (`id`, `image`, `date`, `description`, `montant`, `devise_id`, `note_id`, `categorie_id`) VALUES
 (1, 'pdg08-12-2015-16-06-48.jpg', '2015-06-10', 'IZI TRADING', 666, 1, 1, 1),
-(2, 'pdg08-12-2015-16-07-31.jpg', '2015-10-13', 'EUROS', 150, 1, 3, 3),
 (3, 'pdg08-12-2015-16-08-17.jpg', '2015-08-01', 'COC + BITCH', 300, 1, 6, 6),
 (4, 'pdg08-12-2015-16-09-18.jpg', '2015-03-02', '', 234, 1, 1, 4),
 (5, 'pdg08-12-2015-16-09-46.jpg', '2015-06-22', 'biff', 2340, 1, 5, 4),
@@ -120,8 +119,6 @@ CREATE TABLE `note_frais` (
 
 INSERT INTO `note_frais` (`id`, `name`, `date`, `user_id`, `statut_id`) VALUES
 (1, 'Note 1', '2015-12-06', 1, 1),
-(2, 'Note 2', '2015-12-06', 3, 2),
-(3, 'Note 3', '2015-12-06', 4, 3),
 (4, 'Note 4', '2015-06-20', 1, 5),
 (5, 'Note 5', '2015-08-03', 1, 2),
 (6, 'Note 6', '2015-12-08', 1, 4);
@@ -191,8 +188,6 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `name`, `login`, `password`, `mail`, `role_id`, `devise_id`) VALUES
 (1, 'Grand chef', 'pdg', 'pwdpdg', '', 1, 1),
 (2, 'Chef', 'leader', 'pwdleader', '', 2, 1),
-(3, 'Grand chef', 'pdg', 'pwdpdg', '', 1, 1),
-(4, 'Chef', 'leader', 'pwdleader', '', 2, 1),
 (5, 'Toto', 'toto', 'pwdtoto', '', 3, 1),
 (6, 'Titi', 'titi', 'pwdtiti', '', 3, 1),
 (7, 'Tata', 'tata', 'pwdtata', '', 3, 1),
@@ -301,21 +296,21 @@ ALTER TABLE `user`
 ALTER TABLE `frais`
   ADD CONSTRAINT `fk_categoriefrais_categorie` FOREIGN KEY (`categorie_id`) REFERENCES `categorie_frais` (`id`),
   ADD CONSTRAINT `fk_fraisdevise_devise` FOREIGN KEY (`devise_id`) REFERENCES `devise` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_notefrais_note` FOREIGN KEY (`note_id`) REFERENCES `note_frais` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_notefrais_note` FOREIGN KEY (`note_id`) REFERENCES `note_frais` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `note_frais`
 --
 ALTER TABLE `note_frais`
   ADD CONSTRAINT `fk_statutnote_note` FOREIGN KEY (`statut_id`) REFERENCES `statut_note` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_usernote_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_usernote_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `user`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `fk_roleuser_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`devise_id`) REFERENCES `devise` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`devise_id`) REFERENCES `devise` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

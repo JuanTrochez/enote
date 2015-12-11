@@ -14,8 +14,8 @@
             <td><?php echo $user['login'] ?></td>
             <td><?php echo $user['mail'] ?></td>
             <td><?php echo $user['role_id'] ?></td>
-            <td><?php echo $user['devise_id'] ?></td>
-            <td><button class="user-<?php echo $user['id'] ?> btn btn-danger">supprimer</button> <a href="<?php echo $basePath ."?page=profil&id=" . $user['id'] ?>">editer</a></td>
+            <td><?php echo Devise::getDeviseById($bdd, $sessionUser->getDevise())->getName(); ?></td>
+            <td><button class="user-<?php echo $user['id'] ?> btn btn-danger">supprimer</button> <a href="<?php echo $basePath ."?page=user&id=" . $user['id'] ?>">editer</a></td>
         </tr>
         <?php } ?>
     </table>

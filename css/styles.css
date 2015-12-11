@@ -50,19 +50,19 @@ header
 
 
 /* ACCUEIL (liste des notes) */
-#accueil ul {
+.list-all-note ul {
     padding: 0;
     margin: 0;
 }
 
-#accueil .list-statut {
+.list-all-note .list-statut {
     margin: 30px 0;
     font-size: 0;
     background-color: rgba(68, 102, 136, 0.70);
     color: rgba(255, 255, 255, 0.70);
 }
 
-#accueil .list-statut li {
+.list-all-note .list-statut li {
     display: inline-block;
     cursor: pointer;
     width: 20%;
@@ -70,21 +70,21 @@ header
     text-align: center;
     border-bottom: 2px solid rgba(0, 0, 0, 0.50);
 }
-#accueil .list-statut li:hover {
+.list-all-note .list-statut li:hover {
     background-color: #446688;
     border-bottom: 2px solid white;
     color: white;
 }
-#accueil .list-statut li.active {
+.list-all-note .list-statut li.active {
     background-color: #446688;
     border-bottom: 2px solid white;
     color: white;
 }
 
-#accueil .list-note {
+.list-all-note .list-note {
     color: white;
 }
-#accueil .list-note li {
+.list-all-note .list-note li {
     list-style-type: none;
     min-height: 100px;
     margin: 15px 0;
@@ -92,38 +92,38 @@ header
     background-color: #446688;
     font-size: 0;
 }
-#accueil .list-note li .btn-show-frais {
+.list-all-note .list-note li .btn-show-frais {
     cursor: pointer;
 }
-#accueil .list-note li div {
+.list-all-note .list-note li div {
     display: inline-block;
     vertical-align: top;
     font-size: 20px;
 }
-#accueil .list-note .infos-note, #accueil .list-note .actions-note {
+.list-all-note .list-note .infos-note, .list-all-note .list-note .actions-note {
     width: 40%;
 }
-#accueil .list-note .total {
+.list-all-note .list-note .total {
     width: 20%;
 }
 
-#accueil .list-note .list-frais {
+.list-all-note .list-note .list-frais {
     display: none;
 }
-#accueil .list-note .list-frais li {
+.list-all-note .list-note .list-frais li {
     background-color: rgba(255, 255, 255, 0.30);
     padding: 5px;
 }
 
-#accueil .list-note .infos-frais {
+.list-all-note .list-note .infos-frais {
     width: 60%;
 }
-#accueil .list-note .actions-frais, #accueil .list-frais .total {
+.list-all-note .list-note .actions-frais, .list-all-note .list-frais .total {
     width: 20%;
     text-align: center;
 }
 
-#accueil .list-note .infos-frais .img-frais {
+.list-all-note .list-note .infos-frais .img-frais {
     display: table-cell;
     float: left;
     height: 130px;
@@ -131,7 +131,7 @@ header
     margin-right: 10px;
 }
 
-#accueil .list-note .infos-frais span {
+.list-all-note .list-note .infos-frais span {
     display: table-cell;
 }
 
@@ -170,3 +170,21 @@ header
 #image,date{
     width: 50%;
 }
+
+
+/* Administration */
+.admin-user table {
+    width: 100%;
+}
+
+.admin-user table tr {
+    height: 40px;
+}
+
+.admin-user table tr:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.admin-note .list-statut li {
+    width: 25%;
+}
+

@@ -47,6 +47,9 @@
         }
 
     } elseif (isset($_GET['request']) && !empty($_GET['request'])) {
+        if (!$secu->logged()) {
+            header("Location: " . $basePath . "?page=connexion"); 
+        }
         include_once 'controller/jsonController.php';
     } else {
         if (!$secu->logged()) {
@@ -55,7 +58,7 @@
         include_once 'views/global/header.php'; // Inclusion de l'entete de la page
 
         include_once 'controller/accueilController.php';
-
+        
         // Inclusion du pied de page
         include_once 'views/global/footer.php';
     }
