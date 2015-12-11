@@ -13,11 +13,7 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
     switch ($_GET['action']) {
         //gestion des utilisateurs
         case "user":
-            $listUser = User::getAllUser($bdd);
-            
-            if (isset($_GET['delete']) && !empty($_GET['delete'])) {
-                User::deleteUserById($bdd, $_GET['delete']);
-            }
+            $listUser = User::getAllUser($bdd);     
             
             include_once '/views/admin/user.php';
         break;

@@ -28,8 +28,8 @@
     	sibling.slideDown();
     });
     
+    //requete ajax pour supprimer l'utilisateur dans la partie admin
     $('.admin-user table tr td .btn-danger').click(function() {
-        
         
         var classes = $(this).attr('class');       
         var firstIndex = classes.indexOf('-') + 1;
@@ -37,8 +37,21 @@
         var userId = classes.substring(firstIndex, lastIndex);
         
         if (confirm('confirmer')) {
-            var fullPath = window.location.href + '&delete=' + userId;
-            $.ajax(fullPath);
+            var fullPath = 'http://' + window.location.host + '/enote/?request=1';
+            $.ajax({
+                url: fullPath,
+                type: 'POST',
+                data: {deleteUser: 4},
+                dataType: 'json'
+            }).done(function(data) {
+                //$('.tr-user-' + userId).remove();
+                console.log(data);
+
+            }).fail(function(jqXHR, textStatus) {
+                console.log(jqXHR.responseText);
+                console.error('Une erreur s\'est produite :', jqXHR);
+                console.error('Une erreur s\'est produite :', textStatus);
+            });
         };
     });
 
