@@ -62,5 +62,4 @@
         // Inclusion du pied de page
         include_once 'views/global/footer.php';
     }
-
 ?>
