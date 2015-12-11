@@ -1,12 +1,19 @@
-<div id="accueil">
+<div id="accueil" class="list-all-note">
 	<h1>Mes notes de frais</h1>
 
 
 	<div class="list-container">
 		<ul class="list-statut">
-			<?php foreach ($listStatut as $statut) { ?>
-				<li class="statut-<?php echo $statut['id']; if ($statut['id'] == 1) {echo " active";} ?>"><?php echo $statut['name']; ?></li>
-			<?php } ?>
+			<?php				
+				//pour la classe active
+				$i = 0;
+				foreach ($listStatut as $statut) { 
+			?>
+				<li class="statut-<?php echo $statut['id']; if ($i == 0) {echo " active";} ?>"><?php echo $statut['name']; ?></li>
+			<?php 
+					$i = 1;
+				} 
+			?>
 		</ul>
 
 		<ul class="list-note">
