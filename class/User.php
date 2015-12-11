@@ -127,6 +127,21 @@ class User {
         
     }
 
+    public function editUser($bdd, $Admin)
+    {
+        if($Admin)
+        {
+            
+        }else{  
+            $req = $bdd->prepare("UPDATE user SET password = :password WHERE id = :id");
+            $req->execute(array(
+            ':password' => $this->password,
+            ':id' => $this->id
+            ));  
+        }
+        
+    }
+    
     function __destruct()
     {
 

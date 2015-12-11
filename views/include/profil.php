@@ -36,7 +36,7 @@
                 }
                 $reponseDevise->closeCursor();
                 ?>
-            </select>
+    </select>
     <br/>
     <input class = "btn btn-primary" type="submit" name="changementDevise" value="Modifier"/><br/>
 </form>
