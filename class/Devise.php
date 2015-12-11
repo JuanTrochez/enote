@@ -69,4 +69,10 @@ class Devise {
         
         return $Devise;
     }
+    
+    public function getAllDevise($bdd)
+    {
+        $deviseTable = $bdd->query('SELECT * FROM devise');
+        return $deviseTable;
+    }
 }

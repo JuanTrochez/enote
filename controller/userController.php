@@ -8,7 +8,7 @@ if(isset($_POST['changementDevise']) && verifModification($sessionUser))
 {
     
     $sessionUser->setPassword($_POST['nouveauMdp']);
-    $sessionUser->setDevise($_POST['nouveauMdp']);
+    $sessionUser->setDevise($_POST['devise_id']);
     $_SESSION['user'] = serialize($sessionUser);
     $sessionUser->editUser($bdd,false);
     echo '<div class="bg-success">Modifications enregistrées </div><br/><br/>';
