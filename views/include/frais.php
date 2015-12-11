@@ -1,5 +1,6 @@
 <?php
-
+include_once '/class/Devise.php';
+include_once '/class/CategorieFrais.php';
 ?>
 
 <h2>Ajout d'un nouveau frais</h2><br />
@@ -11,22 +12,17 @@
         <textarea class = "formulaire form-control champ-form descriptionFormulaire" name="description" placeholder="Description"><?php if(isset($_POST['description']) && !empty($_POST['description'])){echo $_POST['description']; } ?></textarea>
         <div id ="blocPrix">
             <input class = "formulaire  formulairePrixTTC form-control champ-form" type="text" name="montant" placeholder="TTC" value="<?php if(isset($_POST['montant']) && !empty($_POST['montant'])){echo $_POST['montant']; } ?>"/>
-
+              
             <select class = "formulaire formulairePrix form-control champ-form" name="devise_id">
-                <?php
-                $reponseDevise = $bdd->query('SELECT * FROM devise');
+            <?php
+                $reponseDevise = Devise::getAllDevise($bdd);
                 while($donnee = $reponseDevise->fetch())
-                {
-                    ?>
-                    <option value="<?php echo $donnee['id'];?>" <?php if(isset($_POST['devise_id']) && !empty($_POST['devise_id']) && $_POST['devise_id'] == $donnee['id']){echo "selected='selected'"; } ?>><?php echo $donnee['name'];?></option>
-                    <?php  
-                }
-                $reponseDevise->closeCursor();
-                ?>
+                    { ?>
+                        <option value="<?php echo $donnee['id'];?>" <?php if($sessionUser->getDevise() == $donnee['id']){echo "selected='selected'"; } ?>><?php echo $donnee['name'];?></option>
+                        <?php  
+                    } ?>
             </select>
         </div>
-        <?php  
-    ?>
         <select class = "formulaire deroulantFrais form-control champ-form deroulantId" name="note_id">
             <?php
             $uid = $sessionUser->getId();
@@ -40,7 +36,7 @@
         
         <select class = "formulaire deroulantFrais form-control champ-form deroulantId" name="categorie_id">
             <?php
-            $reponseCategorie = $bdd->query('SELECT * FROM categorie_frais');
+            $reponseCategorie = CategorieFrais::getAllCategorie($bdd);
             while($donnee = $reponseCategorie->fetch())
             {
                 ?>
@@ -50,7 +46,6 @@
             $reponseCategorie->closeCursor();
             ?>
         </select>
-        
         <br>
         <input class="btn btn-primary" type="submit" value="Valider" name = "valider"/>
     </p>

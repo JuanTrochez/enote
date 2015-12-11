@@ -33,7 +33,7 @@ if(isset($_GET['id']) && Security::isAdmin())
         Nouvelle devise :
         <select class = "formulaire formulairePrix form-control champ-form" name="devise_id">
             <?php
-                $reponseDevise = Devise::getDeviseFromBdd($bdd);
+                $reponseDevise = Devise::getAllDevise($bdd);
                 while($donnee = $reponseDevise->fetch())
                     {
                         ?>
@@ -76,7 +76,7 @@ if(isset($_GET['id']) && Security::isAdmin())
         Nouvelle devise :
         <select class = "formulaire formulairePrix form-control champ-form" name="devise_id">
                     <?php
-                    $reponseDevise = Devise::getDeviseFromBdd($bdd);
+                    $reponseDevise = Devise::getAllDevise($bdd);
                     while($donnee = $reponseDevise->fetch())
                     {
                         ?>

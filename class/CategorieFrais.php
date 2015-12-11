@@ -28,5 +28,11 @@ class CategorieFrais {
     {
         return $this->name;
     }
+    
+    public function getAllCategorie($bdd)
+    {
+        $cateTable = $bdd->query('SELECT * FROM categorie_frais');
+        return $cateTable;
+    }
 
 }
