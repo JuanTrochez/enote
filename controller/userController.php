@@ -4,13 +4,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-if(isset($_POST['changementDevise']) && verifModification())
+if(isset($_POST['changementDevise']) && verifModification($sessionUser))
 {
     
     $sessionUser->setPassword($_POST['nouveauMdp']);
-    $sessionUser->editUserFromUser($bdd,false);
-    echo '<div class="bg-success">Le frais à bien été ajouté </div><br/><br/>';
+    $sessionUser->setDevise($_POST['nouveauMdp']);
+    $_SESSION['user'] = serialize($sessionUser);
+    $sessionUser->editUser($bdd,false);
+    echo '<div class="bg-success">Modifications enregistrées </div><br/><br/>';
 }
     
 if(isset($_SESSION['user']) && !empty($_SESSION['user']))
@@ -21,7 +22,7 @@ if(isset($_SESSION['user']) && !empty($_SESSION['user']))
 }
 
 
-function verifModification()
+function verifModification($user)
 {
     $modifCorrect = true;  
     // Verifie que les champs sont remplies
@@ -31,13 +32,13 @@ function verifModification()
         $modifCorrect = false;
     }
     //Verifie que le mot de passe entré par l'utilisateur est correct
-    else if(strcmp($_POST['ancienMdp'], $sessionUser->getPassword()) != 0)
+    else if(strcmp($_POST['ancienMdp'], $user->getPassword()) != 0)
     {
         echo 'Erreur d identification, le mot de passe est incorrect';
         $modifCorrect = false;
     }
     //Verifie que le nouveau mot de passe est supérieur ou égale à 6 caractères
-    else if(srtlen($_POST['nouveauMdp'])<6)
+    else if(strlen($_POST['nouveauMdp'])<6)
     {
         echo 'Veuillez choisir un mot de passe de 6 caratères minimum';
         $modifCorrect = false;
