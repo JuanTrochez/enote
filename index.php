@@ -46,7 +46,12 @@
                 include_once 'views/global/footer.php';
         }
 
-    }else{
+    } elseif (isset($_GET['request']) && !empty($_GET['request'])) {
+        include_once 'controller/jsonController.php';
+    } else {
+        if (!$secu->logged()) {
+            header("Location: " . $basePath . "?page=connexion"); 
+        }
         include_once 'views/global/header.php'; // Inclusion de l'entete de la page
 
         include_once 'controller/accueilController.php';

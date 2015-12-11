@@ -9,7 +9,7 @@
             <th>Actions</th>
         </tr>
         <?php foreach ($listUser as $user) { ?>
-        <tr>
+        <tr class="tr-user-<?php echo $user['id'] ?>">
             <td><?php echo $user['name'] ?></td>
             <td><?php echo $user['login'] ?></td>
             <td><?php echo $user['mail'] ?></td>
