@@ -44,7 +44,10 @@
                 data: {deleteUser: userId},
                 dataType: 'json'
             }).done(function(data) {
-                $('.tr-user-' + userId).remove();
+                console.log(data);
+                if (data.updated == true) {
+                    $('.tr-user-' + userId).remove();
+                }
 
             }).fail(function(jqXHR, textStatus) {
                 console.error('Une erreur s\'est produite :', textStatus);
