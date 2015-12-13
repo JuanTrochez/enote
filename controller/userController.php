@@ -10,15 +10,30 @@ if(isset($_POST['changementParamUser']) && verifModification($sessionUser))
     $sessionUser->setPassword($_POST['nouveauMdp']);
     $sessionUser->setDevise($_POST['devise_id']);
     $_SESSION['user'] = serialize($sessionUser);
-    $sessionUser->editUser($bdd,false);
+    $sessionUser->editUser($bdd);
     echo '<div class="bg-success">Modifications enregistrées </div><br/><br/>';
+    
+}else if(isset($_POST['changementParamUserByAdmin']) && verifModificationFromAdmin()){
+    
+    $CloneUser= User::getUserById($bdd, $_GET['id']);
+    
+    $CloneUser->setName($_POST['changerNomUser']);
+    $CloneUser->setLogin($_POST['changerLoginUser']);
+    $CloneUser->setEmail($_POST['changerMailUser']);
+    $CloneUser->setRole($_POST['changerRoleUser']);
+    $CloneUser->setDevise($_POST['devise_idAdmin']);
+    
+    if(!empty($_POST['nouveauMdpAdmin']))
+    {
+        $CloneUser->setPassword($_POST['nouveauMdpAdmin']);
+    }
+    
+    $CloneUser->editUserByAdmin($bdd, $CloneUser);
 }
     
 if(isset($_SESSION['user']) && !empty($_SESSION['user']))
 {
     include_once 'views/include/profil.php';
-}else if(isset($_POST['changementParamUser']) && verifModificationFromAdmin()){
-    
 }else{
     header("Location: http://localhost/enote/?page=connexion");
 }
@@ -59,7 +74,7 @@ function verifModificationFromAdmin()
 {
     $modifCorrect = true;
     //Verifie que tous le champs ne sont pas vide
-    if(!isset($_POST['changerNomUser']) || !isset($_POST['changerLoginUser']) || !isset($_POST['changerMailUser']) || !isset($_POST['changerRoleUser']) || !isset($_POST['nouveauMdp']) || !isset($_POST['confirmationMdp']))
+    if(!isset($_POST['changerNomUser']) || !isset($_POST['changerLoginUser']) || !isset($_POST['changerMailUser']) || !isset($_POST['changerRoleUser']))
     {
         echo 'Erreur veuillez remplir tous les champs';
         $modifCorrect = false;
@@ -70,18 +85,20 @@ function verifModificationFromAdmin()
         echo'Erreur, adresse mail non valide';
         $modifCorrect = false;
     }
-    //Verifie que le nouveau mot de passe est supérieur ou égale à 6 caractères
-    else if(strlen($_POST['nouveauMdpAdmin'])<6)
+    if(!empty($_POST['nouveauMdpAdmin']))
     {
-        echo 'Veuillez choisir un mot de passe de 6 caratères minimum';
-        $modifCorrect = false;
+        //Verifie que le nouveau mot de passe est supérieur ou égale à 6 caractères
+        if(strlen($_POST['nouveauMdpAdmin'])<6)
+        {
+            echo 'Veuillez choisir un mot de passe de 6 caratères minimum bitch';
+            $modifCorrect = false;
+        }
+        //Verifie que la confirmation du mot de passe est correct
+        else if(strcmp($_POST['nouveauMdpAdmin'], $_POST['confirmationMdpAdmin']) != 0)
+        {
+            echo 'Erreur avec la confirmation du mot de passe';
+            $modifCorrect = false;
+        }
     }
-    //Verifie que la confirmation du mot de passe est correct
-    else if(strcmp($_POST['nouveauMdpAdmin'], $_POST['confirmationMdpAdmin']) != 0)
-    {
-        echo 'Erreur avec la confirmation du mot de passe';
-        $modifCorrect = false;
-    }
-    
     return $modifCorrect;
 }

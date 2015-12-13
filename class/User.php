@@ -156,19 +156,28 @@ class User {
         
         return $CloneUser;
     }
-    public function editUser($bdd, $Admin)
+    public function editUser($bdd)
     {
-        if($Admin)
-        {
-            
-        }else{  
-            $req = $bdd->prepare("UPDATE user SET password = :password, devise_id = :devise_id WHERE id = :id");
-            $req->execute(array(
-            ':password' => $this->password,
-            ':devise_id' => $this->devise,
+        $req = $bdd->prepare("UPDATE user SET password = :password, devise_id = :devise_id WHERE id = :id");
+        $req->execute(array(
+        ':password' => $this->password,
+        ':devise_id' => $this->devise,
+        ':id' => $this->id
+        ));
+    }
+    
+    public function editUserByAdmin($bdd, $CloneUser)
+    {
+        $req = $bdd->prepare("UPDATE user SET name = :name, login = :login, password = :password, mail = :mail, role_id = :role_id, devise_id = :devise_id WHERE id = :id");
+        $req->execute(array(
+            ':name' => $CloneUser->getname(),
+            ':login' => $CloneUser->getLogin(),
+            ':password' => $CloneUser->getPassword(),
+            ':mail' => $CloneUser->getEmail(),
+            'role_id' => $CloneUser->getRole(),
+            ':devise_id' => $CloneUser->getDevise(),
             ':id' => $this->id
-            ));
-        }
+        ));  
         
     }
     
