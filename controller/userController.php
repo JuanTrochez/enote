@@ -29,6 +29,7 @@ if(isset($_POST['changementParamUser']) && verifModification($sessionUser))
     }
     
     $CloneUser->editUserByAdmin($bdd, $CloneUser);
+    echo '<div class="bg-success">Modifications enregistrées </div><br/><br/>';
 }
     
 if(isset($_SESSION['user']) && !empty($_SESSION['user']))
