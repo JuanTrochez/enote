@@ -153,7 +153,7 @@ header
 
 .formulairePrix{
     display: inline;
-    width : 30%;
+    width : 35%;
 }
 
 .formulaireEmail{
@@ -162,7 +162,7 @@ header
 }
 .formulaireDevise{
     display : inline;
-    width : 7%;
+    width : 10%;
 }
 
 .formulaireRole{

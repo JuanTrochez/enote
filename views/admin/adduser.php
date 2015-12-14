@@ -8,7 +8,7 @@ include_once 'class/Role.php';
         <input class="form-control champ-form" name="pwd" type="password" placeholder="Mot de passe">
         <input class="form-control champ-form" name="pwd2" type="password" placeholder="Confirmer le mot de passe">
         <input class="form-control champ-form" name="email" type="text" placeholder="Email">
-        <select class = "formulaire formulaireRole form-control champ-form" name="role">
+        <select class = "formulaire formulaireRole form-control champ-form" style="margin-left: 0%; display: inline-block;" name="role">
             <?php
                 $reponseRole = Role::getAllRole($bdd);
                 while($donnee = $reponseRole->fetch())
@@ -16,7 +16,7 @@ include_once 'class/Role.php';
                     <option value="<?php echo $donnee['id'];?>"><?php echo $donnee['name'];?></option>
           <?php } ?>
         </select>
-        <select class = "formulaire formulairePrix form-control champ-form" name="devise">
+        <select class = "formulaire formulairePrix form-control champ-form" style="display: inline-block;" name="devise">
             <?php
             $reponseDevise = Devise::getAllDevise($bdd);
             while($donnee = $reponseDevise->fetch())
