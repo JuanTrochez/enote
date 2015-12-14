@@ -13,7 +13,7 @@ if(isset($_POST['changementParamUser']) && verifModification($sessionUser) || is
         $sessionUser->setDevise($_POST['devise_id']);
     }else if(isset($_POST['changementParamUser']))
     {
-        $sessionUser->setPassword($_POST['nouveauMdp']);
+        $sessionUser->setPassword(sha1($_POST['nouveauMdp']));
     }else
     {
         if(filter_var($_POST['nouveauMail'], FILTER_VALIDATE_EMAIL))
@@ -44,7 +44,7 @@ if(isset($_POST['changementParamUser']) && verifModification($sessionUser) || is
     
     if(!empty($_POST['nouveauMdpAdmin']))
     {
-        $CloneUser->setPassword($_POST['nouveauMdpAdmin']);
+        $CloneUser->setPassword(sha1($_POST['nouveauMdpAdmin']));
     }
     
     $CloneUser->editUserByAdmin($bdd, $CloneUser);
@@ -69,7 +69,7 @@ function verifModification($user)
         $modifCorrect = false;
     }
     //Verifie que le mot de passe entré par l'utilisateur est correct
-    else if(strcmp($_POST['ancienMdp'], $user->getPassword()) != 0)
+    else if(strcmp(sha1($_POST['ancienMdp']), $user->getPassword()) != 0)
     {
         echo 'Erreur d identification, le mot de passe est incorrect';
         $modifCorrect = false;

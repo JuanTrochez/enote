@@ -75,4 +75,12 @@ class Devise {
         $deviseTable = $bdd->query('SELECT * FROM devise');
         return $deviseTable;
     }
+    
+    public function getValueOfChangedDevise($value,$fromDeviseTaux, $toDeviseTaux)
+    {
+        $resultat = $value * $fromDeviseTaux;
+        $resultat = $resultat/$toDeviseTaux;
+        
+        return $resultat;
+    }
 }
