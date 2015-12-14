@@ -26,7 +26,7 @@
 					$fraisNote->setId($note['id']);
 					$allFrais = $fraisNote->getListFrais($bdd);
 			?>
-				<li class="statut-<?php echo $note['statut_id']; ?>">
+				<li class="statut-<?php echo $note['statut_id']; ?> note-<?php echo $note['id'] ?>">
 					<div class="infos-note">
 						<span><?php echo $note['name']; ?></span><br/>
 						<span><?php echo date("d-m-Y", strtotime($note['date'])); ?></span><br/>
@@ -40,7 +40,7 @@
 						</span><br/>
 					</div>
 					<div class="actions-note">
-						<span>supprimer</span>
+						<button class="note-<?php echo $note['id'] ?> btn btn-danger">supprimer</button>
 						<a href="<?php echo $basePath. '?page=note&amp;id=' . $note['id']; ?>">editer</a>
 					</div>
 					<div class="total">

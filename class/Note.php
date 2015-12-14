@@ -129,9 +129,9 @@ class Note {
         ));
     }
     
-    public function deleteNote($bdd,$nid) {
-        $delnote = $bdd->prepare("DELETE * FROM `note_frais` WHERE `id`= :nid");
-        $delnote = execute(array(
+    public function deleteNoteById($bdd,$nid) {
+        $delnote = $bdd->prepare("DELETE FROM `note_frais` WHERE `id`= :nid");
+        return $delnote->execute(array(
             ":nid" => $nid
         ));
     }

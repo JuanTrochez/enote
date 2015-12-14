@@ -2,8 +2,9 @@
 
     var activeLi = $('.list-all-note .list-container .list-statut li.active');
     var liClass = activeLi.attr('class');
-    var activeClass = liClass.substring(0, liClass.indexOf(' '));
-    console.log(activeClass);
+    if (liClass) {
+        var activeClass = liClass.substring(0, liClass.indexOf(' '));
+    }
 
 	$('.list-all-note .list-container .list-note li').hide();
 	$('.list-all-note .list-container .list-note .' + activeClass).show();
@@ -45,7 +46,7 @@
         var lastIndex = classes.indexOf(' ');
         var userId = classes.substring(firstIndex, lastIndex);
         
-        if (confirm('confirmer')) {
+        if (confirm('Etes-vous sûr de vouloir supprimer cet utilisateur ?')) {
             var fullPath = 'http://' + window.location.host + '/enote/?request=1';
             $.ajax({
                 url: fullPath,
@@ -58,6 +59,34 @@
                 }
 
             }).fail(function(jqXHR, textStatus) {
+                console.error('Une erreur s\'est produite :', textStatus);
+            });
+        };
+    });
+
+    //requete ajax pour supprimer les notes de frais utilisateur et admin
+    $('.list-all-note .list-container .btn-danger').click(function() {
+        
+        var classes = $(this).attr('class');       
+        var firstIndex = classes.indexOf('-') + 1;
+        var lastIndex = classes.indexOf(' ');
+        var noteId = classes.substring(firstIndex, lastIndex);
+        
+        if (confirm('Confirmez la suppression')) {
+            var fullPath = 'http://' + window.location.host + '/enote/?request=1';
+            $.ajax({
+                url: fullPath,
+                type: 'POST',
+                data: {deleteNote: noteId},
+                dataType: 'json'
+            }).done(function(data) {
+                console.log(data);
+                if (data.updated == true) {
+                    $('.list-all-note .list-container .list-note li.note-' + noteId).remove();
+                }
+
+            }).fail(function(jqXHR, textStatus) {
+                //console.error(jqXHR);
                 console.error('Une erreur s\'est produite :', textStatus);
             });
         };
