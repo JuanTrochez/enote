@@ -2,7 +2,21 @@
 include_once "/class/Statut.php";
 include_once "/class/User.php";
 
-if (isset($_POST['valider']))
+if (isset($_POST['Editer'])){
+    
+    $note_name = $_POST['name_note'];
+    if (isset($note_name) && !empty($note_name))
+    {
+        $namenote = htmlentities($note_name);
+        $statutnote = $_POST['statut'];
+        $nid = $_GET['id'];
+        
+        Note::updateNote($bdd, $nid, $namenote, $statutnote);
+        echo '<div class="bg-success">La note à bien été éditée</div><br/><br/>';
+    }
+}
+
+elseif (isset($_POST['valider']))
 {
     $note_name = $_POST['name_note'];
     if (isset($note_name) && !empty($note_name))
@@ -20,7 +34,7 @@ if (isset($_POST['valider']))
         echo '<div class="bg-success">La note à bien été ajoutée</div><br/><br/>';
     }
 }
-else if (isset($_POST['modifier'])){
+elseif (isset($_POST['modifier'])){
     
     $note_name = $_POST['name_note'];
     if (isset($note_name) && !empty($note_name))
@@ -37,7 +51,7 @@ else if (isset($_POST['modifier'])){
         $nid = $_GET['id'];
         
         Note::updateNote($bdd, $nid, $namenote, $statutnote);
-        echo '<div class="bg-success">La note à bien été modifié</div><br/><br/>';
+        echo '<div class="bg-success">La note à bien été modifiée</div><br/><br/>';
     }
 }
 
