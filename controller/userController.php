@@ -4,11 +4,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-if(isset($_POST['changementParamUser']) && verifModification($sessionUser))
+if(isset($_POST['changementParamUser']) && verifModification($sessionUser) || isset($_POST['changementDeviseUser']))
 {
     
-    $sessionUser->setPassword($_POST['nouveauMdp']);
-    $sessionUser->setDevise($_POST['devise_id']);
+    if(isset($_POST['changementDeviseUser']))
+    {
+        $sessionUser->setDevise($_POST['devise_id']);
+    }else{
+        $sessionUser->getDevise();
+        $sessionUser->setPassword($_POST['nouveauMdp']);
+    }
+    
     $_SESSION['user'] = serialize($sessionUser);
     $sessionUser->editUser($bdd);
     echo '<div class="bg-success">Modifications enregistrées </div><br/><br/>';

@@ -18,7 +18,7 @@ if(isset($_GET['id']) && Security::isAdmin($bdd))
         $Devise = new Devise();
         $Devise = Devise::getDeviseById($bdd,$CloneUser->getDevise());
         ?>
-        <strong>Votre devise actuelle</strong> : <?php echo $Devise->getName() ;?>
+        <strong>Devise actuelle de l'utilisateur</strong> : <?php echo $Devise->getName() ;?>
     </div>
 
     <div>
@@ -70,14 +70,28 @@ if(isset($_GET['id']) && Security::isAdmin($bdd))
     <h3> <strong>Voici quelques informations concernant votre compte : </strong></h3><br/>
 
     <div>
-        <strong>Votre nom</strong> : <?php echo $sessionUser->getName(); ?><br/>
-        <strong>Votre Login</strong> : <?php echo $sessionUser->getLogin(); ?><br/>
-        <strong>Votre Email</strong> : <?php echo $sessionUser->getEmail(); ?><br/>
-        <?php 
-        $Devise = new Devise();
-        $Devise = Devise::getDeviseById($bdd,$sessionUser->getDevise());
-        ?>
-        <strong>Votre devise actuelle</strong> : <?php echo $Devise->getName() ;?>
+        <form  action="" method="POST" enctype="multipart/form-data">
+            <strong>Votre nom</strong> : <?php echo $sessionUser->getName(); ?><br/>
+            <strong>Votre Login</strong> : <?php echo $sessionUser->getLogin(); ?><br/>
+            <strong>Votre Email</strong> : <?php echo $sessionUser->getEmail(); ?><br/>
+            <?php 
+            $Devise = new Devise();
+            $Devise = Devise::getDeviseById($bdd,$sessionUser->getDevise());
+            ?>
+            <strong>Votre devise actuelle</strong> : 
+            <select class = "formulaire formulaireDevise form-control champ-form" name="devise_id">
+                        <?php
+                        $reponseDevise = Devise::getAllDevise($bdd);
+                        while($donnee = $reponseDevise->fetch())
+                        {
+                            ?>
+                            <option value="<?php echo $donnee['id'];?>" <?php if($sessionUser->getDevise() == $donnee['id']){echo "selected='selected'"; } ?>><?php echo $donnee['name'];?></option>
+                            <?php  
+                        }
+                        ?>
+            </select>
+            <input class = "btn btn-primary" type="submit" name="changementDeviseUser" value="Modifier"/>
+        </form>
     </div>
 
     <div>
@@ -89,19 +103,6 @@ if(isset($_GET['id']) && Security::isAdmin($bdd))
         Ancien mot de passe :  <input class = "form-control champ-form" type="password" name="ancienMdp"/><br/>
         Nouveau mot de passe :  <input class = "form-control champ-form" type="password" name="nouveauMdp"/> <br/>
         Confirmer le nouveau mot de passe :  <input class = "form-control champ-form" type="password" name="confirmationMdp"/><br/>
-        Nouvelle devise :
-        <select class = "formulaire formulairePrix form-control champ-form" name="devise_id">
-                    <?php
-                    $reponseDevise = Devise::getAllDevise($bdd);
-                    while($donnee = $reponseDevise->fetch())
-                    {
-                        ?>
-                        <option value="<?php echo $donnee['id'];?>" <?php if($sessionUser->getDevise() == $donnee['id']){echo "selected='selected'"; } ?>><?php echo $donnee['name'];?></option>
-                        <?php  
-                    }
-                    ?>
-        </select>
-        <br/>
         <input class = "btn btn-primary" type="submit" name="changementParamUser" value="Modifier"/><br/>
     </form>
 <?php

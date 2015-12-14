@@ -155,6 +155,10 @@ header
     display: inline;
     width : 30%;
 }
+.formulaireDevise{
+    display : inline;
+    width : 7%;
+}
 
 .formulaireRole{
     margin-left: 25%;
