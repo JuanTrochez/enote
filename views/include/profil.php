@@ -70,10 +70,12 @@ if(isset($_GET['id']) && Security::isAdmin($bdd))
     <h3> <strong>Voici quelques informations concernant votre compte : </strong></h3><br/>
 
     <div>
-        <form  action="" method="POST" enctype="multipart/form-data">
+        <form action="" method="POST" enctype="multipart/form-data">
             <strong>Votre nom</strong> : <?php echo $sessionUser->getName(); ?><br/>
             <strong>Votre Login</strong> : <?php echo $sessionUser->getLogin(); ?><br/>
-            <strong>Votre Email</strong> : <?php echo $sessionUser->getEmail(); ?><br/>
+            <strong>Votre Email</strong> : <input class = "formulaireEmail form-control champ-form" type="text" name="nouveauMail" value='<?php echo $sessionUser->getEmail(); ?>'/>
+            <input class = "btn btn-primary" type="submit" name="changementEmailUser" value="Modifier"/>
+            <br/>
             <?php 
             $Devise = new Devise();
             $Devise = Devise::getDeviseById($bdd,$sessionUser->getDevise());
