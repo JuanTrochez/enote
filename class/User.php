@@ -181,6 +181,20 @@ class User {
         
     }
     
+    public function insertNewUser($bdd)
+    {
+        $newUser = $bdd->prepare("INSERT INTO user(name, login, password, mail, role_id, devise_id) "
+                . "values (:name, :login, :password, :mail, :role, :devise)");
+        $newUser->execute(array(
+           ":name" => $this->name,
+           ":login" => $this->login,
+           ":password" => $this->password,
+           ":mail" => $this->mail,
+           ":role" => $this->role,
+           ":devise" => $this->devise
+        ));
+    }
+    
     function __destruct()
     {
 

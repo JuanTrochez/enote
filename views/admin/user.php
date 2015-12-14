@@ -1,4 +1,4 @@
-<a href="<?php echo $basePath ?>?page=admin&action=adduser" class="btn btn-primary">Ajouter un utilisateur</a>
+<a href="<?php echo $basePath ?>?page=admin&section=user&action=adduser" class="btn btn-primary">Ajouter un utilisateur</a>
 <br/><br/>
 <div class="admin-user">
     <table>
@@ -23,4 +23,4 @@
     </table>
 </div>
 <br/>
-<a href="<?php echo $basePath ?>?page=admin&action=adduser" class="btn btn-primary">Ajouter un utilisateur</a>
+<a href="<?php echo $basePath ?>?page=admin&section=user&action=adduser" class="btn btn-primary">Ajouter un utilisateur</a>
