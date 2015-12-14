@@ -1,8 +1,8 @@
 <?php
 include_once '/class/Note.php';
+include_once '/class/Frais.php';
 
 if (isset($_POST) && !empty($_POST)) {
-//    var_dump($_POST);    
     header('Content-Type: application/json');
     
     $data = [];
@@ -23,7 +23,7 @@ if (isset($_POST) && !empty($_POST)) {
                 break;
 
             case 'deleteFrais':
-                $result = User::deleteFraisById($bdd, $value);
+                $result = Frais::deleteFraisById($bdd, $value);
                 $data = ["updated"=> $result];
 
                 break;

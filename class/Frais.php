@@ -139,6 +139,14 @@ class Frais {
         $req->closeCursor();
     }
     
+    public function deleteFraisById($bdd, $id) {
+        $req = $bdd->prepare('DELETE FROM frais WHERE id = :id');
+        
+        return $req->execute(array(
+            ":id" => $id
+        ));
+    }
+    
     public function getFraisById($bdd, $id)
     {
         $req= $bdd->prepare('SELECT * FROM frais WHERE id = :id LIMIT 1');
