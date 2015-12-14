@@ -46,7 +46,7 @@
 						<td>
 							<?php 
 								$devise = Devise::getDeviseById($bdd, $sessionUser->getDevise());
-								echo '<span class="total-note">' . Note::getMontantTotal($bdd, $note['id']) . '</span> ' . $devise->getSigne();
+								echo '<span class="total-note">' . Note::getMontantTotal($bdd, $note['id'], 1) . '</span> ' . $devise->getSigne();
 							?>
 						</td>
 						<td>

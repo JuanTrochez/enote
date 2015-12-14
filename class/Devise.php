@@ -52,7 +52,7 @@ class Devise {
         $this->taux = $taux;
     }
     
-    public function getDeviseById($bdd, $id) {
+    public static function getDeviseById($bdd, $id) {
         
         $Devise = new Devise();
         $devise = $bdd->prepare("SELECT * FROM devise WHERE id = :did LIMIT 1");
@@ -77,7 +77,7 @@ class Devise {
         return $deviseTable;
     }
     
-    public function getValueOfChangedDevise($value,$fromDeviseTaux, $toDeviseTaux)
+    public static function getValueOfChangedDevise($value,$fromDeviseTaux, $toDeviseTaux)
     {
         $resultat = $value * $fromDeviseTaux;
         $resultat = $resultat/$toDeviseTaux;
