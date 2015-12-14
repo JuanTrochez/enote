@@ -156,6 +156,15 @@ header
     width : 30%;
 }
 
+.formulaireEmail{
+    display : inline;
+    width : 15%;
+}
+.formulaireDevise{
+    display : inline;
+    width : 7%;
+}
+
 .formulaireRole{
     margin-left: 25%;
     width : 50%;

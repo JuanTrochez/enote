@@ -158,10 +158,11 @@ class User {
     }
     public function editUser($bdd)
     {
-        $req = $bdd->prepare("UPDATE user SET password = :password, devise_id = :devise_id WHERE id = :id");
+        $req = $bdd->prepare("UPDATE user SET password = :password, devise_id = :devise_id, mail = :mail WHERE id = :id");
         $req->execute(array(
         ':password' => $this->password,
         ':devise_id' => $this->devise,
+        'mail' => $this->mail,
         ':id' => $this->id
         ));
     }
