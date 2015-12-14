@@ -66,27 +66,38 @@
 
     //requete ajax pour supprimer les notes de frais utilisateur et admin
     $('.list-all-note .list-container .btn-danger').click(function() {
+
+        var parentNote = $(this).parent('.note');
+        console.log(parentNote);
+        //$('.list-all-note .list-container .note-');
         
         var classes = $(this).attr('class');       
         var firstIndex = classes.indexOf('-') + 1;
         var lastIndex = classes.indexOf(' ');
-        var noteId = classes.substring(firstIndex, lastIndex);
+        var elemType = classes.substring(0, firstIndex - 1);
+        var typeId = classes.substring(firstIndex, lastIndex);
+        var namePost = 'delete' + elemType.charAt(0).toUpperCase() + elemType.slice(1);
         
         if (confirm('Confirmez la suppression')) {
             var fullPath = 'http://' + window.location.host + '/enote/?request=1';
+            console.log(namePost);
+            var values = {};
+            values[namePost] = typeId;
             $.ajax({
                 url: fullPath,
                 type: 'POST',
-                data: {deleteNote: noteId},
+                data: values,
                 dataType: 'json'
             }).done(function(data) {
                 console.log(data);
                 if (data.updated == true) {
-                    $('.list-all-note .list-container .list-note li.note-' + noteId).remove();
+                    if (elemType == 'frais') {
+                    }
+                    $('.list-all-note .list-container .list-note li.' + elemType + '-' + typeId).remove();
                 }
 
             }).fail(function(jqXHR, textStatus) {
-                //console.error(jqXHR);
+                console.error(jqXHR);
                 console.error('Une erreur s\'est produite :', textStatus);
             });
         };

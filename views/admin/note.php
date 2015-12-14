@@ -26,7 +26,7 @@
 					$fraisNote->setId($note['id']);
 					$allFrais = $fraisNote->getListFrais($bdd);
 			?>
-				<li class="statut-<?php echo $note['statut_id']; ?> note-<?php echo $note['id'] ?>">
+				<li class="statut-<?php echo $note['statut_id']; ?> note-<?php echo $note['id'] ?> note">
 					<div class="infos-note">
 						<span><?php echo $note['name']; ?></span><br/>
 						<span><?php echo date("d-m-Y", strtotime($note['date'])); ?></span><br/>
@@ -49,20 +49,20 @@
 							echo Note::getMontantTotal($bdd, $note['id']) . ' ' . $devise->getSigne();
 						?>
 					</div>
-					<div class="btn-show-frais">+ Afficher les frais (<?php echo count($allFrais); ?>)</div>
+					<div class="btn-show-frais btn btn-info">+ Afficher les frais (<?php echo count($allFrais); ?>)</div>
 					<ul class="list-frais">
 						<?php
 							//boucle des frais de la note
 							foreach ($allFrais as $frais) {       
 							echo $frais['id'];    			
 						?>
-							<li>
+							<li class="frais-<?php echo $frais['id'] ?>">
 								<div class="infos-frais">
 									<img class="img-frais" src="<?php echo $basePath . 'image/uploads/' .$frais ['image'] ?>"/>
 									<span><?php echo $frais['description'] ?></span><br/>
 								</div>
 								<div class="actions-frais">
-									<span>supprimer</span>
+									<button class="frais-<?php echo $frais['id'] ?> btn btn-danger">supprimer</button>
 									<a href="<?php echo $basePath . '?page=frais&amp;id=' . $frais['id']; ?>">editer</a>
 								</div>
 								<div class="total">
