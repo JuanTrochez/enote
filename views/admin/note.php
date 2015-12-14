@@ -46,7 +46,7 @@
 					<div class="total">
 						<?php 
 							$devise = Devise::getDeviseById($bdd, $sessionUser->getDevise());
-							echo Note::getMontantTotal($bdd, $note['id']) . ' ' . $devise->getSigne();
+							echo Note::getMontantTotal($bdd, $note['id'], $devise->getTaux()) . ' ' . $devise->getSigne();
 						?>
 					</div>
 					<div class="btn-show-frais btn btn-info">+ Afficher les frais (<?php echo count($allFrais); ?>)</div>
