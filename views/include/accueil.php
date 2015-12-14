@@ -24,7 +24,7 @@
 					$fraisNote->setId($note['id']);
 					$allFrais = $fraisNote->getListFrais($bdd);
 			?>
-				<li class="statut-<?php echo $note['statut_id']; ?>">
+				<li class="statut-<?php echo $note['statut_id']; ?> note-<?php echo $note['id'] ?>">
 					<div class="infos-note">
 						<span><?php echo $note['name']; ?></span><br/>
 						<span><?php echo date("d-m-Y", strtotime($note['date'])); ?></span><br/>
@@ -37,10 +37,12 @@
 							?>
 						</span><br/>
 					</div>
-					<div class="actions-note">
-						<span>supprimer</span>
-						<a href="<?php echo $basePath. '?page=note&amp;id=' . $note['id']; ?>">editer</a>
-					</div>
+					<?php if ($note['statut_id'] == 1) { ?>
+						<div class="actions-note">
+							<button class="note-<?php echo $note['id'] ?> btn btn-danger">supprimer</button>
+							<a href="<?php echo $basePath. '?page=note&amp;id=' . $note['id']; ?>">editer</a>
+						</div>
+					<?php } ?>
 					<div class="total">
 						<?php 
 							$devise = Devise::getDeviseById($bdd, $sessionUser->getDevise());
