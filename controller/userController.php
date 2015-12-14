@@ -4,14 +4,33 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-if(isset($_POST['changementParamUser']) && verifModification($sessionUser))
+if(isset($_POST['changementParamUser']) && verifModification($sessionUser) || isset($_POST['changementDeviseUser']) || isset($_POST['changementEmailUser']))
 {
+    $sucess = true;
     
-    $sessionUser->setPassword($_POST['nouveauMdp']);
-    $sessionUser->setDevise($_POST['devise_id']);
+    if(isset($_POST['changementDeviseUser']))
+    {
+        $sessionUser->setDevise($_POST['devise_id']);
+    }else if(isset($_POST['changementParamUser']))
+    {
+        $sessionUser->setPassword($_POST['nouveauMdp']);
+    }else
+    {
+        if(filter_var($_POST['nouveauMail'], FILTER_VALIDATE_EMAIL))
+        {
+            $sessionUser->setEmail($_POST['nouveauMail']);
+        }else{
+            echo 'Erreur avec le mail';
+            $sucess = false;
+        }    
+    }
+    
     $_SESSION['user'] = serialize($sessionUser);
     $sessionUser->editUser($bdd);
-    echo '<div class="bg-success">Modifications enregistrées </div><br/><br/>';
+    if($sucess)
+    {
+       echo '<div class="bg-success">Modifications enregistrées </div><br/><br/>'; 
+    }   
     
 }else if(isset($_POST['changementParamUserByAdmin']) && verifModificationFromAdmin()){
     
