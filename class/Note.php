@@ -111,7 +111,7 @@ class Note {
     
     //recupére le nom d'une note.
     public function getNameNote($bdd, $nid) {
-        $getname = $bdd->prepare("SELECT name from note_frais WHERE statut_id=1 AND id= :nid");
+        $getname = $bdd->prepare("SELECT name from note_frais WHERE id= :nid");
         $getname->execute(array(
             ":nid" => $nid
         ));
@@ -121,7 +121,7 @@ class Note {
     
     //Modification du nom d'une note.
     public function updateNote($bdd, $nid, $namenote, $satutnote) {
-        $getname = $bdd->prepare("UPDATE `note_frais` SET `name`= :name, `statut_id`= :statut WHERE statut_id=1 AND id= :nid");
+        $getname = $bdd->prepare("UPDATE `note_frais` SET `name`= :name, `statut_id`= :statut WHERE id= :nid");
         $getname->execute(array(
             ":name" => $namenote,
             ":statut" => $satutnote,
