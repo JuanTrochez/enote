@@ -1,22 +1,9 @@
 <?php
 include_once '/class/Devise.php';
 include_once '/class/CategorieFrais.php';
+?>
 
-if(isset($_GET['id']))
-{
-    echo 'ok';
-    var_dump($_GET['id']);
-?>
-    <h2>Modification d'un frais</h2><br />
-<?php
-}else{
-    echo 'ok';
-    var_dump($_GET['id']);
-?>
-    <h2>Ajout d'un nouveau frais</h2><br />
-<?php
-}
-?>
+<h2>Ajout d'un nouveau frais</h2><br />
 <form  class = "form" action="" method="POST" enctype="multipart/form-data">
     <p>
         <input class = "formulaire form-control champ-form" type="file" name="image" />
