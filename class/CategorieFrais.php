@@ -29,7 +29,7 @@ class CategorieFrais {
         return $this->name;
     }
     
-    public function getCategorieById($bdd, $id) {
+    public static function getCategorieById($bdd, $id) {
         $req = $bdd->prepare("SELECT * FROM categorie_frais WHERE id = :id");
         $req->execute(array(
             ":id"   =>  $id
@@ -44,7 +44,7 @@ class CategorieFrais {
         return $cloneFrais;
     }
     
-    public function getAllCategorie($bdd)
+    public static function getAllCategorie($bdd)
     {
         return ($bdd->query('SELECT * FROM categorie_frais'));
     }
