@@ -46,8 +46,6 @@ class Statut {
     }
     
     public function getAllStatut($bdd) {
-        $statut = $bdd->query("SELECT * FROM statut_note");
-                
-        return $statut;
+        return ($bdd->query("SELECT * FROM statut_note"));
     }
 }

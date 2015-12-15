@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
 
             //initialisations des variables
             $login = htmlentities($_POST['login']);
-            $password = htmlentities($_POST['pwd']);
+            $password = sha1(htmlentities($_POST['pwd']));
             $remember = false;
 
             $user = new User();

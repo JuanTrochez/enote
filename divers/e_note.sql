@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 15 Décembre 2015 à 10:47
+-- Généré le :  Mar 15 Décembre 2015 à 11:06
 -- Version du serveur :  5.6.26
 -- Version de PHP :  5.6.12
 
@@ -97,7 +97,7 @@ INSERT INTO `frais` (`id`, `image`, `date`, `description`, `montant`, `devise_id
 (7, 'pdg08-12-2015-16-10-46.jpg', '2015-03-22', 'bibi', 900, 1, 5, 3),
 (8, 'pdg08-12-2015-16-11-14.jpg', '2015-05-23', 'DoMac', 5000, 1, 5, 2),
 (9, 'pdg08-12-2015-16-12-17.jpg', '2015-12-06', 'DOLLADOLLA', 200, 1, 1, 7),
-(10, 'pdg08-12-2015-16-12-45.jpg', '2015-02-27', 'IZI MONNAIE', 10000, 1, 1, 4);
+(10, 'pdg15-12-2015-10-58-42.jpg', '2015-02-27', 'IZI MONNAIE', 1000, 1, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `note_frais` (
 --
 
 INSERT INTO `note_frais` (`id`, `name`, `date`, `user_id`, `statut_id`) VALUES
-(1, 'Note 1', '2015-12-06', 1, 1),
+(1, 'Note 1 modif', '2015-12-06', 1, 1),
 (4, 'Note 4', '2015-06-20', 1, 5),
 (5, 'Note 5', '2015-08-03', 1, 2),
 (6, 'Note 6', '2015-12-08', 1, 4);
@@ -200,12 +200,12 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `login`, `password`, `mail`, `role_id`, `devise_id`) VALUES
-(1, 'Grand chef', 'pdg', 'pwdpdg', '', 1, 1),
-(2, 'Chef', 'leader', 'pwdleader', '', 2, 1),
-(5, 'Toto', 'toto', 'pwdtoto', '', 3, 1),
-(6, 'Titi', 'titi', 'pwdtiti', '', 3, 1),
-(7, 'Tata', 'tata', 'pwdtata', '', 3, 1),
-(8, 'Tutu', 'tutu', 'pwdtutu', '', 3, 1);
+(1, 'Grand chef', 'pdg', '016ed176be41ad0d8c1bf473b41f0cc233952f80', 'pdg@enote.fr', 1, 1),
+(2, 'Chef', 'leader', 'e82539751581312ebea51727cd35a8afc494968b', '', 2, 1),
+(5, 'Toto', 'toto', '75dd004caed2daadeb8a3acbce348ea5837b7da8', '', 3, 1),
+(6, 'Titi', 'titi', '17b68e10df76d44ac7a54cc8be5c0ea8b5182f38', '', 3, 1),
+(7, 'Tata', 'tata', '9e9b82c1ebdece4d5d75cf2020cdf01854395b5b', '', 3, 1),
+(8, 'Tutu', 'tutu', '85979612d70c83b49ea7acc89c9c035902f9e618', '', 3, 1);
 
 --
 -- Index pour les tables exportées

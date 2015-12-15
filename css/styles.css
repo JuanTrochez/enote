@@ -81,32 +81,38 @@ header
     color: white;
 }
 
+
 .list-all-note .list-note {
     color: white;
     width: 100%;
     font-size: 20px;
 }
-.list-all-note .list-note tr {
-    height: 15px;
-    border-spacing: 10px;
+
+.list-all-note .note {
     background-color: #446688;
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    font-size: 0;
 }
-.list-all-note .list-note td, th {
+.list-all-note .note .infos-note div {
+    font-size: 20px;
+    display: inline-block;
+    vertical-align: top;
+    line-height: 100px;
     width: 16%;
+    height: 100%;
     text-align: center;
-    padding-top: .5em;
-    padding-bottom: .5em;
 }
-.list-all-note .list-note .actions {
-    width: 36%;
+.list-all-note .note .infos-note .actions {
+    width: 36%;    
+    max-height: 150px;
 }
-.list-all-note .list-note td .btn {
-    margin: 5px 3px;
+.list-all-note .note .infos-note .actions .btn-show-frais {
 }
 
 .list-all-note .list-note .list-frais {
-    height: 0;
-    font-size: 0;
+    display: none;
 }
 .list-all-note .list-note .list-frais ul {
     margin: 0 15px;
@@ -116,19 +122,20 @@ header
     background-color: rgba(255, 255, 255, 0.30);
     padding: 5px;
     margin: 15px 0;
-    font-size: 20px;
+    font-size: 0;
 }
-
 .list-all-note .list-note .infos-frais {
     width: 59%;
     display: inline-block;
     vertical-align: top;
+    font-size: 20px;
 }
 .list-all-note .list-note .actions-frais, .list-all-note .list-frais .total {
     width: 20%;
     text-align: center;
     display: inline-block;
     vertical-align: top;
+    font-size: 20px;
 }
 
 .list-all-note .list-note .infos-frais .img-frais {
