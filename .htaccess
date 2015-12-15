@@ -1,1 +1,1 @@
-ErrorDocument 404 localhosht/enote/views/404.php
+ErrorDocument 404 http://localhost/enote/views/global/404.php
