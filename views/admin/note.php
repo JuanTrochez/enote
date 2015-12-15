@@ -1,5 +1,5 @@
 <div id="accueil" class="list-all-note">
-	<h1>Mes notes de frais</h1>
+	<h1>Les notes de frais</h1>
 
 
 	<div class="list-container">
