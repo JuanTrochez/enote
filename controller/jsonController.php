@@ -11,6 +11,10 @@ if (isset($_POST) && !empty($_POST)) {
         
         switch ($key) {
             case 'deleteUser':
+                if (!$secu->isAdmin($bdd)) {
+                    $data = ["updated"=> false];
+                    break;
+                }
                 $result = User::deleteUserById($bdd, $value);
                 $data = ["updated"=> $result];
 
@@ -23,6 +27,10 @@ if (isset($_POST) && !empty($_POST)) {
                 break;
 
             case 'deleteFrais':
+                if (!$secu->isAdmin($bdd)) {
+                    $data = ["updated"=> false];
+                    break;
+                }
                 $result = Frais::deleteFraisById($bdd, $value);
                 $data = ["updated"=> $result];
 

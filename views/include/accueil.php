@@ -66,6 +66,7 @@
 							<?php
 								//boucle des frais de la note
 								foreach ($allFrais as $frais) {
+									$categorie = CategorieFrais::getCategorieById($bdd, $frais['categorie_id']);
 							?>
 								<li class="frais-<?php echo $frais['id'] ?>">
 									<div class="infos-frais">
@@ -78,12 +79,15 @@
 											echo $frais['montant'] . ' ' . $fdevise->getSigne() . '/ Convertion dans votre devise : '; 
 	                                        echo '<span class="total-frais">' . Devise::getValueOfChangedDevise($frais['montant'],$fdevise->getTaux(),$devise->getTaux()) . '</span>  ' . $devise->getSigne();
 										?><br/>
-										<span><?php echo date("d-m-Y", strtotime($frais['date'])); ?></span>
+										<span><?php echo date("d-m-Y", strtotime($frais['date'])); ?></span><br/>
+										<span class="categorie-frais"><?php echo $categorie->getName(); ?></span>
 									</div>
-									<div class="actions-frais">
-										<button class="frais-<?php echo $frais['id'] ?> btn btn-danger" data-note="note-<?php echo $note['id']; ?>">supprimer</button>
-										<a class="btn btn-default" href="<?php echo $basePath . '?page=frais&amp;id=' . $frais['id']; ?>">editer</a>
-									</div>
+									<?php if ($categorie->getName() != "Avance") { ?>
+										<div class="actions-frais">
+											<button class="frais-<?php echo $frais['id'] ?> btn btn-danger" data-note="note-<?php echo $note['id']; ?>">supprimer</button>
+											<a class="btn btn-default" href="<?php echo $basePath . '?page=frais&amp;id=' . $frais['id']; ?>">editer</a>
+										</div>
+									<?php } ?>
 								</li>
 							<?php
 								} //fin boucle des frais
