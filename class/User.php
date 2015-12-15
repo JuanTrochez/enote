@@ -2,6 +2,7 @@
 
 include_once '/function/cookie.php';
 include_once 'Note.php';
+include_once "/class/Modification.php";
 
 class User {
     //put your code here
@@ -96,9 +97,8 @@ class User {
     //retourne les notes de l'utilisateur en base de données
     public function getNotes($bdd) {
         $note = new Note();
-        $listNotes = $note->getNotesByUser($bdd, $this->id);
 
-        return $listNotes;
+        return ($note->getNotesByUser($bdd, $this->id));
     }
 
     public function connect($bdd, $remember)
@@ -165,6 +165,11 @@ class User {
         'mail' => $this->mail,
         ':id' => $this->id
         ));
+        $table_name = "user";
+        $user = unserialize($_SESSION['user']);
+        $author_id = $user->getId();
+        $nid = $this->id;
+        Modification::insertNewModif($bdd, $nid, $table_name, $author_id);
     }
     
     public function editUserByAdmin($bdd, $CloneUser)
@@ -178,8 +183,12 @@ class User {
             'role_id' => $CloneUser->getRole(),
             ':devise_id' => $CloneUser->getDevise(),
             ':id' => $this->id
-        ));  
-        
+        ));
+        $table_name = "user";
+        $user = unserialize($_SESSION['user']);
+        $author_id = $user->getId();
+        $nid = $this->id;
+        Modification::insertNewModif($bdd, $nid, $table_name, $author_id);
     }
     
     public function insertNewUser($bdd)

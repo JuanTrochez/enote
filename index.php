@@ -29,21 +29,24 @@
         
         $p = htmlspecialchars(htmlentities($_GET['page']));
         // Vérifie si le fichier existe avant inclusion
-        if(file_exists('controller/' . $p . 'Controller.php')){
-                include_once 'views/global/header.php'; // Inclusion de l'entete de la page
-
-                include_once 'controller/' . $p . 'Controller.php'; // Inclusion du contenu de la page
-
-                // Inclusion du pied de page
-                include_once 'views/global/footer.php';
-
-        }else{// sinon renvoi une erreur 404 si le fichier n'existe pas
-                include_once 'views/global/header.php'; // Inclusion de l'entete de la page
-
-                include_once 'views/include/404.php'; // Inclusion du contenu de la page
-
-                // Inclusion du pied de page
-                include_once 'views/global/footer.php';
+        if(file_exists('controller/' . $p . 'Controller.php'))
+        {
+            // Inclusion de l'entete de la page
+            include_once 'views/global/header.php';
+            // Inclusion du contenu de la page
+            include_once 'controller/' . $p . 'Controller.php';
+            // Inclusion du pied de page
+            include_once 'views/global/footer.php';
+        }
+        // sinon renvoi une erreur 404 si le fichier n'existe pas
+        else
+        {   
+            // Inclusion de l'entete de la page
+            include_once 'views/global/header.php';
+            // Inclusion du contenu de la page
+            include_once 'views/include/404.php';
+            // Inclusion du pied de page
+            include_once 'views/global/footer.php';
         }
 
     } elseif (isset($_GET['request']) && !empty($_GET['request'])) {
@@ -55,7 +58,8 @@
         if (!$secu->logged()) {
             header("Location: " . $basePath . "?page=connexion"); 
         }
-        include_once 'views/global/header.php'; // Inclusion de l'entete de la page
+        // Inclusion de l'entete de la page
+        include_once 'views/global/header.php';
 
         include_once 'controller/accueilController.php';
         

@@ -26,8 +26,7 @@ class Role{
     }
     
     public function getAllRole($bdd){
-        $roleTable = $bdd->query('SELECT * FROM role');
-        return $roleTable;
+        return ($bdd->query('SELECT * FROM role'));
     }
     
     public function _destruct(){

@@ -2,56 +2,46 @@
 
 include_once "/class/Frais.php";
 
-// Testons si le fichier a bien été envoyé et s'il n'y a pas d'erreur
-if (isset($_POST['valider']))
+// Testons si le fichier a bien été envoyé, s'il n'y a pas d'erreur et si il n'est pas trop gros ici 1Mo maximum
+if (isset($_POST['valider']) && verifValue($bdd) && ($_FILES['image']['size'] <= 1000000))
 {
-    if(verifValue($bdd))
+    //On prend la date pour l'ajouter dans le nom de l'image upload 
+    $dateImage = date("d-m-Y");
+    $heureImage = date("H-i-s");
+    //On récupère le nom de l'user pour l'ajouter au nom de l'image upload
+    $userName = $sessionUser->getLogin();
+
+    // Testons si l'extension est autorisée
+    $infosfichier = pathinfo($_FILES['image']['name']);
+    $extension_upload = $infosfichier['extension'];
+    $extensions_autorisees = array('jpg', 'jpeg', 'png');
+
+    //Construction du nom de fichier
+    $nom = $userName . $dateImage .'-'. $heureImage . '.' . $extension_upload;
+    if (in_array($extension_upload, $extensions_autorisees))
     {
-     // Testons si le fichier n'est pas trop gros ici 1Mo maximum
-        if ($_FILES['image']['size'] <= 1000000)
-        {
-            //On prend la date pour l'ajouter dans le nom de l'image upload 
-            $dateImage = date("d-m-Y");
-            $heureImage = date("H-i-s");
-            //On récupère le nom de l'user pour l'ajouter au nom de l'image upload
-            $userName = $sessionUser->getLogin();
+        // Methode qui deplce le fichier et change son nom
+        $test = move_uploaded_file($_FILES['image']['tmp_name'], 'image/uploads/'. $nom);
+        if($test)
+        {           
+            $frais = new Frais();
+            $frais->setCategorie(filter_input(INPUT_POST, 'categorie_id'));
+            $frais->setDate(filter_input(INPUT_POST, 'date'));
+            $frais->setDescription(nl2br(filter_input(INPUT_POST, 'description')));
+            $frais->setDevise(filter_input(INPUT_POST, 'devise_id'));
+            $frais->setImage($nom);
+            $frais->setMontant(filter_input(INPUT_POST, 'montant'));
+            $frais->setNote(filter_input(INPUT_POST, 'note_id'));
 
-            // Testons si l'extension est autorisée
-            $infosfichier = pathinfo($_FILES['image']['name']);
-            $extension_upload = $infosfichier['extension'];
-            $extensions_autorisees = array('jpg', 'jpeg', 'png');
+            if(isset($_GET['id']) && !empty($_GET['id'])){
+                $frais->setId($_GET['id']);
+                $frais->upDateFrais($bdd);
+            }else{ $frais->insertFrais($bdd); }                   
 
-            //Construction du nom de fichier
-            $nom = $userName . $dateImage .'-'. $heureImage . '.' . $extension_upload;
-            if (in_array($extension_upload, $extensions_autorisees))
-            {
-                // Methode qui deplce le fichier et change son nom
-                $test = move_uploaded_file($_FILES['image']['tmp_name'], 'image/uploads/'. $nom);
-                if($test == TRUE)
-                {           
-                    $frais = new Frais();
-                    $frais->setCategorie(filter_input(INPUT_POST, 'categorie_id'));
-                    $frais->setDate(filter_input(INPUT_POST, 'date'));
-                    $frais->setDescription(nl2br(filter_input(INPUT_POST, 'description')));
-                    $frais->setDevise(filter_input(INPUT_POST, 'devise_id'));
-                    $frais->setImage($nom);
-                    $frais->setMontant(filter_input(INPUT_POST, 'montant'));
-                    $frais->setNote(filter_input(INPUT_POST, 'note_id'));
-                    
-                    if(isset($_GET['id']) && !empty($_GET['id'])){
-                        $frais->setId($_GET['id']);
-                        $frais->upDateFrais($bdd);
-                    }else{
-                        $frais->insertFrais($bdd);
-                    }                   
-                    
-
-                    echo '<div class="bg-success">Le frais à bien été ajouté </div><br/><br/>';
-                }else{
-                    echo "Une erreur est survenue !";
-                }          
-            }
-        }
+            echo '<div class="bg-success">Le frais à bien été ajouté </div><br/><br/>';
+         }else{
+            echo "Une erreur est survenue !";
+        }          
     }
 }
 if(isset($_GET['id']) && !empty($_GET['id'])){

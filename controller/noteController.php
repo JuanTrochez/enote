@@ -1,6 +1,8 @@
 <?php
 include_once "/class/Statut.php";
 include_once "/class/User.php";
+include_once "/class/Modification.php";
+
 
 if (isset($_POST['Editer'])){
     

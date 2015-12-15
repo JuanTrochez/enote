@@ -26,11 +26,11 @@ include_once '/class/CategorieFrais.php';
             <?php
             $uid = $sessionUser->getId();
             foreach ( (Note::getNotesByUser($bdd, $uid)) as $donnee ) {
-            if ( 1 != $donnee['statut_id'] ) { continue; }
-                ?>
-                <option value="<?php echo $donnee['id'];?>" <?php if(isset($_POST['note_id']) && !empty($_POST['note_id']) && $_POST['note_id'] == $donnee['id']){echo "selected."
-                    . "='selected'"; } ?>><?php echo $donnee['name'];?></option>
-                <?php  }  ?>
+                if ( 1 != $donnee['statut_id'] )
+                    { continue; } ?>
+                <option value="<?php echo $donnee['id'];?>" <?php if(isset($_POST['note_id']) && !empty($_POST['note_id']) && $_POST['note_id'] == $donnee['id'])
+                    {echo "selected.='selected'";} ?>><?php echo $donnee['name'];?></option>
+      <?php }  ?>
         </select>
         
         <select class = "formulaire deroulantFrais form-control champ-form deroulantId" name="categorie_id">
