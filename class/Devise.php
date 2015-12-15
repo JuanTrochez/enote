@@ -57,7 +57,7 @@ class Devise {
         $Devise = new Devise();
         $devise = $bdd->prepare("SELECT * FROM devise WHERE id = :did LIMIT 1");
         $devise->execute(array(
-            ':did'  =>  $id
+            ':did' => $id
         ));
         
         while($array = $devise->fetch())
@@ -73,15 +73,11 @@ class Devise {
     
     public function getAllDevise($bdd)
     {
-        $deviseTable = $bdd->query('SELECT * FROM devise');
-        return $deviseTable;
+        return ($bdd->query('SELECT * FROM devise'));
     }
     
     public static function getValueOfChangedDevise($value,$fromDeviseTaux, $toDeviseTaux)
     {
-        $resultat = $value * $fromDeviseTaux;
-        $resultat = $resultat/$toDeviseTaux;
-        
-        return $resultat;
+        return (($value * $fromDeviseTaux) / $toDeviseTaux);
     }
 }

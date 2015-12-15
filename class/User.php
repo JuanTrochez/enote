@@ -97,9 +97,8 @@ class User {
     //retourne les notes de l'utilisateur en base de données
     public function getNotes($bdd) {
         $note = new Note();
-        $listNotes = $note->getNotesByUser($bdd, $this->id);
 
-        return $listNotes;
+        return ($note->getNotesByUser($bdd, $this->id));
     }
 
     public function connect($bdd, $remember)
