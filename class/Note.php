@@ -97,7 +97,7 @@ class Note {
     public function getListFrais($bdd) {
         return Frais::getFraisByNote($bdd, $this->id);
     }
-    public function getNoteById($bdd, $id){
+    public static function getNoteById($bdd, $id){
         $note = $bdd->prepare('SELECT * FROM note_frais WHERE id = :id LIMIT 1');
         $note->execute(array(
             ':id' => $id
@@ -115,7 +115,7 @@ class Note {
         return $CloneNote;
     }
     
-    public function getMontantTotal($bdd, $nid, $tauxDeviseUser) {
+    public static function getMontantTotal($bdd, $nid, $tauxDeviseUser) {
         
         $CloneNote = Note::getNoteById($bdd,$nid);
         $allFraisFromThisNote = $CloneNote->getListFrais($bdd);
