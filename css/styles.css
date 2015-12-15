@@ -70,6 +70,9 @@ header
     text-align: center;
     border-bottom: 2px solid rgba(0, 0, 0, 0.50);
 }
+.admin-note .list-statut li {
+    width: 25%;
+}
 .list-all-note .list-statut li:hover {
     background-color: #446688;
     border-bottom: 2px solid white;
@@ -95,18 +98,19 @@ header
     width: 100%;
     font-size: 0;
 }
+.list-all-note .note .infos-note {
+    line-height: 45px;
+}
 .list-all-note .note .infos-note div {
     font-size: 20px;
     display: inline-block;
-    vertical-align: top;
-    line-height: 100px;
+    vertical-align: middle;
     width: 16%;
-    height: 100%;
     text-align: center;
 }
 .list-all-note .note .infos-note .actions {
     width: 36%;    
-    max-height: 150px;
+    height: 100%;
 }
 .list-all-note .note .infos-note .actions .btn-show-frais {
 }
@@ -127,14 +131,14 @@ header
 .list-all-note .list-note .infos-frais {
     width: 59%;
     display: inline-block;
-    vertical-align: top;
+    vertical-align: middle;
     font-size: 20px;
 }
 .list-all-note .list-note .actions-frais, .list-all-note .list-frais .total {
     width: 20%;
     text-align: center;
     display: inline-block;
-    vertical-align: top;
+    vertical-align: middle;
     font-size: 20px;
 }
 

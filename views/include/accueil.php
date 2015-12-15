@@ -16,16 +16,6 @@
 			?>
 		</ul>
 
-		<!-- <div class="table list-note">
-			<div class="row">
-				<div class="col">Nom</div>
-				<div class="col">Date</div>
-				<div class="col">Statut</div>
-				<div class="col">Total</div>
-				<div class="col actions">Action</div>
-			</div>
-		</div> -->
-
 		<div class="list-note">
 			<?php
 				//boucle sur la liste des notes
@@ -53,11 +43,11 @@
 							?>
 						</div>
 						<div class="actions">
-							<?php //if ($note['statut_id'] == 1) { ?>
+							<?php if ($note['statut_id'] == 1) { ?>
 								<button class="note-<?php echo $note['id'] ?> btn btn-danger">supprimer</button>
 								<a class="btn btn-default" href="<?php echo $basePath. '?page=note&amp;id=' . $note['id']; ?>">editer</a>
 								<button class="btn-show-frais btn btn-info" data-frais="list-frais-<?php echo $note['id'] ?>">Afficher les frais (<span class="count-frais"><?php echo count($allFrais); ?></span>)</button>
-							<?php //} ?>
+							<?php } ?>
 						</div>
 					</div>
 
@@ -66,6 +56,7 @@
 							<?php
 								//boucle des frais de la note
 								foreach ($allFrais as $frais) {
+									$categorie = CategorieFrais::getCategorieById($bdd, $frais['categorie_id']);
 							?>
 								<li class="frais-<?php echo $frais['id'] ?>">
 									<div class="infos-frais">
@@ -78,12 +69,15 @@
 											echo $frais['montant'] . ' ' . $fdevise->getSigne() . '/ Convertion dans votre devise : '; 
 	                                        echo '<span class="total-frais">' . Devise::getValueOfChangedDevise($frais['montant'],$fdevise->getTaux(),$devise->getTaux()) . '</span>  ' . $devise->getSigne();
 										?><br/>
-										<span><?php echo date("d-m-Y", strtotime($frais['date'])); ?></span>
+										<span><?php echo date("d-m-Y", strtotime($frais['date'])); ?></span><br/>
+										<span class="categorie-frais"><?php echo $categorie->getName(); ?></span>
 									</div>
-									<div class="actions-frais">
-										<button class="frais-<?php echo $frais['id'] ?> btn btn-danger" data-note="note-<?php echo $note['id']; ?>">supprimer</button>
-										<a class="btn btn-default" href="<?php echo $basePath . '?page=frais&amp;id=' . $frais['id']; ?>">editer</a>
-									</div>
+									<?php if ($categorie->getName() != "Avance") { ?>
+										<div class="actions-frais">
+											<button class="frais-<?php echo $frais['id'] ?> btn btn-danger" data-note="note-<?php echo $note['id']; ?>">supprimer</button>
+											<a class="btn btn-default" href="<?php echo $basePath . '?page=frais&amp;id=' . $frais['id']; ?>">editer</a>
+										</div>
+									<?php } ?>
 								</li>
 							<?php
 								} //fin boucle des frais

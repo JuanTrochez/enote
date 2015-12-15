@@ -10,6 +10,7 @@
 	$('.list-all-note .list-container .list-note .' + activeClass).show();
 
     $('.list-all-note .list-container .list-statut li').click(function() {
+        console.log('click');
     	if ($(this).hasClass('active')) {
     		return;
     	}
@@ -71,21 +72,6 @@
         var typeId = classes.substring(firstIndex, lastIndex);
         var namePost = 'delete' + elemType.charAt(0).toUpperCase() + elemType.slice(1);
         var noteParent = '.' + $(this).attr('data-note');
-
-
-
-        var totalNote = $(noteParent + ' .total-note').text();
-                        var totalFrais = $('.frais-' + typeId + ' .total-frais').text();
-                        var noteParentFraisTotal = $(noteParent + ' .count-frais').text() - 1;
-                        $(noteParent + ' .total-note').text(totalNote - totalFrais);
-                        $(noteParent + ' .count-frais').text(noteParentFraisTotal);  
-
-        console.log(noteParent);
-        console.log('frais total', totalFrais);
-        console.log('total note', noteParentFraisTotal);
-        console.log('note total calcul', $(noteParent + ' .total-note').text(totalNote - totalFrais));
-
-
         
         if (confirm('Confirmez la suppression')) {
             var fullPath = 'http://' + window.location.host + '/enote/?request=1';
@@ -105,7 +91,14 @@
                         var totalNote = $(noteParent + ' .total-note').text();
                         var totalFrais = $('.frais-' + typeId + ' .total-frais').text();
                         var noteParentFraisTotal = $(noteParent + ' .count-frais').text() - 1;
-                        $(noteParent + ' .total-note').text(totalNote - totalFrais);
+                        var categorieFrais = $('.frais-' + typeId +' .categorie-frais').text();
+                        var montantTotal = totalNote - totalFrais;
+
+                        if (categorieFrais == 'Avance') {
+                            montantTotal = totalNote + totalFrais;
+                        }
+
+                        $(noteParent + ' .total-note').text(montantTotal);
                         $(noteParent + ' .count-frais').text(noteParentFraisTotal);                        
                     }
 
