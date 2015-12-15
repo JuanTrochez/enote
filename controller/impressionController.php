@@ -1,5 +1,5 @@
 <?php
-include_once "../class/Note.php";
+include_once "/class/Note.php";
 
 error_reporting(E_ALL);
 ini_set('display_errors', TRUE);
@@ -10,11 +10,11 @@ define('EOL',(PHP_SAPI == 'cli') ? PHP_EOL : '<br />');
 date_default_timezone_set('Europe/Paris');
 
 /** PHPExcel_IOFactory */
-require_once ('../ressources/PHPExcel_1.8.0_doc/Classes/PHPExcel/IOFactory.php');
+require_once ('/ressources/PHPExcel_1.8.0_doc/Classes/PHPExcel/IOFactory.php');
 
 echo date('H:i:s') , " Load from Excel5 template" , EOL;
 $objReader = PHPExcel_IOFactory::createReader('Excel5');
-$objPHPExcel = $objReader->load("../ressources/PHPExcel_1.8.0_doc/Examples/templates/30template.xls");
+$objPHPExcel = $objReader->load("ressources/PHPExcel_1.8.0_doc/Examples/templates/30template.xls");
 
 $CloneNote = Note::getNoteById($bdd,1);
 $allFraisFromThisNote = $CloneNote->getListFrais($bdd);
@@ -33,7 +33,7 @@ $allFraisFromThisNote = $CloneNote->getListFrais($bdd);
 //			 );
 $objPHPExcel->getActiveSheet()->setCellValue('D1', PHPExcel_Shared_Date::PHPToExcel(time()));
 
-$baseRow = 3;
+$baseRow = 5;
 
 foreach($allFraisFromThisNote as $r => $fraisFromNote) {
 	$row = $baseRow + $r;
@@ -41,7 +41,8 @@ foreach($allFraisFromThisNote as $r => $fraisFromNote) {
 
 	$objPHPExcel->getActiveSheet()->setCellValue('A'.$row, $fraisFromNote['id'])
 	                              ->setCellValue('B'.$row, $fraisFromNote['description'])
-	                              ->setCellValue('C'.$row, $fraisFromNote['montant']);
+	                              ->setCellValue('C'.$row, $fraisFromNote['montant'])
+                                      ->setCellValue('E'.$row, '=C'.$row);
 }
 
 $objPHPExcel->getActiveSheet()->removeRow($baseRow-1,1);

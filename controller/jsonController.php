@@ -1,11 +1,13 @@
 <?php
 include_once '/class/Note.php';
 include_once '/class/Frais.php';
+include_once '/class/CategorieFrais.php';
+
+
+header('Content-Type: application/json');
+$data = [];
 
 if (isset($_POST) && !empty($_POST)) {
-    header('Content-Type: application/json');
-    
-    $data = [];
     
     foreach ($_POST as $key => $value) {
         
@@ -41,6 +43,28 @@ if (isset($_POST) && !empty($_POST)) {
         }
         
     }
+    
+} else if (isset($_GET) && !empty($_GET)) {
+    foreach ($_GET as $key => $value) {
         
-    echo json_encode($data);
+        switch ($value) {
+            case 'categorie':
+                $allCategorie = CategorieFrais::getAllCategorie($bdd);
+
+                foreach ($allCategorie as $categorie) {
+                    $data["labels"][] = utf8_encode($categorie["name"]);
+                }
+                
+
+                break;
+
+            default:
+                break;
+        }
+        
+    }
 }
+
+    // on retourne la reponse json
+    echo json_encode($data);
+    

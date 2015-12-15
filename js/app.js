@@ -1,5 +1,6 @@
 (function($) {
 
+    //affichage des notes de frais en fonction du statut actif
     var activeLi = $('.list-all-note .list-container .list-statut li.active');
     var liClass = activeLi.attr('class');
     if (liClass) {
@@ -9,6 +10,7 @@
 	$('.list-all-note .list-container .list-note .note').hide();
 	$('.list-all-note .list-container .list-note .' + activeClass).show();
 
+    // lorsque l'on clique sur un nouveau statut, on affiche les notes de frais correspondant
     $('.list-all-note .list-container .list-statut li').click(function() {
         console.log('click');
     	if ($(this).hasClass('active')) {
@@ -75,7 +77,6 @@
         
         if (confirm('Confirmez la suppression')) {
             var fullPath = 'http://' + window.location.host + '/enote/?request=1';
-            console.log(namePost);
             var values = {};
             values[namePost] = typeId;
             $.ajax({
@@ -84,7 +85,6 @@
                 data: values,
                 dataType: 'json'
             }).done(function(data) {
-                console.log(data);
                 if (data.updated == true) {
                     if (elemType == 'frais') {
                         //calcul du montant et du total de frais de la note
