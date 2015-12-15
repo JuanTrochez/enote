@@ -25,6 +25,20 @@ class Role{
         return $this->id;
     }
     
+    public function getRoleById($bdd, $id) {
+        $req = $bdd->prepare("SELECT * FROM role WHERE id = :id");
+        $req->execute(array(
+            ":id"   =>  $id
+        ));
+        
+        $cloneRole = new Role();
+        while ($array = $req->fetch()) {
+            $cloneRole->setId($array['id']);
+            $cloneRole->setName($array['name']);
+        }
+        return $cloneRole;
+    }
+    
     public function getAllRole($bdd){
         return ($bdd->query('SELECT * FROM role'));
     }
