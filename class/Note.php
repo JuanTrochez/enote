@@ -123,7 +123,14 @@ class Note {
         foreach($allFraisFromThisNote as $frais)
         {
             $CloneDevise = Devise::getDeviseById($bdd, $frais['devise_id']);
-            $SommeDesMontants += Devise::getValueOfChangedDevise($frais['montant'], $CloneDevise->getTaux(),$tauxDeviseUser);
+            
+            if($frais['categorie_id'] == 4)
+            {
+                $SommeDesMontants -= Devise::getValueOfChangedDevise($frais['montant'], $CloneDevise->getTaux(),$tauxDeviseUser);
+            }else{
+                $SommeDesMontants += Devise::getValueOfChangedDevise($frais['montant'], $CloneDevise->getTaux(),$tauxDeviseUser);
+            }
+            
         }
         
         
