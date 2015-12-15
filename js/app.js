@@ -8,7 +8,6 @@
 
 	$('.list-all-note .list-container .list-note .note').hide();
 	$('.list-all-note .list-container .list-note .' + activeClass).show();
-    $('.list-all-note .list-container .list-note .list-frais').hide();
 	$('.list-all-note .list-container .list-note .list-frais li').hide();
 
     $('.list-all-note .list-container .list-statut li').click(function() {
@@ -22,23 +21,19 @@
     	$(this).addClass('active');
 
     	$('.list-all-note .list-container .list-note .note').hide();
-		$('.list-all-note .list-container .list-note .list-frais li').show();
+        $('.list-all-note .list-container .list-note .list-frais li').hide();
 		$('.list-all-note .list-container .list-note .' + activeClass).show();
     });
 
     //affiche les boutons de la note
     $('.list-all-note .list-container .list-note .btn-show-frais').click(function() {
         var data = $(this).attr('data-frais');
-        var row = $('.' + data);
     	var list = $('.' + data + ' li');
-        console.log(list);
 
     	if (list.is(':visible')) {
-            row.slideUp();
     		list.slideUp();
     		return;
     	}
-        row.slideDown();
     	list.slideDown();
     });
     

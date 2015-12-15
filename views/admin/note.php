@@ -1,90 +1,98 @@
-<div class="admin-note list-all-note">
-	<h1>Toutes les notes de frais</h1>
+<div id="accueil" class="list-all-note">
+	<h1>Mes notes de frais</h1>
 
 
 	<div class="list-container">
 		<ul class="list-statut">
-			<?php                     		
-                            //pour la classe active
-                            $i = 0;
-                            foreach ($listStatut as $statut) { 
-                                if ($statut['id'] == 1) {continue;};                            
-                        ?>
+			<?php				
+				//pour la classe active
+				$i = 0;
+				foreach ($listStatut as $statut) { 
+			?>
 				<li class="statut-<?php echo $statut['id']; if ($i == 0) {echo " active";} ?>"><?php echo $statut['name']; ?></li>
-                        <?php 
-                                $i = 1;
-                            } 
-                        ?>
+			<?php 
+					$i = 1;
+				} 
+			?>
 		</ul>
 
-		<ul class="list-note">
+		<table class="list-note">
+			<tr>
+				<th>Nom</th>
+				<th>Date</th>
+				<th>Statut</th>
+				<th>Total</th>
+				<th class="actions">Actions</th>
+			</tr>
 			<?php
 				//boucle sur la liste des notes
 				foreach ($notes as $note) {
-                                    if ($note['statut_id'] == 1) { continue; }
 					//initialisation des variables pour les frais de la note		
 					$fraisNote->setId($note['id']);
 					$allFrais = $fraisNote->getListFrais($bdd);
 			?>
-				<li class="statut-<?php echo $note['statut_id']; ?> note-<?php echo $note['id'] ?> note">
-					<div class="infos-note">
-						<span><?php echo $note['name']; ?></span><br/>
-						<span><?php echo date("d-m-Y", strtotime($note['date'])); ?></span><br/>
-						<span>
+					<tr></tr>
+					<tr class="statut-<?php echo $note['statut_id']; ?> note-<?php echo $note['id'] ?> note">
+						<td><?php echo $note['name']; ?></td>
+						<td><?php echo date("d-m-Y", strtotime($note['date'])); ?></td>
+						<td>
 							<?php
 								// recupere et affiche le nom du statut
 								$noteStatut->setId($note['statut_id']);
 								$stat = $noteStatut->getStatutById($bdd);
 								echo $stat['name'];
 							?>
-						</span><br/>
-					</div>
-					<div class="actions-note">
-						<button class="note-<?php echo $note['id'] ?> btn btn-danger">supprimer</button>
-						<a href="<?php echo $basePath. '?page=note&amp;id=' . $note['id']; ?>">editer</a>
-					</div>
-					<div class="total">
-						<?php 
-							$devise = Devise::getDeviseById($bdd, $sessionUser->getDevise());
-							echo Note::getMontantTotal($bdd, $note['id'], $devise->getTaux()) . ' ' . $devise->getSigne();
-						?>
-					</div>
-					<div class="btn-show-frais btn btn-info">+ Afficher les frais (<?php echo count($allFrais); ?>)</div>
-					<ul class="list-frais">
-						<?php
-							//boucle des frais de la note
-							foreach ($allFrais as $frais) {       
-							echo $frais['id'];    			
-						?>
-							<li class="frais-<?php echo $frais['id'] ?>">
-								<div class="infos-frais">
-									<img class="img-frais" src="<?php echo $basePath . 'image/uploads/' .$frais ['image'] ?>"/>
-									<span><?php echo $frais['description'] ?></span><br/>
-								</div>
-								<div class="actions-frais">
-									<button class="frais-<?php echo $frais['id'] ?> btn btn-danger">supprimer</button>
-									<a href="<?php echo $basePath . '?page=frais&amp;id=' . $frais['id']; ?>">editer</a>
-								</div>
-								<div class="total">
-									<?php
-										$fdevise = Devise::getDeviseById($bdd, $frais['devise_id']);
-										echo $frais['montant'] . ' ' . $fdevise->getSigne() . '/ Convertion dans votre devise : '; 
-                                                                                echo Devise::getValueOfChangedDevise($frais['montant'],$fdevise->getTaux(),$devise->getTaux()) . '  ' . $devise->getSigne();
-									?><br/>
-									<span><?php echo date("d-m-Y", strtotime($frais['date'])); ?></span>
-								</div>
-							</li>
-						<?php
-							} //fin boucle des frais
-						?>
-					</ul>
-				</li>
+						</td>
+						<td>
+							<?php 
+								$devise = Devise::getDeviseById($bdd, $sessionUser->getDevise());
+								echo '<span class="total-note">' . Note::getMontantTotal($bdd, $note['id'], $devise->getTaux()) . '</span> ' . $devise->getSigne();
+							?>
+						</td>
+						<td>
+							<?php //if ($note['statut_id'] == 1) { ?>
+							<button class="note-<?php echo $note['id'] ?> btn btn-danger">supprimer</button>
+							<a class="btn btn-default" href="<?php echo $basePath. '?page=note&amp;id=' . $note['id']; ?>">editer</a>
+							<div class="btn-show-frais btn btn-info" data-frais="list-frais-<?php echo $note['id'] ?>">Afficher les frais (<span class="count-frais"><?php echo count($allFrais); ?></span>)</div>
+							<?php //} ?>						
+						</td>
+					</tr>
+
+					<tr class="list-frais list-frais-<?php echo $note['id'] ?>">
+						<td colspan="5">
+							<ul>
+								<?php
+									//boucle des frais de la note
+									foreach ($allFrais as $frais) {
+								?>
+									<li class="frais-<?php echo $frais['id'] ?>">
+										<div class="infos-frais">
+											<img class="img-frais" src="<?php echo $basePath . 'image/uploads/' .$frais ['image'] ?>"/>
+											<span><?php echo $frais['description'] ?></span>
+										</div>
+										<div class="total">
+											<?php
+												$fdevise = Devise::getDeviseById($bdd, $frais['devise_id']);
+												echo $frais['montant'] . ' ' . $fdevise->getSigne() . '/ Convertion dans votre devise : '; 
+		                                        echo Devise::getValueOfChangedDevise($frais['montant'],$fdevise->getTaux(),$devise->getTaux()) . '  ' . $devise->getSigne();
+											?><br/>
+											<span><?php echo date("d-m-Y", strtotime($frais['date'])); ?></span>
+										</div>
+										<div class="actions-frais">
+											<button class="frais-<?php echo $frais['id'] ?> btn btn-danger" data-note="note-<?php echo $note['id']; ?>">supprimer</button>
+											<a class="btn btn-default" href="<?php echo $basePath . '?page=frais&amp;id=' . $frais['id']; ?>">editer</a>
+										</div>
+									</li>
+								<?php
+									} //fin boucle des frais
+								?>
+							</ul>
+						</td>
+					</tr>
 			<?php
 				}//fin boucle liste notes
 			?>
-		</ul>
+		</table>
 	</div>
-
-
-    
 </div>
+

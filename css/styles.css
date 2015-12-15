@@ -103,6 +103,11 @@ header
 .list-all-note .list-note td .btn {
     margin: 5px 3px;
 }
+
+.list-all-note .list-note .list-frais {
+    height: 0;
+    font-size: 0;
+}
 .list-all-note .list-note .list-frais ul {
     margin: 0 15px;
 }
@@ -111,6 +116,7 @@ header
     background-color: rgba(255, 255, 255, 0.30);
     padding: 5px;
     margin: 15px 0;
+    font-size: 20px;
 }
 
 .list-all-note .list-note .infos-frais {

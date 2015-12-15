@@ -46,7 +46,7 @@
 						<td>
 							<?php 
 								$devise = Devise::getDeviseById($bdd, $sessionUser->getDevise());
-								echo '<span class="total-note">' . Note::getMontantTotal($bdd, $note['id'], 1) . '</span> ' . $devise->getSigne();
+								echo '<span class="total-note">' . Note::getMontantTotal($bdd, $note['id'], $devise->getTaux()) . '</span> ' . $devise->getSigne();
 							?>
 						</td>
 						<td>
@@ -73,7 +73,8 @@
 										<div class="total">
 											<?php
 												$fdevise = Devise::getDeviseById($bdd, $frais['devise_id']);
-												echo '<span class="total-frais">' . $frais['montant'] . '</span> ' . $fdevise->getSigne(); 
+												echo $frais['montant'] . ' ' . $fdevise->getSigne() . '/ Convertion dans votre devise : '; 
+		                                        echo Devise::getValueOfChangedDevise($frais['montant'],$fdevise->getTaux(),$devise->getTaux()) . '  ' . $devise->getSigne();
 											?><br/>
 											<span><?php echo date("d-m-Y", strtotime($frais['date'])); ?></span>
 										</div>
