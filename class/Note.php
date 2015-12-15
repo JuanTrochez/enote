@@ -99,17 +99,45 @@ class Note {
     public function getListFrais($bdd) {
         return Frais::getFraisByNote($bdd, $this->id);
     }
-    
-    public function getMontantTotal($bdd, $nid) {
-        $montant = $bdd->prepare("SELECT ROUND(SUM(montant), 2) as 'total' FROM frais WHERE note_id = :nid");
-        
-        $montant->execute(array(
-            ':nid'  =>  $nid
+    public static function getNoteById($bdd, $id){
+        $note = $bdd->prepare('SELECT * FROM note_frais WHERE id = :id LIMIT 1');
+        $note->execute(array(
+            ':id' => $id
         ));
-        $aMontant = $montant->fetch();
-        return $aMontant[0];
+        
+        $array = $note->fetch();
+        
+        $CloneNote = new Note();
+        $CloneNote->setDate($array['date']);
+        $CloneNote->setId($array['id']);
+        $CloneNote->setName($array['name']);
+        $CloneNote->setStatut($array['statut_id']);
+        $CloneNote->setUser($array['user_id']);
+        
+        return $CloneNote;
     }
-
+    
+    public static function getMontantTotal($bdd, $nid, $tauxDeviseUser) {
+        
+        $CloneNote = Note::getNoteById($bdd,$nid);
+        $allFraisFromThisNote = $CloneNote->getListFrais($bdd);
+        $SommeDesMontants = 0;
+        foreach($allFraisFromThisNote as $frais)
+        {
+            $CloneDevise = Devise::getDeviseById($bdd, $frais['devise_id']);
+            
+            if($frais['categorie_id'] == 4)
+            {
+                $SommeDesMontants -= Devise::getValueOfChangedDevise($frais['montant'], $CloneDevise->getTaux(),$tauxDeviseUser);
+            }else{
+                $SommeDesMontants += Devise::getValueOfChangedDevise($frais['montant'], $CloneDevise->getTaux(),$tauxDeviseUser);
+            }
+            
+        }
+        
+        
+        return $SommeDesMontants;
+    }
     
     //recupére le nom d'une note.
     public function getNameNote($bdd, $nid) {

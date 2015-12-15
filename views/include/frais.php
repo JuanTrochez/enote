@@ -4,7 +4,6 @@ include_once '/class/CategorieFrais.php';
 ?>
 
 <h2>Ajout d'un nouveau frais</h2><br />
-
 <form  class = "form" action="" method="POST" enctype="multipart/form-data">
     <p>
         <input class = "formulaire form-control champ-form" type="file" name="image" />

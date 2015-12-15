@@ -97,7 +97,7 @@ class Frais {
         return $this->categorie;
     }    
     
-    public function getFraisByNote($bdd, $noteId) {
+    public static function getFraisByNote($bdd, $noteId) {
         $allFrais = $bdd->prepare("SELECT * FROM frais WHERE note_id = :noteid");
         $allFrais->execute(array(
             ":noteid"   =>  $noteId

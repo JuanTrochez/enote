@@ -83,44 +83,52 @@ header
 
 .list-all-note .list-note {
     color: white;
-}
-.list-all-note .list-note li {
-    list-style-type: none;
-    min-height: 100px;
-    margin: 15px 0;
-    padding: 20px;
-    background-color: #446688;
-    font-size: 0;
-}
-.list-all-note .list-note li .btn-show-frais {
-    cursor: pointer;
-}
-.list-all-note .list-note li div {
-    display: inline-block;
-    vertical-align: top;
+    width: 100%;
     font-size: 20px;
 }
-.list-all-note .list-note .infos-note, .list-all-note .list-note .actions-note {
-    width: 40%;
+.list-all-note .list-note tr {
+    height: 15px;
+    border-spacing: 10px;
+    background-color: #446688;
 }
-.list-all-note .list-note .total {
-    width: 20%;
+.list-all-note .list-note td, th {
+    width: 16%;
+    text-align: center;
+    padding-top: .5em;
+    padding-bottom: .5em;
+}
+.list-all-note .list-note .actions {
+    width: 36%;
+}
+.list-all-note .list-note td .btn {
+    margin: 5px 3px;
 }
 
 .list-all-note .list-note .list-frais {
-    display: none;
+    height: 0;
+    font-size: 0;
+}
+.list-all-note .list-note .list-frais ul {
+    margin: 0 15px;
 }
 .list-all-note .list-note .list-frais li {
+    list-style-type: none;
     background-color: rgba(255, 255, 255, 0.30);
     padding: 5px;
+    margin: 15px 0;
+    font-size: 20px;
 }
 
 .list-all-note .list-note .infos-frais {
-    width: 60%;
+    width: 59%;
+    display: inline-block;
+    vertical-align: top;
 }
 .list-all-note .list-note .actions-frais, .list-all-note .list-frais .total {
     width: 20%;
     text-align: center;
+    display: inline-block;
+    vertical-align: top;
 }
 
 .list-all-note .list-note .infos-frais .img-frais {

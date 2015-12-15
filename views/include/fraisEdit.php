@@ -1,5 +1,5 @@
 
-<h2>Ajout d'un nouveau frais</h2><br />
+<h2>Modification d'un frais</h2><br />
 
 <form  class = "form" action="" method="POST" enctype="multipart/form-data">
     <p>

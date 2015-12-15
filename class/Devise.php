@@ -52,20 +52,21 @@ class Devise {
         $this->taux = $taux;
     }
     
-    public function getDeviseById($bdd, $id) {
+    public static function getDeviseById($bdd, $id) {
         
         $Devise = new Devise();
-        $devise = $bdd->prepare("SELECT * FROM devise WHERE id = :did");
+        $devise = $bdd->prepare("SELECT * FROM devise WHERE id = :did LIMIT 1");
         $devise->execute(array(
             ':did'  =>  $id
         ));
         
-        $array = $devise->fetch();
-        
-        $Devise->setId($array['id']);
-        $Devise->setName($array['name']);
-        $Devise->setSigne($array['signe']);
-        $Devise->setTaux($array['taux']);
+        while($array = $devise->fetch())
+        {
+            $Devise->setId($array['id']);
+            $Devise->setName($array['name']);
+            $Devise->setSigne($array['signe']);
+            $Devise->setTaux($array['taux']);
+        }
         
         return $Devise;
     }
@@ -74,5 +75,13 @@ class Devise {
     {
         $deviseTable = $bdd->query('SELECT * FROM devise');
         return $deviseTable;
+    }
+    
+    public static function getValueOfChangedDevise($value,$fromDeviseTaux, $toDeviseTaux)
+    {
+        $resultat = $value * $fromDeviseTaux;
+        $resultat = $resultat/$toDeviseTaux;
+        
+        return $resultat;
     }
 }
