@@ -10,6 +10,7 @@
 	$('.list-all-note .list-container .list-note .' + activeClass).show();
 
     $('.list-all-note .list-container .list-statut li').click(function() {
+        console.log('click');
     	if ($(this).hasClass('active')) {
     		return;
     	}

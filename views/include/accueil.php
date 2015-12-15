@@ -16,16 +16,6 @@
 			?>
 		</ul>
 
-		<!-- <div class="table list-note">
-			<div class="row">
-				<div class="col">Nom</div>
-				<div class="col">Date</div>
-				<div class="col">Statut</div>
-				<div class="col">Total</div>
-				<div class="col actions">Action</div>
-			</div>
-		</div> -->
-
 		<div class="list-note">
 			<?php
 				//boucle sur la liste des notes
@@ -53,11 +43,11 @@
 							?>
 						</div>
 						<div class="actions">
-							<?php //if ($note['statut_id'] == 1) { ?>
+							<?php if ($note['statut_id'] == 1) { ?>
 								<button class="note-<?php echo $note['id'] ?> btn btn-danger">supprimer</button>
 								<a class="btn btn-default" href="<?php echo $basePath. '?page=note&amp;id=' . $note['id']; ?>">editer</a>
 								<button class="btn-show-frais btn btn-info" data-frais="list-frais-<?php echo $note['id'] ?>">Afficher les frais (<span class="count-frais"><?php echo count($allFrais); ?></span>)</button>
-							<?php //} ?>
+							<?php } ?>
 						</div>
 					</div>
 

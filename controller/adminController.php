@@ -5,6 +5,7 @@ include_once '/class/Note.php';
 include_once '/class/Devise.php';
 include_once '/class/Statut.php';
 include_once '/class/Frais.php';
+include_once '/class/CategorieFrais.php';
 
 
 if (!$secu->isAdmin($bdd)) {
