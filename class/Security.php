@@ -30,5 +30,21 @@ class Security {
     }
     return false;
     }
+    
+    public function isManager($bdd) {
+    if (Security::logged())
+    {
+        $user = unserialize($_SESSION['user']);
+        $result = $bdd->prepare("SELECT * FROM user "
+                . "WHERE id = :id AND role_id = 2 LIMIT 1");
+
+        $result->execute(array(
+                ":id" => $user->getId()
+                ));
+
+        return ($result->rowCount() == 1);
+    }
+    return false;
+    }
 
 }
