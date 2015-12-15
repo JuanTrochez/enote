@@ -27,9 +27,10 @@ header
 /*page connexion*/
 .form
 {
-    width: 25%;
+    width: 275px;
     margin: 0 auto;
     text-align: center;
+    font-size: 16px;
 }
 
 .champ-form
@@ -97,6 +98,7 @@ header
     vertical-align: top;
     width: 100%;
     font-size: 0;
+    margin-bottom: 10px;
 }
 .list-all-note .note .infos-note {
     line-height: 45px;
@@ -132,7 +134,7 @@ header
     width: 59%;
     display: inline-block;
     vertical-align: middle;
-    font-size: 20px;
+    font-size: 16px;
 }
 .list-all-note .list-note .actions-frais, .list-all-note .list-frais .total {
     width: 20%;
@@ -145,8 +147,8 @@ header
 .list-all-note .list-note .infos-frais .img-frais {
     display: table-cell;
     float: left;
-    height: 130px;
-    width: 130px;
+    max-height: 130px;
+    max-width: 130px;
     margin-right: 10px;
 }
 
@@ -212,10 +214,11 @@ header
 
 .admin-user table tr {
     height: 40px;
+    border-bottom: 1px solid rgba(0, 0, 255, 0.1);
 }
 
 .admin-user table tr:hover {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 255, 0.2);
 }
 .admin-note .list-statut li {
     width: 25%;

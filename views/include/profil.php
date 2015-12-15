@@ -27,9 +27,9 @@ if(isset($_GET['id']) && Security::isAdmin($bdd))
     </div>
 
     <form  class = "form" action="" method="POST" enctype="multipart/form-data">
-        Changer le nom de l'utilisateur :  <input class = "form-control champ-form" type="text" name="changerNomUser" value='<?php echo $CloneUser->getName()?>'/><br/>
-        Changer le login de l'utilisateur :  <input class = "form-control champ-form" type="text" name="changerLoginUser" value='<?php echo $CloneUser->getLogin()?>'/><br/>
-        Changer l'email de l'utilisateur :  <input class = "form-control champ-form" type="text" name="changerMailUser"value='<?php echo $CloneUser->getEmail()?>'/><br/>
+        Changer le nom de l'utilisateur :  <input class = "form-control champ-form" type="text" name="changerNomUser" value='<?php echo $CloneUser->getName()?>'/>
+        Changer le login de l'utilisateur :  <input class = "form-control champ-form" type="text" name="changerLoginUser" value='<?php echo $CloneUser->getLogin()?>'/>
+        Changer l'email de l'utilisateur :  <input class = "form-control champ-form" type="text" name="changerMailUser"value='<?php echo $CloneUser->getEmail()?>'/>
         Changer le role de l'utilisateur :
         <select class = "formulaireRole form-control champ-form" name="changerRoleUser">
             <?php
@@ -44,8 +44,8 @@ if(isset($_GET['id']) && Security::isAdmin($bdd))
             ?>
         </select>
         <br/>
-        Nouveau mot de passe (facultatif) :  <input class = "form-control champ-form" type="password" name="nouveauMdpAdmin"/> <br/>
-        Confirmer le nouveau mot de passe :  <input class = "form-control champ-form" type="password" name="confirmationMdpAdmin"/><br/>
+        Nouveau mot de passe (facultatif) :  <input class = "form-control champ-form" type="password" name="nouveauMdpAdmin"/>
+        Confirmer le nouveau mot de passe :  <input class = "form-control champ-form" type="password" name="confirmationMdpAdmin"/>
         Nouvelle devise :
         <select class = "formulaire formulairePrix form-control champ-form" name="devise_idAdmin">
             <?php
@@ -102,10 +102,10 @@ if(isset($_GET['id']) && Security::isAdmin($bdd))
     </div>
 
     <form  class = "form" action="" method="POST" enctype="multipart/form-data">
-        Ancien mot de passe :  <input class = "form-control champ-form" type="password" name="ancienMdp"/><br/>
-        Nouveau mot de passe :  <input class = "form-control champ-form" type="password" name="nouveauMdp"/> <br/>
-        Confirmer le nouveau mot de passe :  <input class = "form-control champ-form" type="password" name="confirmationMdp"/><br/>
-        <input class = "btn btn-primary" type="submit" name="changementParamUser" value="Modifier"/><br/>
+        Ancien mot de passe :  <input class = "form-control champ-form" type="password" name="ancienMdp"/>
+        Nouveau mot de passe :  <input class = "form-control champ-form" type="password" name="nouveauMdp"/>
+        Confirmer le nouveau mot de passe :  <input class = "form-control champ-form" type="password" name="confirmationMdp"/>
+        <input class = "btn btn-primary" type="submit" name="changementParamUser" value="Modifier"/>
     </form>
 <?php
 }
