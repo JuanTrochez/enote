@@ -1,6 +1,6 @@
 <?php
-include_once "/class/Modification.php";
-include_once "/class/User.php";
+include_once "Modification.php";
+include_once "User.php";
 
 class Frais {
     private $id;
