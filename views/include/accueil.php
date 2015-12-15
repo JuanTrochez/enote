@@ -46,8 +46,8 @@
 							<?php if ($note['statut_id'] == 1) { ?>
 								<button class="note-<?php echo $note['id'] ?> btn btn-danger">supprimer</button>
 								<a class="btn btn-default" href="<?php echo $basePath. '?page=note&amp;id=' . $note['id']; ?>">editer</a>
-								<button class="btn-show-frais btn btn-info" data-frais="list-frais-<?php echo $note['id'] ?>">Afficher les frais (<span class="count-frais"><?php echo count($allFrais); ?></span>)</button>
 							<?php } ?>
+								<button class="btn-show-frais btn btn-info" data-frais="list-frais-<?php echo $note['id'] ?>">Afficher les frais (<span class="count-frais"><?php echo count($allFrais); ?></span>)</button>
 						</div>
 					</div>
 
@@ -72,7 +72,7 @@
 										<span><?php echo date("d-m-Y", strtotime($frais['date'])); ?></span><br/>
 										<span class="categorie-frais"><?php echo $categorie->getName(); ?></span>
 									</div>
-									<?php if ($categorie->getName() != "Avance") { ?>
+									<?php if ($categorie->getName() != "Avance" && $note['statut_id'] == 1) { ?>
 										<div class="actions-frais">
 											<button class="frais-<?php echo $frais['id'] ?> btn btn-danger" data-note="note-<?php echo $note['id']; ?>">supprimer</button>
 											<a class="btn btn-default" href="<?php echo $basePath . '?page=frais&amp;id=' . $frais['id']; ?>">editer</a>
