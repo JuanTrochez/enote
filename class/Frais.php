@@ -1,4 +1,6 @@
 <?php
+include_once "/class/Modification.php";
+include_once "/class/User.php";
 
 class Frais {
     private $id;
@@ -137,6 +139,12 @@ class Frais {
             ':id' => $this->id
         ));
         $req->closeCursor();
+        
+        $table_name = "frais";
+        $user = unserialize($_SESSION['user']);
+        $author_id = $user->getId();
+        $nid = $this->id;
+        Modification::insertNewModif($bdd, $nid, $table_name, $author_id);
     }
     
     public function deleteFraisById($bdd, $id) {

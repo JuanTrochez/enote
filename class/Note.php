@@ -1,6 +1,8 @@
 <?php
 
 include_once "Frais.php";
+include_once "/class/Modification.php";
+include_once "/class/User.php";
 
 class Note {
     private $id;
@@ -127,6 +129,10 @@ class Note {
             ":statut" => $satutnote,
             ":nid" => $nid
         ));
+        $table_name = "note_frais";
+        $user = unserialize($_SESSION['user']);
+        $author_id = $user->getId();
+        Modification::insertNewModif($bdd, $nid, $table_name, $author_id);
     }
     
     public function deleteNoteById($bdd,$nid) {
