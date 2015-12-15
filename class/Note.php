@@ -1,8 +1,8 @@
 <?php
 
 include_once "Frais.php";
-include_once "/class/Modification.php";
-include_once "/class/User.php";
+include_once "Modification.php";
+include_once "User.php";
 
 class Note {
     private $id;

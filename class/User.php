@@ -1,8 +1,8 @@
 <?php
 
-include_once '/function/cookie.php';
+include_once '../function/cookie.php';
 include_once 'Note.php';
-include_once "/class/Modification.php";
+include_once "Modification.php";
 
 class User {
     //put your code here
