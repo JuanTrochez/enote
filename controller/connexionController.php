@@ -3,12 +3,14 @@ include_once "/class/User.php";
 include_once "/views/include/connexion.php";
 
 if (isset($_POST['submit'])) {
-    if(isset($_POST['login']) && isset($_POST['pwd'])){
-        if(!empty($_POST['login']) && !empty($_POST['pwd'])){
+    $login = $_POST['login'];
+    $pwd = $_POST['pwd'];
+    if(isset($login, $pwd)){
+        if(!empty($login) && !empty($pwd)){
 
             //initialisations des variables
-            $login = htmlentities($_POST['login']);
-            $password = sha1(htmlentities($_POST['pwd']));
+            $login = htmlentities($login);
+            $password = sha1(htmlentities($pwd));
             $remember = false;
 
             $user = new User();

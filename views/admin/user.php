@@ -16,7 +16,7 @@
             <td><?php echo $user['login']; ?></td>
             <td><?php echo $user['mail']; ?></td>
             <td><?php echo Role::getRoleById($bdd, $user['role_id'])->getName(); ?></td>
-            <td><?php echo Devise::getDeviseById($bdd, $sessionUser->getDevise())->getName(); ?></td>
+            <td><?php echo Devise::getDeviseById($bdd, $user['devise_id'])->getName(); ?></td>
             <td><button class="user-<?php echo $user['id']; ?> btn btn-danger">supprimer</button> <a class="btn btn-default" href="<?php echo $basePath ."?page=user&id=" . $user['id']; ?>">editer</a></td>
         </tr>
         <?php } ?>
