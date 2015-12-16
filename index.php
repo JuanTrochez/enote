@@ -9,13 +9,15 @@
     $redirect_connection = "Location: " . $basePath . "?page=connexion";
     $view_header = 'views/global/header.php';
     $view_footer = 'views/global/footer.php';
+    $log = 'login';
+    $passw = 'password';
     // si il y a un cookie, on connect l'user.
-    if (isset($_COOKIE['login']) && !empty($_COOKIE['login']) &&
-    isset($_COOKIE['password']) && !empty($_COOKIE['password']))
+    if (isset($_COOKIE[$log]) && !empty($_COOKIE[$log]) &&
+    isset($_COOKIE[$passw]) && !empty($_COOKIE[$passw]))
     {
         $user = new User();
-        $user->setLogin(filter_input(INPUT_COOKIE, 'login'));
-        $user->setPassword(filter_input(INPUT_COOKIE, 'password'));
+        $user->setLogin(filter_input(INPUT_COOKIE, $log));
+        $user->setPassword(filter_input(INPUT_COOKIE, $passw));
         $user->connect($bdd,true);
         echo "cookie set session";
     }

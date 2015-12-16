@@ -23,31 +23,28 @@ if (isset($_POST['valider']))
 
         //Construction du nom de fichier
         $nom = $userName . $dateImage .'-'. $heureImage . '.' . $extension_upload;
-        if (in_array($extension_upload, $extensions_autorisees))
-        {
-            // Methode qui deplce le fichier et change son nom
-            $test = move_uploaded_file($image['tmp_name'], 'image/uploads/'. $nom);
-            if($test)
-            {           
-                $frais = new Frais();
-                $frais->setCategorie(filter_input(INPUT_POST, 'categorie_id'));
-                $frais->setDate(filter_input(INPUT_POST, 'date'));
-                $frais->setDescription(nl2br(filter_input(INPUT_POST, 'description')));
-                $frais->setDevise(filter_input(INPUT_POST, 'devise_id'));
-                $frais->setImage($nom);
-                $frais->setMontant($montant);
-                $frais->setNote($idnote);
+        // Methode qui deplce le fichier et change son nom
+        $test = move_uploaded_file($image['tmp_name'], 'image/uploads/'. $nom);
+        if (in_array($extension_upload, $extensions_autorisees) && $test)
+        {       
+            $frais = new Frais();
+            $frais->setCategorie(filter_input(INPUT_POST, 'categorie_id'));
+            $frais->setDate(filter_input(INPUT_POST, 'date'));
+            $frais->setDescription(nl2br(filter_input(INPUT_POST, 'description')));
+            $frais->setDevise(filter_input(INPUT_POST, 'devise_id'));
+            $frais->setImage($nom);
+            $frais->setMontant($montant);
+            $frais->setNote($idnote);
 
-                if(isset($_GET['id']) && !empty($_GET['id'])){
-                    $frais->setId($_GET['id']);
-                    $frais->upDateFrais($bdd);
-                }else{ $frais->insertFrais($bdd); }                   
+            if(isset($_GET['id']) && !empty($_GET['id'])){
+                $frais->setId($_GET['id']);
+                $frais->upDateFrais($bdd);
+            }
+            else{ $frais->insertFrais($bdd); }                   
 
-                echo '<div class="bg-success">Le frais à bien été ajouté </div><br/><br/>';
-             }else{
-                echo "Une erreur est survenue !";
-            }          
+            echo '<div class="bg-success">Le frais à bien été ajouté </div><br/><br/>';
         }
+        else{ echo "Une erreur est survenue !"; }          
     }
 }
 if(isset($_GET['id']) && !empty($_GET['id'])){
