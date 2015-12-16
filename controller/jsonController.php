@@ -50,27 +50,44 @@ if (isset($_POST) && !empty($_POST)) {
         
         switch ($key) {
             case 'statistique':
+                //couts par categorie
                 $allCategorie = CategorieFrais::getAllCategorie($bdd);
                 $userDevise = Devise::getDeviseById($bdd, $sessionUser->getDevise())->getTaux();
-                //incrementation pour les mois de l'année
+                
+                //incrementation pour lesfrais par mois de l'année
                 $i = 1;
+                
+                //couleur des categories
+                $color = 30;
 
                 foreach ($allCategorie as $categorie) {
                     $categorieCout = Frais::getCoutByCategorieId($bdd, $categorie["id"]);
                     $fdevise = Devise::getDeviseById($bdd, $categorieCout['devise_id'])->getTaux();
-                    $data["categorie"]["labels"][] = $categorie["name"];
+                    $data["categorie"]["labels"][] = $categorie["name"];                    
                     $data["categorie"]["cout"][] = Devise::getValueOfChangedDevise($categorieCout["totalCat"], $fdevise, $userDevise);
+                    $data["categorie"]["all"][] = [
+                        "value"     => Devise::getValueOfChangedDevise($categorieCout["totalCat"], $fdevise, $userDevise),
+                        "color"     =>  "rgb(" . $color . ", " . $color * 2 . ", " . $color / 2 . ")",
+                        "highlight" =>  "rgb(" . ($color + 15) . ", " . (($color * 2) + 15) . ", " . ($color + 15) . ")",
+                        "label"     =>  $categorie["name"]
+                    ];
+                    
+                    $color += 30;
                 }
                                 
                 while ($i <= 12) {
-                    $coutMois = Frais::getCoutParMois($bdd, $i);                    
+                    $coutMois = Frais::getCoutParMois($bdd, $i);
                     $fdevise = Devise::getDeviseById($bdd, $coutMois['devise_id'])->getTaux();
                     
                     if ($coutMois == NULL) {
                         $coutMois = 0;
                     }
-                    $data["mois"]["cout"][$i] = Devise::getValueOfChangedDevise($coutMois["totalMois"], $fdevise, $userDevise);
+                    $data["mois"]["cout"][] = Devise::getValueOfChangedDevise($coutMois["totalMois"], $fdevise, $userDevise);
                     $i++;
+                }
+                
+                while ($i <= 10) {
+                    $data["user"]["cout"][] = "dfs";
                 }
 
                 break;
@@ -84,4 +101,8 @@ if (isset($_POST) && !empty($_POST)) {
 
     // on retourne la reponse json
     echo json_encode($data);
+    
+    
+function dynamicColor($index){
+};
     

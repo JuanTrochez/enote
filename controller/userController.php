@@ -1,9 +1,7 @@
 <?php
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
+$newpwdadm = 'nouveauMdpAdmin';
+
 if(isset($_POST['changementParamUser']) && verifModification($sessionUser) || isset($_POST['changementDeviseUser']) || isset($_POST['changementEmailUser']))
 {
     $sucess = true;
@@ -42,9 +40,9 @@ if(isset($_POST['changementParamUser']) && verifModification($sessionUser) || is
     $CloneUser->setRole($_POST['changerRoleUser']);
     $CloneUser->setDevise($_POST['devise_idAdmin']);
     
-    if(!empty($_POST['nouveauMdpAdmin']))
+    if(!empty($_POST[$newpwdadm]))
     {
-        $CloneUser->setPassword(sha1($_POST['nouveauMdpAdmin']));
+        $CloneUser->setPassword(sha1($_POST[$newpwdadm]));
     }
     
     $CloneUser->editUserByAdmin($bdd, $CloneUser);

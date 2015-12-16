@@ -68,8 +68,8 @@
 									<div class="total">
 										<?php
 											$fdevise = Devise::getDeviseById($bdd, $frais['devise_id']);
-											echo $frais['montant'] . ' ' . $fdevise->getSigne() . '/ Convertion dans votre devise : '; 
-	                                        echo '<span class="total-frais">' . Devise::getValueOfChangedDevise($frais['montant'],$fdevise->getTaux(),$devise->getTaux()) . '</span>  ' . $devise->getSigne();
+											echo $frais['montant'] . ' ' . $fdevise->getSigne() . '<br/>'; 
+	                                        echo '(<span class="total-frais">' . Devise::getValueOfChangedDevise($frais['montant'],$fdevise->getTaux(),$devise->getTaux()) . '</span>  ' . $devise->getSigne() . ')';
 										?><br/>
 										<span><?php echo date("d-m-Y", strtotime($frais['date'])); ?></span><br/>
 										<span class="categorie-frais"><?php echo $categorie->getName(); ?></span>

@@ -15,7 +15,7 @@ if (!$secu->isAdmin($bdd)) {
 
 if (isset($_GET['section']) && !empty($_GET['section'])) {
     
-    switch ($_GET['section']) {
+    switch (filter_input(INPUT_GET, 'section')) {
         //gestion des utilisateurs
         case "user":
             if (isset($_GET['action']) && (strcmp($_GET['action'], 'adduser') == 0)){

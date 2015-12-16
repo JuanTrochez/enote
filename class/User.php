@@ -88,7 +88,7 @@ class User {
     {
         return $this->mail;
     }
-    public function getAllUser($bdd) {
+    public static function getAllUser($bdd) {
         $req = $bdd->query("SELECT * FROM user");
         
         return $req->fetchAll();
