@@ -82,14 +82,14 @@
                                         <a class="btn btn-default" href="<?php echo $basePath . '?page=frais&amp;id=' . $frais['id']; ?>">editer</a>
                                     </div>
                                 </li>
-                            <?php
-                            } //fin boucle des frais
-                            ?>
+                    <?php  //fin boucle des frais
+                            } 
+                        ?>
                         </ul>
                     </div>
                 </div>
-        <?php
-            }//fin boucle liste notes
+    <?php  //fin boucle liste notes
+            }
         ?>
         </div>
     </div>
