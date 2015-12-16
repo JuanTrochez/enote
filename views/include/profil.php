@@ -1,5 +1,7 @@
 <?php include_once 'class/Devise.php';
       include_once 'class/Role.php';
+      
+      $selected = "selected='selected'";
 ?>
 
 <?php
@@ -38,7 +40,7 @@ if(isset($_GET['id']) && Security::isAdmin($bdd))
                 while($donnee = $reponseRole->fetch())
                     {
                         ?>
-            <option value="<?php echo $donnee['id'];?>" <?php if($CloneUser->getRole() == $donnee['id']){echo "selected='selected'"; } ?>><?php echo $donnee['name'];?></option>
+            <option value="<?php echo $donnee['id'];?>" <?php if($CloneUser->getRole() == $donnee['id']){echo $selected; } ?>><?php echo $donnee['name'];?></option>
                         <?php  
                     }
             ?>
@@ -53,7 +55,7 @@ if(isset($_GET['id']) && Security::isAdmin($bdd))
                 while($donnee = $reponseDevise->fetch())
                     {
                         ?>
-            <option value="<?php echo $donnee['id'];?>" <?php if($CloneUser->getDevise() == $donnee['id']){echo "selected='selected'"; } ?>><?php echo $donnee['name'];?></option>
+            <option value="<?php echo $donnee['id'];?>" <?php if($CloneUser->getDevise() == $donnee['id']){echo $selected; } ?>><?php echo $donnee['name'];?></option>
                         <?php  
                     }
             ?>
@@ -87,7 +89,7 @@ if(isset($_GET['id']) && Security::isAdmin($bdd))
                         while($donnee = $reponseDevise->fetch())
                         {
                             ?>
-                            <option value="<?php echo $donnee['id'];?>" <?php if($sessionUser->getDevise() == $donnee['id']){echo "selected='selected'"; } ?>><?php echo $donnee['name'];?></option>
+                            <option value="<?php echo $donnee['id'];?>" <?php if($sessionUser->getDevise() == $donnee['id']){echo $selected; } ?>><?php echo $donnee['name'];?></option>
                             <?php  
                         }
                         ?>
