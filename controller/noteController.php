@@ -2,11 +2,11 @@
 include_once "/class/Statut.php";
 include_once "/class/User.php";
 include_once "/class/Modification.php";
-
+$namenote = 'name_note';
 
 if (isset($_POST['Editer'])){
     
-    $note_name = $_POST['name_note'];
+    $note_name = $_POST[$namenote];
     if (isset($note_name) && !empty($note_name))
     {
         $namenote = htmlentities($note_name);
@@ -20,7 +20,7 @@ if (isset($_POST['Editer'])){
 
 elseif (isset($_POST['valider']))
 {
-    $note_name = filter_input(INPUT_POST, 'name_note');
+    $note_name = filter_input(INPUT_POST, $namenote);
     if (isset($note_name) && !empty($note_name))
     {
         $date = date("Y-m-d");
@@ -38,7 +38,7 @@ elseif (isset($_POST['valider']))
 }
 elseif (isset($_POST['modifier'])){
     
-    $note_name = filter_input(INPUT_POST, 'name_note');
+    $note_name = filter_input(INPUT_POST, $namenote);
     if (isset($note_name) && !empty($note_name))
     {
         $namenote = htmlentities($note_name);
