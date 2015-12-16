@@ -1,4 +1,6 @@
-
+<?php 
+$selected = "selected='selected'";
+?>
 <h2>Modification d'un frais</h2><br />
 
 <form  class = "form" action="" method="POST" enctype="multipart/form-data">
@@ -20,7 +22,7 @@
                 while($donnee = $reponseDevise->fetch())
                 {
                     ?>
-                    <option value="<?php echo $donnee['id'];?>" <?php if($data['devise_id']== $donnee['id']){echo "selected='selected'"; } ?>><?php echo $donnee['name'];?></option>
+                    <option value="<?php echo $donnee['id'];?>" <?php if($data['devise_id']== $donnee['id']){echo $selected; } ?>><?php echo $donnee['name'];?></option>
                     <?php  
                 }
                 $reponseDevise->closeCursor();
@@ -33,7 +35,7 @@
             while($donnee = $reponseNote->fetch())
             {
                 ?>
-                <option value="<?php echo $donnee['id'];?>" <?php if($data['note_id']== $donnee['id']){echo "selected='selected'"; } ?>><?php echo $donnee['name'];?></option>
+                <option value="<?php echo $donnee['id'];?>" <?php if($data['note_id']== $donnee['id']){echo $selected; } ?>><?php echo $donnee['name'];?></option>
                 <?php  
             }
             $reponseNote->closeCursor();
@@ -46,7 +48,7 @@
             while($donnee = $reponseCategorie->fetch())
             {
                 ?>
-                <option value ="<?php echo $donnee['id'];?>" <?php if($data['categorie_id'] == $donnee['id']){echo "selected='selected'"; } ?>><?php echo $donnee['name'];?></option>
+                <option value ="<?php echo $donnee['id'];?>" <?php if($data['categorie_id'] == $donnee['id']){echo $selected; } ?>><?php echo $donnee['name'];?></option>
                 <?php
             }
             $reponseCategorie->closeCursor();

@@ -61,64 +61,55 @@ if(isset($_SESSION['user']) && !empty($_SESSION['user']))
 
 function verifModification($user)
 {
-    $modifCorrect = true;  
+    $modifCorrect = false;
+    $newpwd = $_POST['nouveauMdp'];
     // Verifie que les champs sont remplies
-    if(!isset($_POST['ancienMdp']) || !isset($_POST['nouveauMdp']) || !isset($_POST['confirmationMdp']))
+    if(!isset($_POST['ancienMdp']) || !isset($newpwd) || !isset($_POST['confirmationMdp']))
     {
         echo 'Erreur veuillez remplir tous les champs';
-        $modifCorrect = false;
     }
     //Verifie que le mot de passe entré par l'utilisateur est correct
-    else if(strcmp(sha1($_POST['ancienMdp']), $user->getPassword()) != 0)
+    elseif(strcmp(sha1($_POST['ancienMdp']), $user->getPassword()) != 0)
     {
         echo 'Erreur d identification, le mot de passe est incorrect';
-        $modifCorrect = false;
     }
     //Verifie que le nouveau mot de passe est supérieur ou égale à 6 caractères
-    else if(strlen($_POST['nouveauMdp'])<6)
+    elseif(strlen($newpwd)<6)
     {
         echo 'Veuillez choisir un mot de passe de 6 caratères minimum';
-        $modifCorrect = false;
     }
     //Verifie que la confirmation du mot de passe est correct
-    else if(strcmp($_POST['nouveauMdp'], $_POST['confirmationMdp']) != 0)
+    elseif(strcmp($newpwd, $_POST['confirmationMdp']) != 0)
     {
         echo 'Erreur avec la confirmation du mot de passe';
-        $modifCorrect = false;
     }
+    else { $modifCorrect = true; }
     return $modifCorrect;
 }
 
 
 function verifModificationFromAdmin()
 {
-    $modifCorrect = true;
+    $modifCorrect = false;
+    $changemail = $_POST['changerMailUser'];
+    $newpwdadmin = $_POST['nouveauMdpAdmin'];
     //Verifie que tous le champs ne sont pas vide
-    if(!isset($_POST['changerNomUser']) || !isset($_POST['changerLoginUser']) || !isset($_POST['changerMailUser']) || !isset($_POST['changerRoleUser']))
+    if(!isset($_POST['changerNomUser']) || !isset($_POST['changerLoginUser']) || !isset($changemail) || !isset($_POST['changerRoleUser']))
     {
         echo 'Erreur veuillez remplir tous les champs';
-        $modifCorrect = false;
     }
     //Verifie que l'adresse mail est valide
-    else if(!filter_var($_POST['changerMailUser'], FILTER_VALIDATE_EMAIL))
-    {
+    elseif(!filter_var($changemail, FILTER_VALIDATE_EMAIL)){
         echo'Erreur, adresse mail non valide';
-        $modifCorrect = false;
     }
-    if(!empty($_POST['nouveauMdpAdmin']))
-    {
-        //Verifie que le nouveau mot de passe est supérieur ou égale à 6 caractères
-        if(strlen($_POST['nouveauMdpAdmin'])<6)
-        {
-            echo 'Veuillez choisir un mot de passe de 6 caratères minimum bitch';
-            $modifCorrect = false;
-        }
-        //Verifie que la confirmation du mot de passe est correct
-        else if(strcmp($_POST['nouveauMdpAdmin'], $_POST['confirmationMdpAdmin']) != 0)
-        {
-            echo 'Erreur avec la confirmation du mot de passe';
-            $modifCorrect = false;
-        }
+    //Verifie que le nouveau mot de passe est supérieur ou égale à 6 caractères
+    elseif(!empty($newpwdadmin) && strlen($newpwdadmin)<6){
+        echo 'Veuillez choisir un mot de passe de 6 caratères minimum bitch';
     }
+    //Verifie que la confirmation du mot de passe est correct
+    elseif(strcmp($newpwdadmin, $_POST['confirmationMdpAdmin']) != 0){
+        echo 'Erreur avec la confirmation du mot de passe';
+    }
+    else { $modifCorrect = true; }
     return $modifCorrect;
 }

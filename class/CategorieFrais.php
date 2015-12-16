@@ -47,6 +47,6 @@ class CategorieFrais {
     public static function getAllCategorie($bdd)
     {
         return ($bdd->query('SELECT * FROM categorie_frais'));
-    }
+    }   
 
 }
