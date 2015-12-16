@@ -164,6 +164,23 @@ class Frais {
         return $req->fetchAll();
     }
     
+    public static function getCoutByCategorieId($bdd, $id) {
+        $req = $bdd->prepare("SELECT SUM(montant) as totalCat, categorie_id, devise_id FROM frais WHERE categorie_id = :id");
+        $req->execute(array(
+            ":id"   =>  $id
+        ));
+        return $req->fetch();
+    }
+    
+    public static function getCoutParMois($bdd, $mois) {
+        $req = $bdd->prepare("SELECT SUM(montant) as totalMois, devise_id FROM frais WHERE month(date) = :mois");
+        $req->execute(array(
+            ":mois" => $mois
+        ));
+        
+        return $req->fetch();
+    }
+    
     
 
 }

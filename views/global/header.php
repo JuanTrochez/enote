@@ -7,7 +7,7 @@ and open the template in the editor.
 <html>
     <head>
         <title>E note</title>
-        <meta charset="UTF-8">
+        <meta http-equiv="content-type" content="text/html; UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="<?php echo $basePath ?>vendor/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<?php echo $basePath ?>css/app.css">
