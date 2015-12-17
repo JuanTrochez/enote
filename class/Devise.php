@@ -78,7 +78,8 @@ class Devise {
     
     public static function getValueOfChangedDevise($value,$fromDeviseTaux, $toDeviseTaux)
     {
-        return (($value * $fromDeviseTaux) / $toDeviseTaux);
+        $total = ($value * $fromDeviseTaux) / $toDeviseTaux;
+        return round($total, 2);
     }
     
 }
