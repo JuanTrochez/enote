@@ -148,8 +148,7 @@ if(isset($_GET['id']) && !empty($_GET['id']))
     include_once '/views/include/impression.php';
 }
 else{
-    include_once '/views/include/accueil.php';
-    echo 'La note n\'existe pas' ;
+    header('Location:' . $basePath);
 }
 
 
