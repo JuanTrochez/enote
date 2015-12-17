@@ -29,7 +29,7 @@ $allFraisFromThisNote = $CloneNote->getListFrais($bdd);
 $CloneDevise = Devise::getDeviseById($bdd, $sessionUser->getDevise());
 
 //Ecrit le nom et le login de l'utilisateur
-$nomUtilisateur = $sessionUser->getName();
+$nomUtilisateur = str_replace(" ","",$sessionUser->getName());
 
 $objPHPExcel->getActiveSheet()->setCellValue('B8', $nomUtilisateur);
 $objPHPExcel->getActiveSheet()->setCellValue('F8', $sessionUser->getLogin());
@@ -130,8 +130,15 @@ $objPHPExcel->getActiveSheet()->setCellValue('A'.($totalCase+7), date('d/m/y'));
 
 echo date('H:i:s') , " Write to Excel5 format" , EOL;
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
-$objWriter->save('Excel/'.$sessionUser->getName().date("d-m-Y").'A'. date('H-i-s') .'NoteFrais.xls');
+$nomFichier = $nomUtilisateur.date("d-m-Y").'A'. date('H-i-s') .'NoteFrais.xls';
+$cheminComplet = 'Excel/'.$nomUtilisateur.date("d-m-Y").'A'. date('H-i-s') .'NoteFrais.xls';
 
+$objWriter->save($cheminComplet);
+
+forcerTelechargement($nomFichier, $cheminComplet, filesize($cheminComplet));
+
+
+echo filesize($cheminComplet) . 'et le nom '.$nomFichier. ' et le chemin '. $cheminComplet;
 echo date('H:i:s') , " File written to " , str_replace('.php', '.xls', pathinfo(__FILE__, PATHINFO_BASENAME)) , EOL;
 
 // Echo memory peak usage
@@ -140,7 +147,8 @@ echo date('H:i:s') , " Peak memory usage: " , (memory_get_peak_usage(true) / 102
 // Echo done
 echo date('H:i:s') , " Done writing file" , EOL;
 echo 'File has been created in ' , getcwd() , EOL;
-
+<a href="/images/myw3schoolsimage.jpg" download>
+//forcerTelechargement($nomFichier, $cheminComplet, filesize($cheminComplet));
 
 function afficherAvance($devise,$montantAvance,$objPHPExcel, $celluleAremplir)
 {
@@ -161,3 +169,34 @@ function afficherAvance($devise,$montantAvance,$objPHPExcel, $celluleAremplir)
             break;
     }
 }
+
+function forcerTelechargement($nom, $situation, $poids)
+  {
+//    header('Content-Type: application/octet-stream');
+//    header('Content-Length: '. $poids);
+//    header('Content-disposition: attachment; filename='. $nom);
+//    header('Pragma: no-cache');
+//    header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+//    header('Expires: 0');
+//    readfile($situation);
+//    exit();
+    
+    // désactive la mise en cache
+    header("Cache-Control: no-cache, must-revalidate");
+    header("Cache-Control: post-check=0,pre-check=0");
+    header("Cache-Control: max-age=0");
+    header("Pragma: no-cache");
+    header("Expires: 0");
+
+    // force le téléchargement du fichier avec un beau nom
+    header("Content-Type: application/force-download");
+    header('Content-Disposition: attachment; filename="'.$nom.'"');
+
+    // indique la taille du fichier à télécharger
+    header("Content-Length: ".$poids);
+
+    // envoi le contenu du fichier
+    readfile($situation);
+  }
+  
+  ?>
