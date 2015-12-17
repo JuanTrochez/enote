@@ -54,6 +54,9 @@ if (isset($_POST) && !empty($_POST)) {
                 $allCategorie = CategorieFrais::getAllCategorie($bdd);
                 $userDevise = Devise::getDeviseById($bdd, $sessionUser->getDevise())->getTaux();
                 
+                //couts pour les 10 premiers utilisateurs
+                $userCouts = Note::getCoutOfUser($bdd);
+                
                 //incrementation pour lesfrais par mois de l'année
                 $i = 1;
                 
@@ -86,8 +89,9 @@ if (isset($_POST) && !empty($_POST)) {
                     $i++;
                 }
                 
-                while ($i <= 10) {
-                    $data["user"]["cout"][] = "dfs";
+                foreach ($userCouts as $uCout) {
+                    $data["user"]["login"][] = $uCout["username"];
+                    $data["user"]["cout"][] = $uCout["total"];
                 }
 
                 break;

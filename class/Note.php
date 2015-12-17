@@ -74,7 +74,7 @@ class Note {
         return $listNotes->fetchAll();
     }
     
-    public function getNotesByUser($bdd, $uid) {
+    public static function getNotesByUser($bdd, $uid) {
         $listNotes = $bdd->prepare("SELECT * FROM note_frais WHERE user_id = :uId");
         $listNotes->execute(array(
             ":uId"  =>  $uid
@@ -169,4 +169,35 @@ class Note {
             ":nid" => $nid
         ));
     }
+    
+    public static function getCoutOfUser($bdd) {
+        $allUser = User::getAllUser($bdd);
+        $couts = [];
+        
+        foreach ($allUser as $user) {
+            $userNotes = Note::getNotesByUser($bdd, $user['id']);
+            $uDevise = Devise::getDeviseById($bdd, $user['devise_id']);
+            $totalNote = 0;
+            
+            foreach ($userNotes as $note) {
+                $totalNote += Note::getMontantTotal($bdd, $note['id'], $uDevise->getTaux());
+            }
+            
+            $couts[] = [
+                "username"  => $user['login'],
+                "total"     => $totalNote
+            ];
+        }
+        
+        
+        $sortedCouts = usort($couts, function($a, $b) {
+            if($a['total']==$b['total']) {return 0;}
+            return $a['total'] < $b['total']?1:-1;
+        });
+        $slicedCouts = array_slice($couts, 0, 10);
+        
+        
+        return $slicedCouts;
+    }
+    
 }

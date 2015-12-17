@@ -78,15 +78,8 @@ class Devise {
     
     public static function getValueOfChangedDevise($value,$fromDeviseTaux, $toDeviseTaux)
     {
-        return (($value * $fromDeviseTaux) / $toDeviseTaux);
+        $total = ($value * $fromDeviseTaux) / $toDeviseTaux;
+        return round($total, 2);
     }
     
-    public static function getPopularDevise($bdd, $id) {
-        $req = $bdd->prepare("SELECT COUNT(*) as totalDevise, devise_id FROM frais GROUP BY devise_id");
-        $req->execute(array(
-            ":id"   =>  $id
-        ));
-        
-        $req->fetchAll();
-    }
 }

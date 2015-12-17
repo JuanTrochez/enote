@@ -1,5 +1,3 @@
-<?php  var_dump(Frais::getCoutParMois($bdd, 1)['totalMois']); ?>
-
 <div class="admin-stat">
     <h1>Statistiques du site (en <?php echo Devise::getDeviseById($bdd, $sessionUser->getDevise())->getSigne(); ?>)</h1>
     
@@ -12,7 +10,7 @@
     	<canvas id="fraisChart" width="500" height="500"></canvas>
     </div>
     <div class="chart">
-    	<h3>Couts :</h3>
+    	<h3>Couts des 10 premiers utilisateurs :</h3>
     	<canvas id="userChart" width="500" height="500"></canvas>
     </div>
 </div>
