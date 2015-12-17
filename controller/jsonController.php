@@ -105,8 +105,3 @@ if (isset($_POST) && !empty($_POST)) {
 
     // on retourne la reponse json
     echo json_encode($data);
-    
-    
-function dynamicColor($index){
-};
-    

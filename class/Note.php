@@ -190,14 +190,13 @@ class Note {
         }
         
         
-        $sortedCouts = usort($couts, function($a, $b) {
+        usort($couts, function($a, $b) {
             if($a['total']==$b['total']) {return 0;}
             return $a['total'] < $b['total']?1:-1;
         });
-        $slicedCouts = array_slice($couts, 0, 10);
         
+        return array_slice($couts, 0, 10);
         
-        return $slicedCouts;
     }
     
 }
