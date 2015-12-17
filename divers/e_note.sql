@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.14
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 15 Décembre 2015 à 11:06
--- Version du serveur :  5.6.26
--- Version de PHP :  5.6.12
+-- Généré le :  Jeu 17 Décembre 2015 à 15:46
+-- Version du serveur :  10.1.9-MariaDB
+-- Version de PHP :  5.6.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,10 +26,10 @@ SET time_zone = "+00:00";
 -- Structure de la table `categorie_frais`
 --
 
-CREATE TABLE IF NOT EXISTS `categorie_frais` (
+CREATE TABLE `categorie_frais` (
   `id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `categorie_frais`
@@ -41,8 +41,8 @@ INSERT INTO `categorie_frais` (`id`, `name`) VALUES
 (3, 'Train'),
 (4, 'Avance'),
 (5, 'Carburant'),
-(6, 'H&ocirc;tel'),
-(7, 'P&eacute;age');
+(6, 'Hôtel'),
+(7, 'Péage');
 
 -- --------------------------------------------------------
 
@@ -50,12 +50,12 @@ INSERT INTO `categorie_frais` (`id`, `name`) VALUES
 -- Structure de la table `devise`
 --
 
-CREATE TABLE IF NOT EXISTS `devise` (
+CREATE TABLE `devise` (
   `id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
   `signe` varchar(30) NOT NULL,
   `taux` double NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `devise`
@@ -73,7 +73,7 @@ INSERT INTO `devise` (`id`, `name`, `signe`, `taux`) VALUES
 -- Structure de la table `frais`
 --
 
-CREATE TABLE IF NOT EXISTS `frais` (
+CREATE TABLE `frais` (
   `id` int(11) NOT NULL,
   `image` varchar(255) NOT NULL,
   `date` date NOT NULL,
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `frais` (
   `devise_id` int(11) NOT NULL,
   `note_id` int(11) NOT NULL,
   `categorie_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `frais`
@@ -93,11 +93,13 @@ INSERT INTO `frais` (`id`, `image`, `date`, `description`, `montant`, `devise_id
 (3, 'pdg08-12-2015-16-08-17.jpg', '2015-08-01', 'COC + BITCH', 300, 1, 6, 6),
 (4, 'pdg08-12-2015-16-09-18.jpg', '2015-03-02', '', 234, 1, 1, 4),
 (5, 'pdg08-12-2015-16-09-46.jpg', '2015-06-22', 'biff', 2340, 1, 5, 4),
-(6, 'pdg08-12-2015-16-10-21.jpg', '2015-08-19', 'LVMH', 92000000, 1, 5, 4),
+(6, 'pdg08-12-2015-16-10-21.jpg', '2015-08-19', 'LVMH', 920, 1, 5, 4),
 (7, 'pdg08-12-2015-16-10-46.jpg', '2015-03-22', 'bibi', 900, 1, 5, 3),
 (8, 'pdg08-12-2015-16-11-14.jpg', '2015-05-23', 'DoMac', 5000, 1, 5, 2),
 (9, 'pdg08-12-2015-16-12-17.jpg', '2015-12-06', 'DOLLADOLLA', 200, 1, 1, 7),
-(10, 'pdg15-12-2015-10-58-42.jpg', '2015-02-27', 'IZI MONNAIE', 1000, 1, 1, 4);
+(10, 'pdg15-12-2015-10-58-42.jpg', '2015-02-27', 'IZI MONNAIE', 1000, 1, 1, 4),
+(11, '#', '2015-12-16', 'Frais avion', 348, 1, 4, 1),
+(12, 'pdg17-12-2015-15-44-40.png', '2015-12-10', 'Avion', 750.32, 3, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -105,7 +107,7 @@ INSERT INTO `frais` (`id`, `image`, `date`, `description`, `montant`, `devise_id
 -- Structure de la table `modification`
 --
 
-CREATE TABLE IF NOT EXISTS `modification` (
+CREATE TABLE `modification` (
   `id` int(11) NOT NULL,
   `date` date NOT NULL,
   `change_id` int(11) NOT NULL,
@@ -113,19 +115,26 @@ CREATE TABLE IF NOT EXISTS `modification` (
   `author_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Contenu de la table `modification`
+--
+
+INSERT INTO `modification` (`id`, `date`, `change_id`, `table_name`, `author_id`) VALUES
+(1, '2015-12-17', 4, 'note_frais', 1);
+
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `note_frais`
 --
 
-CREATE TABLE IF NOT EXISTS `note_frais` (
+CREATE TABLE `note_frais` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `date` date NOT NULL,
   `user_id` int(11) NOT NULL,
   `statut_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `note_frais`
@@ -133,8 +142,8 @@ CREATE TABLE IF NOT EXISTS `note_frais` (
 
 INSERT INTO `note_frais` (`id`, `name`, `date`, `user_id`, `statut_id`) VALUES
 (1, 'Note 1 modif', '2015-12-06', 1, 1),
-(4, 'Note 4', '2015-06-20', 1, 5),
-(5, 'Note 5', '2015-08-03', 1, 2),
+(4, 'Note 4', '2015-06-20', 5, 2),
+(5, 'Note 5', '2015-08-03', 7, 2),
 (6, 'Note 6', '2015-12-08', 1, 4);
 
 -- --------------------------------------------------------
@@ -143,10 +152,10 @@ INSERT INTO `note_frais` (`id`, `name`, `date`, `user_id`, `statut_id`) VALUES
 -- Structure de la table `role`
 --
 
-CREATE TABLE IF NOT EXISTS `role` (
+CREATE TABLE `role` (
   `id` int(11) NOT NULL,
   `name` varchar(60) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `role`
@@ -163,18 +172,18 @@ INSERT INTO `role` (`id`, `name`) VALUES
 -- Structure de la table `statut_note`
 --
 
-CREATE TABLE IF NOT EXISTS `statut_note` (
+CREATE TABLE `statut_note` (
   `id` int(11) NOT NULL,
   `name` varchar(75) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `statut_note`
 --
 
 INSERT INTO `statut_note` (`id`, `name`) VALUES
-(1, 'Non publi&eacute;e'),
-(2, 'En cours'),
+(1, 'En cours'),
+(2, 'En traitement'),
 (3, 'Refus&eacute;e'),
 (4, 'Accept&eacute;e'),
 (5, 'Pay&eacute;e');
@@ -185,27 +194,28 @@ INSERT INTO `statut_note` (`id`, `name`) VALUES
 -- Structure de la table `user`
 --
 
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `name` varchar(99) NOT NULL,
   `login` varchar(75) NOT NULL,
   `password` varchar(255) NOT NULL,
   `mail` varchar(150) NOT NULL,
   `role_id` int(11) NOT NULL,
-  `devise_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+  `devise_id` int(11) NOT NULL,
+  `manager_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `user`
 --
 
-INSERT INTO `user` (`id`, `name`, `login`, `password`, `mail`, `role_id`, `devise_id`) VALUES
-(1, 'Grand chef', 'pdg', '016ed176be41ad0d8c1bf473b41f0cc233952f80', 'pdg@enote.fr', 1, 1),
-(2, 'Chef', 'leader', 'e82539751581312ebea51727cd35a8afc494968b', '', 2, 1),
-(5, 'Toto', 'toto', '75dd004caed2daadeb8a3acbce348ea5837b7da8', '', 3, 1),
-(6, 'Titi', 'titi', '17b68e10df76d44ac7a54cc8be5c0ea8b5182f38', '', 3, 1),
-(7, 'Tata', 'tata', '9e9b82c1ebdece4d5d75cf2020cdf01854395b5b', '', 3, 1),
-(8, 'Tutu', 'tutu', '85979612d70c83b49ea7acc89c9c035902f9e618', '', 3, 1);
+INSERT INTO `user` (`id`, `name`, `login`, `password`, `mail`, `role_id`, `devise_id`, `manager_id`) VALUES
+(1, 'Grand chef', 'pdg', '016ed176be41ad0d8c1bf473b41f0cc233952f80', 'pdg@enote.fr', 1, 1, 1),
+(2, 'Chef', 'leader', 'e82539751581312ebea51727cd35a8afc494968b', '', 2, 1, 1),
+(5, 'Toto', 'toto', '75dd004caed2daadeb8a3acbce348ea5837b7da8', '', 3, 1, 2),
+(6, 'Titi', 'titi', '17b68e10df76d44ac7a54cc8be5c0ea8b5182f38', '', 3, 1, 2),
+(7, 'Tata', 'tata', '9e9b82c1ebdece4d5d75cf2020cdf01854395b5b', '', 2, 1, 1),
+(8, 'Tutu', 'tutu', '85979612d70c83b49ea7acc89c9c035902f9e618', '', 3, 1, 7);
 
 --
 -- Index pour les tables exportées
@@ -266,7 +276,8 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
   ADD KEY `role` (`role_id`),
   ADD KEY `devise_id` (`devise_id`),
-  ADD KEY `devise_id_2` (`devise_id`);
+  ADD KEY `devise_id_2` (`devise_id`),
+  ADD KEY `manager_id` (`manager_id`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
@@ -276,42 +287,42 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `categorie_frais`
 --
 ALTER TABLE `categorie_frais`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT pour la table `devise`
 --
 ALTER TABLE `devise`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `frais`
 --
 ALTER TABLE `frais`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT pour la table `modification`
 --
 ALTER TABLE `modification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `note_frais`
 --
 ALTER TABLE `note_frais`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT pour la table `role`
 --
 ALTER TABLE `role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `statut_note`
 --
 ALTER TABLE `statut_note`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- Contraintes pour les tables exportées
 --

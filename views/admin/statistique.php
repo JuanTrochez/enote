@@ -1,5 +1,3 @@
-<?php  var_dump(Frais::getCoutParMois($bdd, 1)['totalMois']); ?>
-
 <div class="admin-stat">
     <h1>Statistiques du site (en <?php echo Devise::getDeviseById($bdd, $sessionUser->getDevise())->getSigne(); ?>)</h1>
     
