@@ -5,6 +5,7 @@
     var fullPath = 'http://' + window.location.host + '/enote/?request=1';
     var categoChart = $("#categorieChart").get(0).getContext("2d");
     var fraisMoisChart = $("#fraisChart").get(0).getContext("2d");
+    var donChart = $("#userChart").get(0).getContext("2d");
 
     //requete pour les donnees des categories
     $.ajax({
@@ -15,7 +16,8 @@
         dataType: 'json'
     }).done(function(response) {
         console.log('response', response);
-        
+
+        //data pour les categories
         var data = {
             labels: response.categorie.labels,
             datasets: [
@@ -31,7 +33,9 @@
                 }
             ]
         };
+        var dataDon = response.categorie.all;
 
+        //data pour les frais par mois
         var fraisData = {
             labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
             datasets: [
@@ -47,11 +51,11 @@
                 }
             ]
         };
-        console.log('array dataset', data.datasets);
 
 
-        var myRadarChart = new Chart(categoChart).Radar(data);
-        new Chart(fraisMoisChart).Bar(fraisData);
+        new Chart(categoChart).Radar(data);
+        new Chart(fraisMoisChart).Bar(fraisData);        
+        new Chart(donChart).Doughnut(dataDon);
 
     }).fail(function(jqXHR, textStatus) {
         console.error(jqXHR);
