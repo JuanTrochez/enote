@@ -9,7 +9,7 @@ class Security {
 
     }
 
-    public function logged(){
+    public static function logged(){
         if (isset($_SESSION['user']))
             { return true; }
         return false;

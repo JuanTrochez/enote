@@ -39,6 +39,9 @@ if(isset($_GET['id']) && Security::isAdmin($bdd))
                 var_dump($reponseRole);
                 while($donnee = $reponseRole->fetch())
                     {
+                        if ($secu->isManager($bdd) && $donnee['id'] == 1) {
+                            continue;
+                        }
                         ?>
             <option value="<?php echo $donnee['id'];?>" <?php if($CloneUser->getRole() == $donnee['id']){echo $selected; } ?>><?php echo $donnee['name'];?></option>
                         <?php  
