@@ -49,7 +49,7 @@
             // Inclusion de l'entete de la page
             include_once $view_header;
             // Inclusion du contenu de la page
-            include_once 'views/include/404.php';
+            include_once 'views/global/404.php';
             // Inclusion du pied de page
             include_once $view_footer;
         }
