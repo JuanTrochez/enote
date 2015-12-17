@@ -112,4 +112,18 @@
         };
     });
 
+
+    //popup pour afficher l'image des frais
+    $(function() {
+        $('.img-frais').click(function() {
+            var src = $(this).attr('src');
+            //console.log('popup', src);
+            $('.bpopup-container').bPopup({
+                content: 'image',
+                contentContainer: '.img-container',
+                loadUrl: src
+            });
+        });
+    });
+
 })(jQuery);

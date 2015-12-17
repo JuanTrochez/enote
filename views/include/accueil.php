@@ -60,7 +60,7 @@
 							?>
 								<li class="frais-<?php echo $frais['id'] ?>">
 									<div class="infos-frais">
-										<img class="img-frais" src="<?php echo $basePath . 'image/uploads/' . $frais['image'] ?>"/>
+										<img class="img-frais" data-bpopup="{"content":"image","contentContainer":".content","loadUrl":"<?php echo $basePath . 'image/uploads/' . $frais['image'] ?>"}" src="<?php echo $basePath . 'image/uploads/' . $frais['image'] ?>"/>
 										<span><?php echo $frais['description'] ?></span>
 									</div>
 									<div class="total">
