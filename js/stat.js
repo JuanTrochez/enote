@@ -5,7 +5,7 @@
     var fullPath = 'http://' + window.location.host + '/enote/?request=1';
     var categoChart = $("#categorieChart").get(0).getContext("2d");
     var fraisMoisChart = $("#fraisChart").get(0).getContext("2d");
-    var donChart = $("#userChart").get(0).getContext("2d");
+    var userChart = $("#userChart").get(0).getContext("2d");
 
     //requete pour les donnees des categories
     $.ajax({
@@ -17,22 +17,7 @@
     }).done(function(response) {
         console.log('response', response);
 
-        //data pour les categories
-        var data = {
-            labels: response.categorie.labels,
-            datasets: [
-                {
-                    label: "Categorie chart",
-                    fillColor: "rgba(220,220,220,0.2)",
-                    strokeColor: "rgba(220,220,220,1)",
-                    pointColor: "rgba(220,220,220,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(220,220,220,1)",
-                    data: response.categorie.cout
-                }
-            ]
-        };
+        
         var dataDon = response.categorie.all;
 
         //data pour les frais par mois
@@ -52,10 +37,26 @@
             ]
         };
 
+        //data pour les categories
+        var data = {
+            labels: response.user.login,
+            datasets: [
+                {
+                    label: "Categorie chart",
+                    fillColor: "rgba(220,220,220,0.2)",
+                    strokeColor: "rgba(220,220,220,1)",
+                    pointColor: "rgba(220,220,220,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: response.user.cout
+                }
+            ]
+        };
 
-        new Chart(categoChart).Radar(data);
-        new Chart(fraisMoisChart).Bar(fraisData);        
-        new Chart(donChart).Doughnut(dataDon);
+        new Chart(categoChart).Doughnut(dataDon);
+        new Chart(fraisMoisChart).Line(fraisData);
+        new Chart(userChart).Bar(data);
 
     }).fail(function(jqXHR, textStatus) {
         console.error(jqXHR);

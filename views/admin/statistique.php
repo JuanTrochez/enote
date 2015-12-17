@@ -12,7 +12,7 @@
     	<canvas id="fraisChart" width="500" height="500"></canvas>
     </div>
     <div class="chart">
-    	<h3>Couts :</h3>
+    	<h3>Couts des 10 premiers utilisateurs :</h3>
     	<canvas id="userChart" width="500" height="500"></canvas>
     </div>
 </div>
