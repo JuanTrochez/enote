@@ -5,7 +5,7 @@
 ?>
 
 <?php
-if(isset($_GET['id']) && Security::isAdmin($bdd))
+if(isset($_GET['id']) && (Security::isAdmin($bdd) || $secu->isManager($bdd)))
 {
     $CloneUser= User::getUserById($bdd, $_GET['id']);
 ?>
@@ -32,22 +32,26 @@ if(isset($_GET['id']) && Security::isAdmin($bdd))
         Changer le nom de l'utilisateur :  <input class = "form-control champ-form" type="text" name="changerNomUser" value='<?php echo $CloneUser->getName()?>'/>
         Changer le login de l'utilisateur :  <input class = "form-control champ-form" type="text" name="changerLoginUser" value='<?php echo $CloneUser->getLogin()?>'/>
         Changer l'email de l'utilisateur :  <input class = "form-control champ-form" type="text" name="changerMailUser"value='<?php echo $CloneUser->getEmail()?>'/>
-        Changer le role de l'utilisateur :
-        <select class = "formulaireRole form-control champ-form" name="changerRoleUser">
-            <?php
-                $reponseRole = Role::getAllRole($bdd);
-                var_dump($reponseRole);
-                while($donnee = $reponseRole->fetch())
-                    {
-                        if ($secu->isManager($bdd) && $donnee['id'] == 1) {
-                            continue;
+        <?php if ($secu->isAdmin($bdd)) { ?>
+            Changer le role de l'utilisateur :
+            <select class = "formulaireRole form-control champ-form" name="changerRoleUser">
+                <?php
+                    $reponseRole = Role::getAllRole($bdd);
+                    var_dump($reponseRole);
+                    while($donnee = $reponseRole->fetch())
+                        {
+                            if ($secu->isManager($bdd) && $donnee['id'] == 1) {
+                                continue;
+                            }
+                            ?>
+                <option value="<?php echo $donnee['id'];?>" <?php if($CloneUser->getRole() == $donnee['id']){echo $selected; } ?>><?php echo $donnee['name'];?></option>
+                            <?php  
                         }
-                        ?>
-            <option value="<?php echo $donnee['id'];?>" <?php if($CloneUser->getRole() == $donnee['id']){echo $selected; } ?>><?php echo $donnee['name'];?></option>
-                        <?php  
-                    }
-            ?>
-        </select>
+                ?>
+            </select>
+        <?php } else { ?>
+            <input type="hidden" value="1" name="changerRoleUser" />
+        <?php } ?>
         <br/>
         Nouveau mot de passe (facultatif) :  <input class = "form-control champ-form" type="password" name="nouveauMdpAdmin"/>
         Confirmer le nouveau mot de passe :  <input class = "form-control champ-form" type="password" name="confirmationMdpAdmin"/>
