@@ -9,7 +9,7 @@ include_once '/class/CategorieFrais.php';
 include_once '/class/Role.php';
 
 
-if (!$secu->isAdmin($bdd)) {
+if (!$secu->isAdmin($bdd) && !$secu->isManager($bdd)) {
     header("Location: " . $basePath);
 }
 
@@ -36,7 +36,14 @@ if (isset($_GET['section']) && !empty($_GET['section'])) {
                 include_once '/views/admin/adduser.php';
                 break;
             }
-            $listUser = User::getAllUser($bdd);     
+            
+            //on retourne la liste d'utilisateur en fonction du role
+            if ($secu->isAdmin($bdd)) {
+                $listUser = User::getAllUser($bdd);
+            } else {
+                $listUser = User::getUsersByManagerId($bdd, $sessionUser->getId());
+            }
+            
             include_once '/views/admin/user.php';
         break;
 
@@ -48,7 +55,17 @@ if (isset($_GET['section']) && !empty($_GET['section'])) {
 
         //Gestion des notes
         case "note":
-            $notes = Note::getAllNotes($bdd);
+            //on retourne la liste des notes en fonction du role de l'utilisateur
+            if ($secu->isAdmin($bdd)) {
+                $notes = Note::getAllNotes($bdd);
+            } else {
+                $listUser = User::getUsersByManagerId($bdd, $sessionUser->getId());
+                $notes = [];
+                foreach ($listUser as $user) {
+                    $listNote = Note::getNotesByUser($bdd, $user["id"]);
+                    $notes = array_merge($notes, $listNote);
+                }
+            }
             $fraisNote = new Note();
             $statut = new Statut();
             $listStatut = $statut->getAll($bdd);
@@ -57,7 +74,7 @@ if (isset($_GET['section']) && !empty($_GET['section'])) {
         break;
         //par defaut on a les statistiques
         default:
-            include_once '/views/admin/statistique.php';
+            include_once '/views/admin/index.php';
             break;
     }
     
