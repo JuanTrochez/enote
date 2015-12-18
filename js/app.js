@@ -12,7 +12,6 @@
 
     // lorsque l'on clique sur un nouveau statut, on affiche les notes de frais correspondant
     $('.list-all-note .list-container .list-statut li').click(function() {
-        console.log('click');
     	if ($(this).hasClass('active')) {
     		return;
     	}
@@ -54,7 +53,7 @@
                 data: {deleteUser: userId},
                 dataType: 'json'
             }).done(function(data) {
-                if (data.updated == true) {
+                if (data.updated === true) {
                     $('.tr-user-' + userId).remove();
                 }
 
@@ -85,8 +84,8 @@
                 data: values,
                 dataType: 'json'
             }).done(function(data) {
-                if (data.updated == true) {
-                    if (elemType == 'frais') {
+                if (data.updated === true) {
+                    if (elemType === 'frais') {
                         //calcul du montant et du total de frais de la note
                         var totalNote = $(noteParent + ' .total-note').text();
                         var totalFrais = $('.frais-' + typeId + ' .total-frais').text();
@@ -94,7 +93,7 @@
                         var categorieFrais = $('.frais-' + typeId +' .categorie-frais').text();
                         var montantTotal = totalNote - totalFrais;
 
-                        if (categorieFrais == 'Avance') {
+                        if (categorieFrais === 'Avance') {
                             montantTotal = totalNote + totalFrais;
                         }
 
@@ -117,7 +116,6 @@
     $(function() {
         $('.img-frais').click(function() {
             var src = $(this).attr('src');
-            //console.log('popup', src);
             $('.bpopup-container').bPopup({
                 content: 'image',
                 contentContainer: '.img-container',
