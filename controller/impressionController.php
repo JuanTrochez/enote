@@ -23,7 +23,7 @@ if(isset($_GET['id']) && !empty($_GET['id']))
     $objReader = PHPExcel_IOFactory::createReader('Excel5');
 
 
-    // Chemin d'accès à la librairie de convesion
+    // Chemin d'accès à la librairie de convesion tcPDF
     $rendererLibraryPath = 'ressources/PHPExcel_1.8.0_doc/Classes/libs/tcpdf';
     PHPExcel_Settings::setPdfRenderer(PHPExcel_Settings::PDF_RENDERER_TCPDF, $rendererLibraryPath);
 
@@ -31,14 +31,16 @@ if(isset($_GET['id']) && !empty($_GET['id']))
 
     $objPHPExcel = $objReader->load("ressources/PHPExcel_1.8.0_doc/Examples/templates/templateEnote.xls");
 
+    //On fait un clone de la note pour obtenir toutes ses informations
     $CloneNote = Note::getNoteById($bdd,$_GET['id']);
     $allFraisFromThisNote = $CloneNote->getListFrais($bdd);
 
+    //Clone de la devise pour avoir toutes ses informations
     $CloneDevise = Devise::getDeviseById($bdd, $sessionUser->getDevise());
 
-    //Ecrit le nom et le login de l'utilisateur
+    //Ecrit le nom et le login de l'utilisateur ainsi que sa devise
     $nomUtilisateur = str_replace(" ","",$sessionUser->getName());
-
+    
     $objPHPExcel->getActiveSheet()->setCellValue('B8', $nomUtilisateur);
     $objPHPExcel->getActiveSheet()->setCellValue('F8', $sessionUser->getLogin());
     $objPHPExcel->getActiveSheet()->setCellValue('J8', $CloneDevise->getName());
@@ -51,6 +53,7 @@ if(isset($_GET['id']) && !empty($_GET['id']))
     $totalTTC = 0;
     $baseRow = 16;
 
+    //On boucle pour afficher les informations de chaques frais de la note dans le tableau excel
     foreach($allFraisFromThisNote as $r => $fraisFromNote) {
             $row = $baseRow + $r;
             $CategorieName = CategorieFrais::getCategorieById($bdd, $fraisFromNote['categorie_id']);
@@ -60,7 +63,7 @@ if(isset($_GET['id']) && !empty($_GET['id']))
             $deviseFrais = Devise::getDeviseById($bdd, $fraisFromNote['devise_id']);
             $montantDeviseUser = Devise::getValueOfChangedDevise($fraisFromNote['montant'], $deviseFrais->getTaux(), $CloneDevise->getTaux());
 
-            //Verifie si on a ne avance
+            //Verifie si on a une avance
             if($fraisFromNote['categorie_id'] == 4)
             {
                 $totalAvance += $montantDeviseUser;
@@ -130,29 +133,31 @@ if(isset($_GET['id']) && !empty($_GET['id']))
     $objPHPExcel->getActiveSheet()->setCellValue('A'.($totalCase+5), $nomUtilisateur);
     $objPHPExcel->getActiveSheet()->setCellValue('A'.($totalCase+7), date('d/m/y'));
 
-
+    //On prépare le fichier excel
     $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
     $nomFichier = $nomUtilisateur.date("d-m-Y").'A'. date('H-i-s') .'NoteFrais.xls';
 
-
-
+    //On sauvegarde le fichier sous forme xls (pour pouvoir le télécharger par la suite si désiré)
     $cheminComplet = 'Excel/'.$nomUtilisateur.date("d-m-Y").'A'. date('H-i-s') .'NoteFrais.xls';
     $objWriter->save($cheminComplet);
-
+    
+    //Préparation du fichier PDF
     $nomFichierPdf = $nomUtilisateur.date("d-m-Y").'A'. date('H-i-s') .'NoteFrais.pdf';
     $cheminCompletPdf = 'Excel/'.$nomUtilisateur.date("d-m-Y").'A'. date('H-i-s') .'NoteFrais.pdf';
 
+    //On sauvegarde le fichier sous format pdf (on passe en paramètre le tableau excel)
     $objWriterPdf = PHPExcel_IOFactory::createWriter($objPHPExcel, 'PDF');
     $objWriterPdf->save($cheminCompletPdf);
     
     include_once '/views/include/impression.php';
 }
 else{
+    //Si l'id de la note n'est pas trouvé on renvoie l'utilisateur à l'accueil
     header('Location:' . $basePath);
 }
 
 
-
+//Permet d'afficher la valeur des montants dans la bonne devise et dans les bonnes cases
 function afficherAvance($devise,$montantAvance,$objPHPExcel, $celluleAremplir)
 {
     switch ($devise) {
