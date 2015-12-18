@@ -47,9 +47,10 @@
 							?>
 						</div>
 						<div class="actions">
-							<button class="note-<?php echo $note['id'] ?> btn btn-danger">supprimer</button>
-							<a class="btn btn-default" href="<?php echo $basePath. '?page=note&amp;id=' . $note['id']; ?>">editer</a>
-							<button class="btn-show-frais btn btn-info" data-frais="list-frais-<?php echo $note['id'] ?>">Afficher les frais (<span class="count-frais"><?php echo count($allFrais); ?></span>)</button>
+							<button class="note-<?php echo $note['id'] ?> btn btn-danger">Supprimer</button>
+							<a class="btn btn-default" href="<?php echo $basePath. '?page=note&amp;id=' . $note['id']; ?>">editer</a><br/>
+								<a href="<?php echo $basePath . "?page=impression&id=" . $note['id']; ?>" class="btn btn-success">Imprimer</a>
+							<button class="btn-show-frais btn btn-info" data-frais="list-frais-<?php echo $note['id'] ?>"><span class="glyphicon glyphicon-plus"></span> Frais (<span class="count-frais"><?php echo count($allFrais); ?></span>)</button>
 						</div>
 					</div>
 

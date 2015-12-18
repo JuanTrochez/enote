@@ -33,11 +33,15 @@ and open the template in the editor.
                 <li>
                     <a href="<?php echo $basePath; ?>?page=frais">Ajouter un frais</a>
                 </li>
+                <?php if ($secu->isAdmin($bdd) || $secu->isManager($bdd)) { ?>
+                    <li>
+                        <a href="<?php echo $basePath; ?>?page=admin">
+                            <?php if ($secu->isAdmin($bdd)) { echo "Admin"; } else { echo "Manage"; } ?>
+                        </a>
+                    </li>
+                <?php } ?>
                 <li>
-                    <a href="<?php echo $basePath; ?>?page=admin">Admin</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
+                    <a href="#">Haut de page</a>
                 </li>
                 <li>
                     <?php

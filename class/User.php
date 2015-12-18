@@ -205,6 +205,15 @@ class User {
         ));
     }
     
+    public static function getUsersByManagerId($bdd, $id) {
+        $req = $bdd->prepare("SELECT * FROM user WHERE manager_id = :id");
+        $req->execute(array(
+            ":id"   =>  $id
+        ));
+        
+        return $req->fetchAll();
+    }
+    
     function __destruct()
     {
 
