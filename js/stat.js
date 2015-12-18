@@ -15,7 +15,6 @@
         contentType: "application/json; charset=utf-8",
         dataType: 'json'
     }).done(function(response) {
-            
         var dataDon = response.categorie.all;
 
         //data pour les frais par mois

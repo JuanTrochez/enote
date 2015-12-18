@@ -17,7 +17,7 @@
     	}
 
         activeClass = $(this).attr('class');
-    	
+
     	$('.list-all-note .list-container .list-statut li').removeClass('active');
     	$(this).addClass('active');
 
@@ -36,15 +36,15 @@
     	}
     	list.slideDown();
     });
-    
+
     //requete ajax pour supprimer l'utilisateur dans la partie admin
     $('.admin-user table tr td .btn-danger').click(function() {
-        
-        var classes = $(this).attr('class');       
+
+        var classes = $(this).attr('class');
         var firstIndex = classes.indexOf('-') + 1;
         var lastIndex = classes.indexOf(' ');
         var userId = classes.substring(firstIndex, lastIndex);
-        
+
         if (confirm('Etes-vous sûr de vouloir supprimer cet utilisateur ?')) {
             var fullPath = 'http://' + window.location.host + '/enote/?request=1';
             $.ajax({
@@ -66,14 +66,14 @@
     //requete ajax pour supprimer les notes de frais utilisateur et admin
     $('.list-all-note .list-container .btn-danger').click(function() {
 
-        var classes = $(this).attr('class');       
+        var classes = $(this).attr('class');
         var firstIndex = classes.indexOf('-') + 1;
         var lastIndex = classes.indexOf(' ');
         var elemType = classes.substring(0, firstIndex - 1);
         var typeId = classes.substring(firstIndex, lastIndex);
         var namePost = 'delete' + elemType.charAt(0).toUpperCase() + elemType.slice(1);
         var noteParent = '.' + $(this).attr('data-note');
-        
+
         if (confirm('Confirmez la suppression')) {
             var fullPath = 'http://' + window.location.host + '/enote/?request=1';
             var values = {};
@@ -98,7 +98,7 @@
                         }
 
                         $(noteParent + ' .total-note').text(montantTotal);
-                        $(noteParent + ' .count-frais').text(noteParentFraisTotal);                        
+                        $(noteParent + ' .count-frais').text(noteParentFraisTotal);
                     }
 
                     $('.list-all-note .list-container .list-note li.' + elemType + '-' + typeId).remove();
