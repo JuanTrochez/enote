@@ -24,7 +24,7 @@ if (isset($_POST['valider']))
         //Construction du nom de fichier
         $nom = $userName . $dateImage .'-'. $heureImage . '.' . $extension_upload;
         // Methode qui deplce le fichier et change son nom
-        $test = move_uploaded_file($image['tmp_name'], 'image/'. $nom);
+        $test = move_uploaded_file($image['tmp_name'], 'image/upload/'. $nom);
         if (in_array($extension_upload, $extensions_autorisees) && $test)
         {       
             $frais = new Frais();
