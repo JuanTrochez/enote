@@ -13,19 +13,19 @@ if(isset($_GET['id']) && (Security::isAdmin($bdd) || $secu->isManager($bdd)))
     <br/>
     <h3> <strong>Voici quelques informations concernant le compte de l'utilisateur : </strong></h3><br/>
     <div>
-        <strong>Nom de l'utilisateur</strong> : <?php echo $CloneUser->getName(); ?><br/>
-        <strong>Login de l'utilisateur</strong> : <?php echo $CloneUser->getLogin(); ?><br/>
-        <strong>Email de l'utilisateur</strong> : <?php echo $CloneUser->getEmail(); ?><br/>
+        <span class="bandblue">Nom de l'utilisateur</span> : <?php echo $CloneUser->getName(); ?><br/>
+        <span class="bandblue">Login de l'utilisateur</span> : <?php echo $CloneUser->getLogin(); ?><br/>
+        <span class="bandblue">Email de l'utilisateur</span> : <?php echo $CloneUser->getEmail(); ?><br/>
         <?php 
         $Devise = new Devise();
         $Devise = Devise::getDeviseById($bdd,$CloneUser->getDevise());
         ?>
-        <strong>Devise actuelle de l'utilisateur</strong> : <?php echo $Devise->getName() ;?>
+        <span class="bandblue">Devise actuelle de l'utilisateur</span> : <?php echo $Devise->getName() ;?>
     </div>
 
-    <div>
-        <h2> Modification des informations personnelle</h2><br/>
-        <h4> <strong>Modifications des informations </strong></h4><br/>
+    <div style="text-align: center">
+        <br/>
+        <h3> <strong>Modifications des informations personnelles</strong></h3><br/>
     </div>
 
     <form  class = "form" action="" method="POST" enctype="multipart/form-data">
@@ -52,7 +52,6 @@ if(isset($_GET['id']) && (Security::isAdmin($bdd) || $secu->isManager($bdd)))
         <?php } else { ?>
             <input type="hidden" value="1" name="changerRoleUser" />
         <?php } ?>
-        <br/>
         Nouveau mot de passe (facultatif) :  <input class = "form-control champ-form" type="password" name="nouveauMdpAdmin"/>
         Confirmer le nouveau mot de passe :  <input class = "form-control champ-form" type="password" name="confirmationMdpAdmin"/>
         Nouvelle devise :
@@ -80,17 +79,17 @@ if(isset($_GET['id']) && (Security::isAdmin($bdd) || $secu->isManager($bdd)))
 
     <div>
         <form action="" method="POST" enctype="multipart/form-data">
-            <strong>Votre nom</strong> : <?php echo $sessionUser->getName(); ?><br/>
-            <strong>Votre Login</strong> : <?php echo $sessionUser->getLogin(); ?><br/>
-            <strong>Votre Email</strong> : <input class = "formulaireEmail form-control champ-form" type="text" name="nouveauMail" value='<?php echo $sessionUser->getEmail(); ?>'/>
-            <input class = "btn btn-primary" type="submit" name="changementEmailUser" value="Modifier"/>
+            <span class="bandblue">Votre nom</span> : <?php echo $sessionUser->getName(); ?><br/>
+            <span class="bandblue">Votre Login</span> : <?php echo $sessionUser->getLogin(); ?><br/>
+            <span class="bandblue">Votre Email</span> : <input class = "formulaireEmail formprofil" type="text" name="nouveauMail" value='<?php echo $sessionUser->getEmail(); ?>'/>
+            <input class = "btnmodif" type="submit" name="changementEmailUser" value="Modifier"/>
             <br/>
             <?php 
             $Devise = new Devise();
             $Devise = Devise::getDeviseById($bdd,$sessionUser->getDevise());
             ?>
-            <strong>Votre devise actuelle</strong> : 
-            <select class = "formulaire formulaireDevise form-control champ-form" name="devise_id">
+            <span class="bandblue">Votre devise actuelle</span> : 
+            <select class = "formulaire formulaireDevise formprofil" name="devise_id">
                         <?php
                         $reponseDevise = Devise::getAllDevise($bdd);
                         while($donnee = $reponseDevise->fetch())
@@ -101,13 +100,13 @@ if(isset($_GET['id']) && (Security::isAdmin($bdd) || $secu->isManager($bdd)))
                         }
                         ?>
             </select>
-            <input class = "btn btn-primary" type="submit" name="changementDeviseUser" value="Modifier"/>
+            <input class = "btnmodif" type="submit" name="changementDeviseUser" value="Modifier"/>
         </form>
     </div>
 
-    <div>
-        <h2> Modification des informations personnelle</h2><br/>
-        <h4> <strong>Modifications des informations </strong></h4><br/>
+    <div style="text-align: center">
+        <br/><br/>
+        <h3><strong>Modification du mot de passe</strong></h3><br/>
     </div>
 
     <form  class = "form" action="" method="POST" enctype="multipart/form-data">
