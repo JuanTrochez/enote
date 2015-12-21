@@ -149,7 +149,7 @@ class Note {
         return $name[0];
     }
     
-    //Modification du nom d'une note.
+    //Modification d'une note.
     public function updateNote($bdd, $nid, $namenote, $satutnote) {
         $getname = $bdd->prepare("UPDATE `note_frais` SET `name`= :name, `statut_id`= :statut WHERE id= :nid");
         $getname->execute(array(
