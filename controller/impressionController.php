@@ -68,8 +68,11 @@ if(isset($_GET['id']) && !empty($_GET['id']))
             {
                 $totalAvance += $montantDeviseUser;
                 $tva = $montantDeviseUser;
+                
+                $totalTTC -= $montantDeviseUser;
             }else{
                 $tva = $montantDeviseUser * 1.2;
+                $totalTTC += $tva;
             }
 
             $objPHPExcel->getActiveSheet()->setCellValue('A'.$row, $fraisFromNote['id'])
@@ -117,9 +120,9 @@ if(isset($_GET['id']) && !empty($_GET['id']))
     $objPHPExcel->getActiveSheet()->setCellValue('F'.($totalCase), '=F'.($totalCase-1).'-'.($totalAvance));
 
     $montantFinal = $objPHPExcel->getActiveSheet()->getCell('F'.($totalCase))->getValue();
-
-    //Affiche le du à l'interéssé ou le rendu par l'intéréssé (totalcase = 18 si la deduction rendue sur avance est négative sinon il vaut 19)
-    if($totalCase == 18)
+    
+    //Affiche le du à l'interéssé ou le rendu par l'intéréssé
+    if($totalTTC < 0)
     {
         $objPHPExcel->getActiveSheet()->setCellValue('E'.($totalCase+2), '=-F'.($totalCase));
         $objPHPExcel->getActiveSheet()->setCellValue('F'.($totalCase+1), 0);
