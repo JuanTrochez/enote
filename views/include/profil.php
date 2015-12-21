@@ -58,7 +58,7 @@ if(isset($_GET['id']) && (Security::isAdmin($bdd) || $secu->isManager($bdd)))
         Nouvelle devise :
         <select class = "formulaire formulairePrix form-control champ-form" name="devise_idAdmin">
             <?php
-                $reponseDevise = Devise::getAllDevise($bdd);
+                $reponseDevise = Devise::getAllDevise($bdd); 
                 while($donnee = $reponseDevise->fetch())
                     {
                         ?>
