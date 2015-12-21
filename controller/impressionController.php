@@ -68,8 +68,11 @@ if(isset($_GET['id']) && !empty($_GET['id']))
             {
                 $totalAvance += $montantDeviseUser;
                 $tva = $montantDeviseUser;
+                
+                $totalTTC -= $montantDeviseUser;
             }else{
                 $tva = $montantDeviseUser * 1.2;
+                $totalTTC += $tva;
             }
 
             $objPHPExcel->getActiveSheet()->setCellValue('A'.$row, $fraisFromNote['id'])
@@ -106,23 +109,22 @@ if(isset($_GET['id']) && !empty($_GET['id']))
     $objPHPExcel->getActiveSheet()->setCellValue('F10', $dateDernierFrais);
 
     //Affiche le total sans et avec les taxes
-    $objPHPExcel->getActiveSheet()->setCellValue('E'.($totalCase), '=SUM(E15:E'.($totalCase-1).')');
+    $objPHPExcel->getActiveSheet()->setCellValue('E'.($totalCase), '=SUM(E15:E'.($totalCase-1).')-'.$totalAvance);
     $totalCase++;
-    $objPHPExcel->getActiveSheet()->setCellValue('F'.($totalCase), '=SUM(F15:F'.($totalCase-1).')');
+    $objPHPExcel->getActiveSheet()->setCellValue('F'.($totalCase), '=SUM(F15:F'.($totalCase-1).')-'.$totalAvance);
 
     afficherAvance($CloneDevise->getName(),$totalAvance, $objPHPExcel, $totalCase+1);
 
     //Affiche la déduction des avances
     $totalCase++;
-    $objPHPExcel->getActiveSheet()->setCellValue('F'.($totalCase), '=F'.($totalCase-1).'-'.$totalAvance);
+    $objPHPExcel->getActiveSheet()->setCellValue('F'.($totalCase), '=F'.($totalCase-1).'-'.($totalAvance));
 
     $montantFinal = $objPHPExcel->getActiveSheet()->getCell('F'.($totalCase))->getValue();
-
-
+    
     //Affiche le du à l'interéssé ou le rendu par l'intéréssé
-    if($montantFinal < 0)
+    if($totalTTC < 0)
     {
-        $objPHPExcel->getActiveSheet()->setCellValue('E'.($totalCase+2), ($montantFinal*-1));
+        $objPHPExcel->getActiveSheet()->setCellValue('E'.($totalCase+2), '=-F'.($totalCase));
         $objPHPExcel->getActiveSheet()->setCellValue('F'.($totalCase+1), 0);
     }else{
         $objPHPExcel->getActiveSheet()->setCellValue('F'.($totalCase+1), '=F'.($totalCase-1).'-'.$totalAvance);
