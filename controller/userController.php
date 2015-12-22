@@ -8,15 +8,15 @@ if(isset($_POST['changementParamUser']) && verifModification($sessionUser) || is
     
     if(isset($_POST['changementDeviseUser']))
     {
-        $sessionUser->setDevise($_POST['devise_id']);
+        $sessionUser->setDevise(htmlentities($_POST['devise_id']));
     }else if(isset($_POST['changementParamUser']))
     {
-        $sessionUser->setPassword(sha1($_POST['nouveauMdp']));
+        $sessionUser->setPassword(sha1(htmlentities($_POST['nouveauMdp'])));
     }else
     {
         if(filter_var($_POST['nouveauMail'], FILTER_VALIDATE_EMAIL))
         {
-            $sessionUser->setEmail($_POST['nouveauMail']);
+            $sessionUser->setEmail(htmlentities($_POST['nouveauMail']));
         }else{
             echo 'Erreur avec le mail';
             $sucess = false;
@@ -34,15 +34,15 @@ if(isset($_POST['changementParamUser']) && verifModification($sessionUser) || is
     
     $CloneUser= User::getUserById($bdd, $_GET['id']);
     
-    $CloneUser->setName($_POST['changerNomUser']);
-    $CloneUser->setLogin($_POST['changerLoginUser']);
-    $CloneUser->setEmail($_POST['changerMailUser']);
-    $CloneUser->setRole($_POST['changerRoleUser']);
-    $CloneUser->setDevise($_POST['devise_idAdmin']);
+    $CloneUser->setName(htmlentities($_POST['changerNomUser']));
+    $CloneUser->setLogin(htmlentities($_POST['changerLoginUser']));
+    $CloneUser->setEmail(htmlentities($_POST['changerMailUser']));
+    $CloneUser->setRole(htmlentities($_POST['changerRoleUser']));
+    $CloneUser->setDevise(htmlentities($_POST['devise_idAdmin']));
     
-    if(!empty($_POST[$newpwdadm]))
+    if(!empty(htmlentities($_POST[$newpwdadm])))
     {
-        $CloneUser->setPassword(sha1($_POST[$newpwdadm]));
+        $CloneUser->setPassword(sha1(htmlentities($_POST[$newpwdadm])));
     }
     
     $CloneUser->editUserByAdmin($bdd, $CloneUser);
@@ -60,14 +60,14 @@ if(isset($_SESSION['user']) && !empty($_SESSION['user']))
 function verifModification($user)
 {
     $modifCorrect = false;
-    $newpwd = $_POST['nouveauMdp'];
+    $newpwd = htmlentities($_POST['nouveauMdp']);
     // Verifie que les champs sont remplies
     if(!isset($_POST['ancienMdp']) || !isset($newpwd) || !isset($_POST['confirmationMdp']))
     {
         echo 'Erreur veuillez remplir tous les champs';
     }
     //Verifie que le mot de passe entré par l'utilisateur est correct
-    elseif(strcmp(sha1($_POST['ancienMdp']), $user->getPassword()) != 0)
+    elseif(strcmp(sha1(htmlentities($_POST['ancienMdp'])), $user->getPassword()) != 0)
     {
         echo 'Erreur d identification, le mot de passe est incorrect';
     }
@@ -77,7 +77,7 @@ function verifModification($user)
         echo 'Veuillez choisir un mot de passe de 6 caratères minimum';
     }
     //Verifie que la confirmation du mot de passe est correct
-    elseif(strcmp($newpwd, $_POST['confirmationMdp']) != 0)
+    elseif(strcmp($newpwd, htmlentities($_POST['confirmationMdp'])) != 0)
     {
         echo 'Erreur avec la confirmation du mot de passe';
     }
@@ -89,8 +89,8 @@ function verifModification($user)
 function verifModificationFromAdmin()
 {
     $modifCorrect = false;
-    $changemail = $_POST['changerMailUser'];
-    $newpwdadmin = $_POST['nouveauMdpAdmin'];
+    $changemail = htmlentities($_POST['changerMailUser']);
+    $newpwdadmin = htmlentities($_POST['nouveauMdpAdmin']);
     //Verifie que tous le champs ne sont pas vide
     if(!isset($_POST['changerNomUser']) || !isset($_POST['changerLoginUser']) || !isset($changemail) || !isset($_POST['changerRoleUser']))
     {
