@@ -10,7 +10,7 @@ if (isset($_POST['Editer'])){
     if (isset($note_name) && !empty($note_name))
     {
         $namenote = htmlentities($note_name);
-        $statutnote = $_POST['statut'];
+        $statutnote = htmlentities($_POST['statut']);
         $nid = $_GET['id'];
         
         Note::updateNote($bdd, $nid, $namenote, $statutnote);
