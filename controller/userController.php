@@ -102,7 +102,7 @@ function verifModificationFromAdmin()
     }
     //Verifie que le nouveau mot de passe est supérieur ou égale à 6 caractères
     elseif(!empty($newpwdadmin) && strlen($newpwdadmin)<6){
-        echo 'Veuillez choisir un mot de passe de 6 caratères minimum bitch';
+        echo 'Veuillez choisir un mot de passe de 6 caratères minimum';
     }
     //Verifie que la confirmation du mot de passe est correct
     elseif(strcmp($newpwdadmin, $_POST['confirmationMdpAdmin']) != 0){
