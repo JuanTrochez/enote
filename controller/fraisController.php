@@ -5,9 +5,9 @@ include_once "/class/Frais.php";
 // Testons si le fichier a bien été envoyé, s'il n'y a pas d'erreur et si il n'est pas trop gros ici 1Mo maximum
 if (isset($_POST['valider']))
 {
-    $image = $_FILES['image'];
-    $montant = filter_input(INPUT_POST, 'montant');
-    $idnote = filter_input(INPUT_POST, 'note_id');
+    $image = htmlentities($_FILES['image']);
+    $montant = htmlentities(filter_input(INPUT_POST, 'montant'));
+    $idnote = htmlentities(filter_input(INPUT_POST, 'note_id'));
     if (verifValue($bdd,$image,$montant,$idnote) && ($image['size'] <= 1000000))
     {
         //On prend la date pour l'ajouter dans le nom de l'image upload 
