@@ -5,7 +5,7 @@ include_once "/class/Frais.php";
 // Testons si le fichier a bien été envoyé, s'il n'y a pas d'erreur et si il n'est pas trop gros ici 1Mo maximum
 if (isset($_POST['valider']))
 {
-    $image = htmlentities($_FILES['image']);
+    $image = $_FILES['image'];
     $montant = htmlentities(filter_input(INPUT_POST, 'montant'));
     $idnote = htmlentities(filter_input(INPUT_POST, 'note_id'));
     if (verifValue($bdd,$image,$montant,$idnote) && ($image['size'] <= 1000000))
@@ -19,12 +19,12 @@ if (isset($_POST['valider']))
         // Testons si l'extension est autorisée
         $infosfichier = pathinfo($image['name']);
         $extension_upload = $infosfichier['extension'];
-        $extensions_autorisees = array('jpg', 'jpeg', 'png');
+        $extensions_autorisees = array('jpg', 'jpeg', 'png', 'pdf');
 
         //Construction du nom de fichier
-        $nom = $userName . $dateImage .'-'. $heureImage . '.' . $extension_upload;
-        // Methode qui deplce le fichier et change son nom
-        $test = move_uploaded_file($image['tmp_name'], $basepath.'image/uploads/'. $nom);
+        $nom = $userName . '-' . $dateImage . '-' . $heureImage . '.' . $extension_upload;
+        // Methode qui deplace le fichier et change son nom
+        $test = move_uploaded_file($image['tmp_name'], 'image/uploads/' . $nom);
         if (in_array($extension_upload, $extensions_autorisees) && $test)
         {       
             $frais = new Frais();
