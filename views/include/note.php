@@ -3,7 +3,7 @@
   include_once 'class/Role.php';
   include_once 'class/Note.php';
 
-        if (isset($_GET["id"]) && Security::isAdmin($bdd)) { ?>
+        if (isset($_GET["id"]) && (Security::isAdmin($bdd) || $secu->isManager($bdd))) { ?>
             
             <h2>Edition d'une note de frais</h2>
             <br/>
@@ -13,7 +13,9 @@
             <?php
                 $reponseStatut = Statut::getAllStatut($bdd);
                 while($donnee = $reponseStatut->fetch())
-                { ?>
+                { 
+                   if ($donnee['id'] == 1) { continue; } 
+                   ?>
                     <option value="<?php echo $donnee['id'];?>"><?php echo $donnee['name'];?></option>
           <?php } ?>
             </select>
