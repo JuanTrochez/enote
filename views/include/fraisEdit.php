@@ -14,7 +14,7 @@ $selected = "selected='selected'";
         <input class = "formulaire form-control champ-form formulaireReduit" type="date" max="<?php echo date('Y-m-d');?>" name="date" placeholder="aaaa/mm/jj" value="<?php echo $data['date'];  ?>"/>
         <textarea class = "formulaire form-control champ-form descriptionFormulaire" name="description" placeholder="Description"><?php echo $data['description']; ?></textarea>
         <div id ="blocPrix">
-            <input class = "formulaire  formulairePrixTTC form-control champ-form" type="text" name="montant" placeholder="TTC" value="<?php echo $data['montant']; ?>"/>
+            <input class = "formulaire  formulairePrixTTC form-control champ-form" type="text" name="montant" placeholder="HT" value="<?php echo $data['montant']; ?>"/>
 
             <select class = "formulaire formulairePrix form-control champ-form" name="devise_id">
                 <?php

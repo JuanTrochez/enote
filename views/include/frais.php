@@ -15,7 +15,7 @@ $categori = 'categorie_id';
         <input class = "formulaire form-control champ-form formulaireReduit" type="date" max="<?php echo date('Y-m-d');?>" name="date" placeholder="aaaa/mm/jj" value="<?php if(isset($_POST['date']) && !empty($_POST['date'])){echo filter_input(INPUT_POST, 'date'); } ?>"/>
         <textarea class = "formulaire form-control champ-form descriptionFormulaire" name="description" placeholder="Description"><?php if(isset($_POST[$descriptio]) && !empty($_POST[$descriptio])){echo filter_input(INPUT_POST, $descriptio); } ?></textarea>
         <div id ="blocPrix">
-            <input class = "formulaire  formulairePrixTTC form-control champ-form" type="text" name="montant" placeholder="TTC" value="<?php if(isset($_POST[$montan]) && !empty($_POST[$montan])){echo filter_input(INPUT_POST, $montan); } ?>"/>
+            <input class = "formulaire  formulairePrixTTC form-control champ-form" type="text" name="montant" placeholder="HT" value="<?php if(isset($_POST[$montan]) && !empty($_POST[$montan])){echo filter_input(INPUT_POST, $montan); } ?>"/>
               
             <select class = "formulaire formulairePrix form-control champ-form" name="devise_id">
             <?php
